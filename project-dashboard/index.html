@@ -32,8 +32,72 @@
 		</header>
 
 		<main>
-			<section>
-				<form action=""></form>
+			<section class="form-task">
+				<form action="/create-task" method="POST">
+					<h2>Crear Nueva Tarea</h2>
+
+					<label for="title">Título de la tarea:</label>
+					<input
+						type="text"
+						id="title"
+						name="title"
+						placeholder="Escribe el título"
+						required
+					/>
+
+					<label for="description">Descripción:</label>
+					<textarea
+						id="description"
+						name="description"
+						placeholder="Describe la tarea"
+					></textarea>
+
+					<label for="due-date">Fecha de vencimiento:</label>
+					<input type="date" id="due-date" name="due_date" required />
+
+					<label for="priority">Prioridad:</label>
+					<select id="priority" name="priority">
+						<option value="low">Baja</option>
+						<option value="medium">Media</option>
+						<option value="high">Alta</option>
+					</select>
+
+					<label for="tags">Etiquetas:</label>
+					<input
+						type="text"
+						id="tags"
+						name="tags"
+						placeholder="Trabajo, Urgente"
+					/>
+
+					<label for="assigned-to">Asignado a:</label>
+					<input
+						type="text"
+						id="assigned-to"
+						name="assigned_to"
+						placeholder="Nombre de la persona"
+					/>
+
+					<label for="file">Adjuntar archivo:</label>
+					<input type="file" id="file" name="file" />
+
+					<div class="checkbox-container">
+						<input type="checkbox" id="notifications" name="notifications" />
+						<label for="notifications" style="margin: 0"
+							>Recordarme antes de la fecha de vencimiento</label
+						>
+					</div>
+
+					<label for="repeat">Repetir tarea:</label>
+					<select id="repeat" name="repeat">
+						<option value="never">Nunca</option>
+						<option value="daily">Diariamente</option>
+						<option value="weekly">Semanalmente</option>
+						<option value="monthly">Mensualmente</option>
+					</select>
+
+					<button type="submit">Crear tarea</button>
+				</form>
 			</section>
 		</main>
 	</body>

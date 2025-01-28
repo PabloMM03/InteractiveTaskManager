@@ -13,7 +13,12 @@ nav {
 	align-items: center;
 	padding: 1rem 2rem;
 	height: 50px; /* Altura fija del navbar */
-	position: relative;
+	position: fixed;
+	top: 0;
+	left: 0;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	width: calc(100% - 4rem); /* Restamos el padding de ambos lados */
+	z-index: 1000;
 }
 
 /* Contenedor del logo */
@@ -85,7 +90,7 @@ nav ul li .button:hover {
 
 /* Botón */
 nav .btn {
-	width: 120px;
+	width: 130px;
 	height: 45px;
 	padding: 0;
 	display: flex;
@@ -103,4 +108,76 @@ nav .btn {
 nav .btn:hover {
 	background-color: white;
 	color: #0056b3;
+}
+
+/* Estilos para el formulario */
+form {
+	background: #ffffff;
+	padding: 2rem;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 600px;
+	margin: 2rem auto 2rem 20%;
+}
+
+form h2 {
+	margin-bottom: 1rem;
+	color: #333;
+	text-align: center;
+}
+
+label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	color: #555;
+}
+
+input[type='text'],
+input[type='date'],
+input[type='file'],
+select,
+textarea {
+	width: 96%;
+	padding: 0.8rem;
+	margin-bottom: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 1rem;
+}
+
+textarea {
+	resize: none;
+	height: 100px;
+}
+
+input[type='checkbox'] {
+	margin-right: 0.5rem;
+}
+
+button {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 0.8rem 1.2rem;
+	border-radius: 5px;
+	font-size: 1rem;
+	cursor: pointer;
+	width: 100%;
+	transition: background-color 0.3s;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+
+.checkbox-container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.form-task {
+	margin-top: 10%;
 }
