@@ -1,0 +1,94 @@
+/* Navbar */
+nav {
+	background-color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem;
+	height: 50px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	width: calc(100% - 4rem);
+	z-index: 1000;
+}
+
+/* Contenedor del logo */
+nav .logo {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	height: 50px;
+}
+
+/* Logo */
+nav .logo img {
+	height: 50px;
+	border-radius: 10px;
+	transition: transform 0.3s ease;
+	flex-shrink: 0;
+}
+
+nav .logo img:hover {
+	transform: scale(1.5);
+	z-index: 10;
+}
+
+/* Texto al lado del logo */
+nav .logo li {
+	color: black;
+	font-size: 1.2rem;
+	list-style: none;
+	margin-left: 5px;
+	white-space: nowrap;
+}
+
+/* Menú */
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+nav ul li {
+	margin-left: 1.5rem;
+}
+
+/* Botones del nav */
+nav ul li .button {
+	width: 120px;
+	height: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	border-radius: 30px;
+	border: 1px solid #7eb7f5;
+	background-color: transparent;
+	color: #0056b3;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+nav .btn {
+	width: 145px;
+	height: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	border-radius: 30px;
+	border: 1px solid #7eb7f5;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li .button:hover,
+nav .btn:hover {
+	background-color: #0056b3;
+	color: white;
+}

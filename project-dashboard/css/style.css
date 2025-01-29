@@ -1,183 +1,21 @@
+@import url('navbar.css');
+@import url('form.css');
+@import url('tasks.css');
+
 /* Estilos generales */
 body {
 	margin: 0;
 	font-family: Arial, sans-serif;
 }
 
-/* Navbar */
-nav {
-	background-color: white;
-	color: white;
+/* Contenedor sección formulario */
+.container {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
-	padding: 1rem 2rem;
-	height: 50px; /* Altura fija del navbar */
-	position: fixed;
-	top: 0;
-	left: 0;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	width: calc(100% - 4rem); /* Restamos el padding de ambos lados */
-	z-index: 1000;
-}
-
-/* Contenedor del logo */
-nav .logo {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	position: relative; /* Establece un contexto para el logo */
-	height: 50px; /* Altura inicial */
-}
-
-/* Logo (imagen) */
-nav .logo img {
-	height: 50px;
-	border-radius: 10px;
-	transition: transform 0.3s ease;
-	flex-shrink: 0;
-}
-
-/* Hover en el logo */
-nav .logo img:hover {
-	transform: scale(1.5); /* Amplía la imagen dentro del contexto */
-	z-index: 10; /* Coloca el logo sobre otros elementos */
-}
-
-/* Texto al lado del logo */
-nav .logo li {
-	color: black;
-	font-size: 1.2rem;
-	list-style: none;
-	margin-left: 5px;
-	white-space: nowrap; /* Evita que el texto se corte en varias líneas */
-}
-
-/* Menú */
-nav ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-}
-
-nav ul li {
-	margin-left: 1.5rem;
-}
-
-/* Botónes del nav */
-nav ul li .button {
-	width: 120px;
-	height: 45px;
-	padding: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	border-radius: 30px;
-	border: 1px solid #7eb7f5;
-	background-color: transparent;
-	color: #0056b3;
-	cursor: pointer;
-	transition: background-color 0.3s, color 0.3s;
-}
-
-/* Transición */
-nav ul li .button:hover {
-	background-color: #007bff; /* Color de fondo al pasar el ratón */
-	color: white; /* Cambia el color del texto en el hover */
-}
-
-/* Botón */
-nav .btn {
-	width: 130px;
-	height: 45px;
-	padding: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	border-radius: 30px;
-	border: 1px solid #7eb7f5;
-	background-color: #007bff;
-	color: white;
-	cursor: pointer;
-	transition: background-color 0.3s, color 0.3s;
-}
-
-nav .btn:hover {
-	background-color: white;
-	color: #0056b3;
-}
-
-/* Estilos para el formulario */
-form {
-	background: #ffffff;
+	align-items: flex-start;
+	gap: 20px;
 	padding: 2rem;
-	border-radius: 10px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	max-width: 600px;
-	margin: 2rem auto 2rem 20%;
-}
-
-form h2 {
-	margin-bottom: 1rem;
-	color: #333;
-	text-align: center;
-}
-
-label {
-	display: block;
-	font-weight: bold;
-	margin-bottom: 0.5rem;
-	color: #555;
-}
-
-input[type='text'],
-input[type='date'],
-input[type='file'],
-select,
-textarea {
-	width: 96%;
-	padding: 0.8rem;
-	margin-bottom: 1rem;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	font-size: 1rem;
-}
-
-textarea {
-	resize: none;
-	height: 100px;
-}
-
-input[type='checkbox'] {
-	margin-right: 0.5rem;
-}
-
-button {
-	background-color: #007bff;
-	color: white;
-	border: none;
-	padding: 0.8rem 1.2rem;
-	border-radius: 5px;
-	font-size: 1rem;
-	cursor: pointer;
-	width: 100%;
-	transition: background-color 0.3s;
-}
-
-button:hover {
-	background-color: #0056b3;
-}
-
-.checkbox-container {
-	display: flex;
-	align-items: center;
-	margin-bottom: 1rem;
-}
-
-.form-task {
-	margin-top: 10%;
+	max-width: 1200px;
+	margin: auto;
+	margin-top: 6rem;
 }
