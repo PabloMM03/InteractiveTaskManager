@@ -32,23 +32,3 @@
 .hidden {
 	display: none;
 }
-
-#tags-suggestions {
-	list-style-type: none;
-	padding: 0;
-	max-height: 200px;
-	overflow-y: auto;
-	border: 1px solid #ccc;
-	background-color: white;
-	position: absolute;
-	width: 100%;
-}
-
-#tags-suggestions li {
-	padding: 8px;
-	cursor: pointer;
-}
-
-#tags-suggestions li:hover {
-	background-color: #f0f0f0;
-}

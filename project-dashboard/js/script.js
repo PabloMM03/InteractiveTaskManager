@@ -94,16 +94,19 @@ function deleteTask(index) {
  * Lógica Objetivos
  */
 
+// Añadir objetivos
 function addGoals() {
 	document.querySelector('#goal-form').addEventListener('submit', function (e) {
-		e.preventDefault();
+		e.preventDefault(); //Prevenir envio del formulario por defecto
 
+		//Caspturar todo el formulario, obtener sus datos y añadirle una fecha de creación
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData.entries());
 		const startDate = new Date().toISOString().split('T')[0];
 
 		data.startDate = startDate;
 
+		//Comprobar que hay objetivos, obtener el localStorage y añadirlos al él
 		if (Object.keys(data).length > 0) {
 			const goals = JSON.parse(localStorage.getItem('goals')) || [];
 
@@ -119,17 +122,21 @@ function addGoals() {
 	});
 }
 
+// Cargar objetivos creados
 function loadGoals() {
+	//Obtener json con objetivos y pasarlo a objetos
 	const goals = JSON.parse(localStorage.getItem('goals')) || [];
 	const goalsList = document.getElementById('goals-list');
 	goalsList.innerHTML = '';
 
+	// Recorrer los objetivos e ir añadiendo a elementos creados dinamicamente
 	goals.forEach((goal, index) => {
 		const span = document.createElement('span');
 		const li = document.createElement('li');
 
 		span.textContent = `${goal.gtitle} - ${goal.gtag} - ${goal.gdate}`;
 
+		// Añadir boton de eliminar por indice de objetivo, añadiendo un evento
 		const deleteButton = document.createElement('button');
 		deleteButton.textContent = 'Eliminar';
 		deleteButton.dataset.index = index; // Asigna el índice correctamente
@@ -146,12 +153,13 @@ function loadGoals() {
 	});
 }
 
+// Eliminar objetivos
 function deleteGoal(index) {
 	const goals = JSON.parse(localStorage.getItem('goals')) || [];
 
-	if (index >= 0 && index < goals.length) {
-		goals.splice(index, 1);
-		localStorage.setItem('goals', JSON.stringify(goals));
-	}
+	//Comprobar que es un indice correcto y eliminarlo
+	const updatedGoals = goals.filter((_, i) => i !== index); // Filtra el elemento por índice
+	localStorage.setItem('goals', JSON.stringify(updatedGoals));
+
 	loadGoals();
 }

@@ -9,15 +9,55 @@ const tags = [
 	'Familia',
 	'Hobbies',
 	'Proyectos',
-]; // Ejemplo de etiquetas
+	'Educación',
+	'Desarrollo personal',
+	'Cultura',
+	'Finanzas',
+	'Relaciones',
+	'Liderazgo',
+	'Motivación',
+	'Tecnología',
+	'Innovación',
+	'Entretenimiento',
+	'Festejos',
+	'Arte',
+	'Música',
+	'Lectura',
+	'Videojuegos',
+	'Cocina',
+	'Mascotas',
+	'Medicina',
+	'Ciencia',
+	'Emprendimiento',
+	'Sostenibilidad',
+	'Aventura',
+	'Productividad',
+	'Networking',
+	'Hogar',
+	'Voluntariado',
+	'Programar',
+];
 
-function filterTags() {
-	const input = document.getElementById('tag');
+document.addEventListener('DOMContentLoaded', () => {
+	// Llamadas a la función para los dos inputs
+	document
+		.getElementById('gtag')
+		?.addEventListener('input', () => filterTags('gtag', 'gtags-suggestions'));
+
+	document
+		.getElementById('ttag')
+		?.addEventListener('input', () => filterTags('ttag', 'ttags-suggestions'));
+});
+
+function filterTags(inputId, suggestionsId) {
+	const input = document.getElementById(inputId);
 	const filter = input.value.toLowerCase();
-	const suggestions = document.getElementById('tags-suggestions');
+	const suggestions = document.getElementById(suggestionsId);
 
 	// Limpiar sugerencias previas
 	suggestions.innerHTML = '';
+
+	if (!input || !suggestions) return; //Verificar si existen
 
 	// Mostrar solo las sugerencias que coinciden con la búsqueda
 	const filteredTags = tags.filter((tag) => tag.toLowerCase().includes(filter));
@@ -28,7 +68,7 @@ function filterTags() {
 		filteredTags.forEach((tag) => {
 			const li = document.createElement('li');
 			li.textContent = tag;
-			li.onclick = () => selectTag(tag);
+			li.onclick = () => selectTag(tag, inputId, suggestionsId);
 			suggestions.appendChild(li);
 		});
 	} else {
@@ -36,8 +76,9 @@ function filterTags() {
 	}
 }
 
-function selectTag(tag) {
-	const input = document.getElementById('tag');
-	input.value = tag; // Poner la etiqueta seleccionada en el campo de entrada
-	document.getElementById('tags-suggestions').classList.add('hidden'); // Ocultar las sugerencias
+// Poner la etiqueta seleccionada en el campo de entrada
+function selectTag(tag, inputId, suggestionsId) {
+	const input = document.getElementById(inputId);
+	input.value = tag;
+	document.getElementById(suggestionsId).classList.add('hidden'); // Ocultar las sugerencias
 }

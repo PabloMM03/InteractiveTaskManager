@@ -20,3 +20,39 @@ body {
 	margin: auto;
 	margin-top: 6rem;
 }
+
+/* Mostrar sugerencias de etiquetas */
+#gtags-suggestions,
+#ttags-suggestions {
+	list-style-type: none;
+	max-height: 200px;
+	overflow-y: auto;
+	width: 100%;
+	padding: 0.8rem;
+	margin-top: 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 1rem;
+	background: #fff;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	position: absolute;
+	z-index: 100;
+}
+
+#gtags-container,
+#ttags-container {
+	position: relative; /* Asegura que la lista de sugerencias se posicione correctamente */
+	width: 100%;
+}
+/*Lista con etiquetas */
+#gtags-suggestions li,
+#ttags-suggestions li {
+	padding: 0.5rem;
+	cursor: pointer;
+	transition: background 0.2s ease-in-out;
+}
+/*Efecto */
+#gtags-suggestions li:hover,
+#ttags-suggestions li:hover {
+	background: #f0f0f0;
+}

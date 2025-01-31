@@ -49,3 +49,8 @@ section#task-section ul li span {
 section#task-section ul li span:hover {
 	transform: translateX(20px); /* Desliza el texto hacia la derecha */
 }
+
+/* Oculta las sugerencias cuando no hay entrada */
+.hidden {
+	display: none;
+}

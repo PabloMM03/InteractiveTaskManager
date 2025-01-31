@@ -63,18 +63,20 @@
 							<option value="Alta">Alta</option>
 						</select>
 
-						<label for="tags">Etiquetas:</label>
-						<input
-							type="text"
-							id="tag"
-							name="tag"
-							placeholder="Busca o escribe una etiqueta..."
-							oninput="filterTags()"
-							required
-						/>
-						<ul id="tags-suggestions" class="hidden">
-							<!-- Las opciones de etiquetas se mostrarán aquí -->
-						</ul>
+						<div id="ttags-container">
+							<label for="ttags">Etiquetas:</label>
+							<input
+								type="text"
+								id="ttag"
+								name="ttag"
+								placeholder="Busca o escribe una etiqueta..."
+								oninput="filterTags()"
+								required
+							/>
+							<ul id="ttags-suggestions" class="hidden">
+								<!-- Las opciones de etiquetas se mostrarán aquí -->
+							</ul>
+						</div>
 
 						<label for="assigned-to">Asignado a:</label>
 						<input
@@ -117,8 +119,20 @@
 							placeholder="Escribe tu objetivo..."
 							required
 						/>
-						<label for="gtag">Etiqueta:</label>
-						<input type="text" name="gtag" id="gtag" />
+						<div id="gtags-container">
+							<label for="gtag">Etiqueta:</label>
+							<input
+								type="text"
+								id="gtag"
+								name="gtag"
+								placeholder="Busca o escribe una etiqueta..."
+								oninput="filterTags()"
+								required
+							/>
+							<ul id="gtags-suggestions" class="hidden">
+								<!-- Las opciones de etiquetas se mostrarán aquí -->
+							</ul>
+						</div>
 
 						<label for="gdate">Fecha de vencimiento:</label>
 						<input type="date" id="gdate" name="gdate" required />
