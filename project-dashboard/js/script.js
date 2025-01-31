@@ -1,11 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 	loadTask(); // Cargar tareas guardadas al iniciar
 	addTask(); // Agregar eventos al formulario
+	loadGoals(); // Cargar objetivos guardados al iniciar
+	addGoals(); // Agregar ebentos al formulario
 });
+
+/**
+ * Lógica Tareas
+ */
 
 // Añadir tareas y guardar al enviar
 function addTask() {
-	document.querySelector('form').addEventListener('submit', function (e) {
+	document.querySelector('#task-form').addEventListener('submit', function (e) {
 		e.preventDefault(); // Previene el envío por defecto
 
 		// ✅ Capturar formulario completo y convertir a objeto
@@ -13,6 +19,9 @@ function addTask() {
 		const data = Object.fromEntries(formData.entries());
 		data.notifications = formData.get('notifications') === 'on';
 		data.isChecked = false;
+
+		const createTaskDate = new Date().toISOString().split('T')[0];
+		data.createTaskDate = createTaskDate;
 
 		// Verificar los datos capturados
 		if (Object.keys(data).length > 0) {
@@ -79,4 +88,70 @@ function deleteTask(index) {
 	tasks.splice(index, 1); // Eliminar por índice de tarea
 	localStorage.setItem('tasks', JSON.stringify(tasks));
 	loadTask(); // Recargar la lista sin refrescar la página
+}
+
+/**
+ * Lógica Objetivos
+ */
+
+function addGoals() {
+	document.querySelector('#goal-form').addEventListener('submit', function (e) {
+		e.preventDefault();
+
+		const formData = new FormData(e.target);
+		const data = Object.fromEntries(formData.entries());
+		const startDate = new Date().toISOString().split('T')[0];
+
+		data.startDate = startDate;
+
+		if (Object.keys(data).length > 0) {
+			const goals = JSON.parse(localStorage.getItem('goals')) || [];
+
+			goals.push(data);
+
+			localStorage.setItem('goals', JSON.stringify(goals));
+
+			console.log(goals);
+			loadGoals();
+
+			e.target.reset();
+		}
+	});
+}
+
+function loadGoals() {
+	const goals = JSON.parse(localStorage.getItem('goals')) || [];
+	const goalsList = document.getElementById('goals-list');
+	goalsList.innerHTML = '';
+
+	goals.forEach((goal, index) => {
+		const span = document.createElement('span');
+		const li = document.createElement('li');
+
+		span.textContent = `${goal.gtitle} - ${goal.gtag} - ${goal.gdate}`;
+
+		const deleteButton = document.createElement('button');
+		deleteButton.textContent = 'Eliminar';
+		deleteButton.dataset.index = index; // Asigna el índice correctamente
+
+		deleteButton.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const goalIndex = parseInt(e.target.dataset.index);
+			deleteGoal(goalIndex);
+		});
+
+		li.appendChild(span);
+		li.appendChild(deleteButton);
+		goalsList.appendChild(li);
+	});
+}
+
+function deleteGoal(index) {
+	const goals = JSON.parse(localStorage.getItem('goals')) || [];
+
+	if (index >= 0 && index < goals.length) {
+		goals.splice(index, 1);
+		localStorage.setItem('goals', JSON.stringify(goals));
+	}
+	loadGoals();
 }

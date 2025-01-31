@@ -36,7 +36,7 @@
 				<!-- Sección del formulario -->
 				<section id="form-section">
 					<h2>Crear Nueva Tarea</h2>
-					<form action="/create-task" method="POST">
+					<form id="task-form">
 						<label for="title">Título de la tarea:</label>
 						<input
 							type="text"
@@ -66,10 +66,15 @@
 						<label for="tags">Etiquetas:</label>
 						<input
 							type="text"
-							id="tags"
-							name="tags"
-							placeholder="Trabajo, Urgente"
+							id="tag"
+							name="tag"
+							placeholder="Busca o escribe una etiqueta..."
+							oninput="filterTags()"
+							required
 						/>
+						<ul id="tags-suggestions" class="hidden">
+							<!-- Las opciones de etiquetas se mostrarán aquí -->
+						</ul>
 
 						<label for="assigned-to">Asignado a:</label>
 						<input
@@ -86,14 +91,6 @@
 							>
 						</div>
 
-						<!-- <label for="repeat">Repetir tarea:</label>
-						<select id="repeat" name="repeat">
-							<option value="never">Nunca</option>
-							<option value="daily">Diariamente</option>
-							<option value="weekly">Semanalmente</option>
-							<option value="monthly">Mensualmente</option>
-						</select> -->
-
 						<button type="submit">Crear tarea</button>
 					</form>
 				</section>
@@ -106,7 +103,41 @@
 					</ul>
 				</section>
 			</div>
+
+			<div class="container">
+				<!-- Sección del formulario de objetivos -->
+				<section id="goals-form-section">
+					<h2>Crear Nuevo Objetivo</h2>
+					<form id="goal-form">
+						<label for="gtitle">Título del objetivo:</label>
+						<input
+							type="text"
+							id="gtitle"
+							name="gtitle"
+							placeholder="Escribe tu objetivo..."
+							required
+						/>
+						<label for="gtag">Etiqueta:</label>
+						<input type="text" name="gtag" id="gtag" />
+
+						<label for="gdate">Fecha de vencimiento:</label>
+						<input type="date" id="gdate" name="gdate" required />
+
+						<button type="submit">Agregar Objetivo</button>
+					</form>
+				</section>
+
+				<!-- Sección donde se mostrarán los objetivos -->
+				<section id="goals-section">
+					<h2>Lista de Objetivos</h2>
+					<ul id="goals-list">
+						<li>hola</li>
+						<!-- Aquí se insertarán los objetivos dinámicamente -->
+					</ul>
+				</section>
+			</div>
 		</main>
-		<script src="/project-dashboard/js/script.js"></script>
+		<script src="./js/script.js"></script>
+		<script src="./js/autocompleteSearchTag.js"></script>
 	</body>
 </html>

@@ -1,0 +1,54 @@
+#goals-form-section,
+#goals-section {
+	margin-top: 20px;
+	padding: 20px;
+	background: #f4f4f4;
+	border-radius: 8px;
+}
+
+#goals-list {
+	list-style: none;
+	padding: 0;
+}
+
+#goals-list li {
+	padding: 8px;
+	background: white;
+	margin: 5px 0;
+	border-radius: 4px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#goals-list li button {
+	background: red;
+	color: white;
+	border: none;
+	padding: 5px;
+	cursor: pointer;
+}
+
+/* Oculta las sugerencias cuando no hay entrada */
+.hidden {
+	display: none;
+}
+
+#tags-suggestions {
+	list-style-type: none;
+	padding: 0;
+	max-height: 200px;
+	overflow-y: auto;
+	border: 1px solid #ccc;
+	background-color: white;
+	position: absolute;
+	width: 100%;
+}
+
+#tags-suggestions li {
+	padding: 8px;
+	cursor: pointer;
+}
+
+#tags-suggestions li:hover {
+	background-color: #f0f0f0;
+}
