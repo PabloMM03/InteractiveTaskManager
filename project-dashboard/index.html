@@ -37,27 +37,18 @@
 				<section id="form-section">
 					<h2>Crear Nueva Tarea</h2>
 					<form id="task-form">
-						<label for="title">Título de la tarea:</label>
+						<label for="goal-select">Objetivo:</label>
+						<select id="goal-select"></select>
+						<!-- Se llenará dinámicamente -->
+
 						<input
 							type="text"
-							id="title"
 							name="title"
-							placeholder="Escribe el título"
+							placeholder="Nombre de la tarea"
 							required
 						/>
-
-						<label for="description">Descripción:</label>
-						<textarea
-							id="description"
-							name="description"
-							placeholder="Describe la tarea"
-						></textarea>
-
-						<label for="due-date">Fecha de vencimiento:</label>
-						<input type="date" id="due-date" name="due_date" required />
-
-						<label for="priority">Prioridad:</label>
-						<select id="priority" name="priority">
+						<input type="date" name="due_date" required />
+						<select name="priority">
 							<option value="Baja">Baja</option>
 							<option value="Media">Media</option>
 							<option value="Alta">Alta</option>
