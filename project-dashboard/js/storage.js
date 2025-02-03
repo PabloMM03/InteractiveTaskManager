@@ -19,21 +19,36 @@ export function saveGoalsToStorage(goals) {
 }
 
 // Eliminar tarea del almacenamiento
-export function deleteTaskFromStorage(index, goalId) {
+// Eliminar tarea del almacenamiento
+export function deleteTaskFromStorage(index) {
 	const tasks = loadTasksFromStorage();
 	const goals = loadGoalsFromStorage();
 
 	const wasChecked = tasks[index].isChecked;
+	const taskGoalId = tasks[index].goalId; // Id del objetivo relacionado con la tarea
 
-	if (wasChecked) {
-		tasks[index].isActive = false;
+	// Si la tarea tiene un objetivo asociado
+	if (taskGoalId !== 'no-goal' && goals[taskGoalId]) {
+		if (wasChecked) {
+			tasks[index].isActive = false;
+		} else {
+			tasks.splice(index, 1);
+			goals[taskGoalId].totalTasks -= 1; // Restar 1 al total de tareas del objetivo
+		}
 	} else {
+		// Si la tarea no tiene objetivo, eliminarla normalmente
 		tasks.splice(index, 1);
-		goals[goalId].totalTasks -= 1;
 	}
 
+	// Guardar tareas y objetivos actualizados
 	saveTasksToStorage(tasks);
 	saveGoalsToStorage(goals);
+
+	// Actualizar el progreso del objetivo (si tiene objetivo)
+	if (taskGoalId !== 'no-goal') {
+		updateGoalProgressInStorage(taskGoalId);
+	}
+
 	return wasChecked;
 }
 

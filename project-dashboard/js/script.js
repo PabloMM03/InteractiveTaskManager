@@ -35,11 +35,13 @@ function addTask() {
 
 		const selectedGoalId = document.getElementById('goal-select').value;
 		if (!selectedGoalId) {
-			alert('Por favor, selecciona un objetivo.');
-			return;
+			// alert('Por favor, selecciona un objetivo.');
+			// return;
+			data.goalId = 'no-goal';
+		} else {
+			// Añadir id del campo seleccionable de objetivos
+			data.goalId = parseInt(selectedGoalId);
 		}
-		// Añadir id del campo seleccionable de objetivos
-		data.goalId = parseInt(selectedGoalId);
 
 		const tasks = loadTasksFromStorage();
 		tasks.push(data);
@@ -90,7 +92,7 @@ function loadTask(goalId) {
 // Actualizar el estado de la tarea
 function stateTask(index, task, span) {
 	const tasks = loadTasksFromStorage();
-	task.isChecked = !task.isChecked;
+	task.isChecked = !task.isChecked; //Cambiar estado
 	tasks[index] = task;
 	saveTasksToStorage(tasks);
 
@@ -100,7 +102,7 @@ function stateTask(index, task, span) {
 
 // Eliminar tareas y actualizar lista
 function deleteTask(index, goalId) {
-	const wasChecked = deleteTaskFromStorage(index, goalId);
+	const wasChecked = deleteTaskFromStorage(index);
 	loadTask(goalId);
 	updateGoalProgress(goalId);
 	return wasChecked;
@@ -135,9 +137,12 @@ function loadGoals() {
 	const goals = loadGoalsFromStorage();
 	const goalsList = document.getElementById('goals-list');
 	const goalSelect = document.getElementById('goal-select');
+
+	//Añadir campo de seleccion al crear tarea
 	goalsList.innerHTML = '';
 	goalSelect.innerHTML = '<option value="">Selecciona un objetivo</option>';
 
+	// Obtener objetivos y crear lista dinámica para mostrar
 	goals.forEach((goal, index) => {
 		const span = document.createElement('span');
 		const li = document.createElement('li');
@@ -155,6 +160,7 @@ function loadGoals() {
 		li.appendChild(deleteButton);
 		goalsList.appendChild(li);
 
+		//Añadir el objetivo a las opciones del form-task
 		const option = document.createElement('option');
 		option.value = index;
 		option.textContent = goal.gtitle;
@@ -167,18 +173,29 @@ function loadGoals() {
 // Eliminar objetivos
 function deleteGoal(index) {
 	const goals = loadGoalsFromStorage();
+	const tasks = loadTasksFromStorage();
+
+	//TODO: Eliminar objetivo y que que se eliminen sus tareas correspondientes por id
+
+	const goalId = index; //Id del objetivo a eliminar
+
+	//Filtrar objetivos y tareas relacionadas para al mismo
 	const updatedGoals = goals.filter((_, i) => i !== index);
+	const updatedTasks = tasks.filter((task) => task.goalId !== goalId);
 
-	//TODO: Eliminar objetivo y que que se eliminen sus tareas correspondientes
-
+	//Guardar almacenamiento y actualizar
 	saveGoalsToStorage(updatedGoals);
+	saveTasksToStorage(updatedTasks);
 	loadGoals();
+	loadTask(goalId);
 }
 
 // Actualizar progreso de objetivos
 function updateGoalProgress(goalId) {
 	const tasks = loadTasksFromStorage();
 	const goals = loadGoalsFromStorage();
+
+	if (goalId === 'no-goal') return; //Si la tarea no tiene objetivo, no hace nada
 
 	const relatedTasks = tasks.filter((task) => task.goalId == goalId);
 	const completedTasks = relatedTasks.filter((task) => task.isChecked);
