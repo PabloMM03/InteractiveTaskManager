@@ -1,3 +1,4 @@
+import { renderChart } from './charts.js';
 import {
 	loadTasksFromStorage,
 	saveTasksToStorage,
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	addTask(); // Agregar eventos al formulario
 	loadGoals(); // Cargar objetivos guardados al iniciar
 	addGoals(); // Agregar eventos al formulario
+	tasksDate();
 });
 
 /**
@@ -54,12 +56,17 @@ function addTask() {
 
 		loadTask(data.goalId);
 		updateGoalProgress(data.goalId);
+
+		//Actualizar gráficos después de añadir tarea
+		renderChart();
+		// updateTagChart();
+
 		e.target.reset();
 	});
 }
 
 // Cargar y mostrar tareas
-function loadTask(goalId) {
+export function loadTask(goalId) {
 	const tasks = loadTasksFromStorage();
 	const taskList = document.getElementById('task-list');
 	taskList.innerHTML = '';
@@ -98,6 +105,10 @@ function stateTask(index, task, span) {
 
 	span.style.textDecoration = task.isChecked ? 'line-through' : 'none';
 	updateGoalProgress(task.goalId);
+
+	//Actualizar gráficos después de añadir tarea
+	renderChart();
+	// updateTagChart();
 }
 
 // Eliminar tareas y actualizar lista
@@ -105,6 +116,11 @@ function deleteTask(index, goalId) {
 	const wasChecked = deleteTaskFromStorage(index);
 	loadTask(goalId);
 	updateGoalProgress(goalId);
+
+	//Actualizar gráficos después de añadir tarea
+	renderChart();
+	// updateTagChart();
+
 	return wasChecked;
 }
 
@@ -175,8 +191,6 @@ function deleteGoal(index) {
 	const goals = loadGoalsFromStorage();
 	const tasks = loadTasksFromStorage();
 
-	//TODO: Eliminar objetivo y que que se eliminen sus tareas correspondientes por id
-
 	const goalId = index; //Id del objetivo a eliminar
 
 	//Filtrar objetivos y tareas relacionadas para al mismo
@@ -206,4 +220,14 @@ function updateGoalProgress(goalId) {
 		goals[goalId].totalTasks
 	);
 	loadGoals();
+}
+
+//Obtener tareas por fecha
+
+function tasksDate() {
+	const tasks = loadTasksFromStorage();
+
+	const dates = tasks.map((task) => task.createTaskDate);
+
+	console.log(dates);
 }

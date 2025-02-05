@@ -19,7 +19,6 @@ export function saveGoalsToStorage(goals) {
 }
 
 // Eliminar tarea del almacenamiento
-// Eliminar tarea del almacenamiento
 export function deleteTaskFromStorage(index) {
 	const tasks = loadTasksFromStorage();
 	const goals = loadGoalsFromStorage();
@@ -63,4 +62,29 @@ export function updateGoalProgressInStorage(
 		totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 	goals[goalId].progress = progress;
 	saveGoalsToStorage(goals);
+}
+
+export function getStats() {
+	const tasks = loadTasksFromStorage();
+
+	const stats = {
+		totalTasks: tasks.length,
+		completedTasks: tasks.filter((task) => task.isChecked).length,
+		tagCount: {},
+	};
+
+	tasks.forEach((task) => {
+		if (task.ttag) {
+			// Asegurar que la tarea tiene una etiqueta válida
+			if (!stats.tagCount[task.ttag]) {
+				stats.tagCount[task.ttag] = 0;
+			}
+			stats.tagCount[task.ttag]++;
+		}
+	});
+
+	stats.completedPercentage =
+		stats.totalTasks > 0 ? (stats.completedTasks / stats.totalTasks) * 100 : 0;
+
+	return stats;
 }
