@@ -1,4 +1,4 @@
-import { renderChart } from './charts.js';
+import { renderChart, renderTasksChart } from './charts.js';
 import {
 	loadTasksFromStorage,
 	saveTasksToStorage,
@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	addTask(); // Agregar eventos al formulario
 	loadGoals(); // Cargar objetivos guardados al iniciar
 	addGoals(); // Agregar eventos al formulario
-	tasksDate();
+	renderTasksChart();
+
+	//addSampleTask(); // Añadir tarea simulada
 });
 
 /**
@@ -58,8 +60,8 @@ function addTask() {
 		updateGoalProgress(data.goalId);
 
 		//Actualizar gráficos después de añadir tarea
-		renderChart();
-		// updateTagChart();
+		// renderChart();
+		renderTasksChart();
 
 		e.target.reset();
 	});
@@ -107,8 +109,8 @@ function stateTask(index, task, span) {
 	updateGoalProgress(task.goalId);
 
 	//Actualizar gráficos después de añadir tarea
-	renderChart();
-	// updateTagChart();
+	// renderChart();
+	renderTasksChart();
 }
 
 // Eliminar tareas y actualizar lista
@@ -118,8 +120,8 @@ function deleteTask(index, goalId) {
 	updateGoalProgress(goalId);
 
 	//Actualizar gráficos después de añadir tarea
-	renderChart();
-	// updateTagChart();
+	// renderChart();
+	renderTasksChart();
 
 	return wasChecked;
 }
@@ -222,12 +224,21 @@ function updateGoalProgress(goalId) {
 	loadGoals();
 }
 
-//Obtener tareas por fecha
+//Silmular una tarea
+function addSampleTask() {
+	const sampleTask = {
+		title: 'Tarea simulada Marzo',
+		priority: 'Alta',
+		due_date: '2025-01-15', // Puedes asignar cualquier fecha de vencimiento
+		notifications: true,
+		isChecked: false,
+		createTaskDate: '2025-03-15', // Asignar una fecha aleatoria
+		isActive: true,
+		goalId: 'no-goal', // Si no tiene objetivo
+	};
 
-function tasksDate() {
 	const tasks = loadTasksFromStorage();
+	tasks.push(sampleTask); // Añadir la tarea simulada al array de tareas
 
-	const dates = tasks.map((task) => task.createTaskDate);
-
-	console.log(dates);
+	saveTasksToStorage(tasks); // Guardar las tareas en el localStorage
 }
