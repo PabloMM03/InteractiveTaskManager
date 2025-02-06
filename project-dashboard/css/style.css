@@ -56,3 +56,12 @@ body {
 #ttags-suggestions li:hover {
 	background: #f0f0f0;
 }
+
+.charts {
+	display: flex;
+	justify-content: center; /* Centra horizontal y verticalmente */
+	align-items: center;
+	width: 80vw; /* 80% del ancho de la ventana */
+	height: 400px; /* Altura específica */
+	margin: auto;
+}

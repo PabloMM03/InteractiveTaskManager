@@ -211,17 +211,20 @@ function updateGoalProgress(goalId) {
 	const tasks = loadTasksFromStorage();
 	const goals = loadGoalsFromStorage();
 
-	if (goalId === 'no-goal') return; //Si la tarea no tiene objetivo, no hace nada
+	if (goalId === 'no-goal' || !goals[goalId]) return; //Si la tarea no tiene objetivo, no hace nada
 
 	const relatedTasks = tasks.filter((task) => task.goalId == goalId);
 	const completedTasks = relatedTasks.filter((task) => task.isChecked);
 
-	updateGoalProgressInStorage(
-		goalId,
-		completedTasks.length,
-		goals[goalId].totalTasks
-	);
-	loadGoals();
+	// Asegurar que el goalId asignado a la tarea pertenece a un objetivo
+	if (goals[goalId]) {
+		updateGoalProgressInStorage(
+			goalId,
+			completedTasks.length,
+			goals[goalId].totalTasks
+		);
+		loadGoals();
+	}
 }
 
 //Silmular una tarea
@@ -229,12 +232,12 @@ function addSampleTask() {
 	const sampleTask = {
 		title: 'Tarea simulada Marzo',
 		priority: 'Alta',
-		due_date: '2025-01-15', // Puedes asignar cualquier fecha de vencimiento
+		due_date: '2025-01-15',
 		notifications: true,
 		isChecked: false,
-		createTaskDate: '2025-03-15', // Asignar una fecha aleatoria
+		createTaskDate: '2025-12-15',
 		isActive: true,
-		goalId: 'no-goal', // Si no tiene objetivo
+		goalId: 'no-goal',
 	};
 
 	const tasks = loadTasksFromStorage();

@@ -47,12 +47,64 @@ export function renderChart(chartData) {
 		type: 'bar',
 		data: chartData,
 		options: {
-			responsive: true,
-			scales: {
-				y: {
-					beginAtZero: true, // Asegurar que el eje Y comienza en 0
+			responsive: true, // Se ajusta automáticamente al tamaño del contenedor
+			maintainAspectRatio: true, // Permite cambiar el tamaño manualmente
+			plugins: {
+				legend: {
+					display: true,
+					labels: {
+						font: {
+							size: 16, // Aumenta el tamaño de la fuente de la leyenda
+							weight: 'bold',
+						},
+						color: '#4B5563',
+						padding: 20, // Más espacio alrededor de la leyenda
+					},
+				},
+				tooltip: {
+					backgroundColor: '#1F2937',
+					titleColor: '#F9FAFB',
+					bodyColor: '#D1D5DB',
+					cornerRadius: 5,
+					padding: 15, // Un poco más de espacio en el tooltip
+				},
+				animation: {
+					duration: 800,
+					easing: 'easeInOutQuad',
 				},
 			},
+			scales: {
+				x: {
+					ticks: {
+						font: {
+							size: 14, // Aumenta el tamaño de las etiquetas en eje X
+							family: 'Arial',
+							weight: '600',
+						},
+						color: '#374151',
+					},
+					title: {
+						display: true,
+						text: 'Meses',
+						font: {
+							size: 18, // Título más grande
+							weight: 'bold',
+						},
+						color: '#111827',
+					},
+				},
+				y: {
+					ticks: {
+						display: false, // Ocultar los números del eje Y
+					},
+					grid: {
+						drawTicks: false,
+						color: 'transparent',
+					},
+				},
+			},
+			// Tienes que definir un tamaño adecuado en el contenedor de tu gráfico
+			// Esto lo puedes hacer en CSS
 		},
 	});
 }
@@ -65,7 +117,7 @@ export function renderTasksChart() {
 		labels: months, // Meses (ej. "2025-1", "2025-2", etc.)
 		datasets: [
 			{
-				label: 'Número de Tareas',
+				label: ['Número de Tareas'],
 				data: taskCounts, // Número de tareas por mes
 				backgroundColor: 'rgba(75, 192, 192, 0.2)',
 				borderColor: 'rgba(75, 192, 192, 1)',
@@ -114,34 +166,49 @@ function updateStatsUI() {
 		stats.completedPercentage.toFixed(2);
 }
 
-renderTagChart();
+// renderTagChart();
 
 // Lógica para obtener tareas por mes
 function getTasksByMonth() {
 	const tasks = loadTasksFromStorage();
 
-	// Procesamos las tareas para obtener el mes/año
-	const tasksWithMonth = tasks.map((task) => {
-		const taskDate = new Date(task.createTaskDate);
-		const month = taskDate.getMonth(); // Obtener mes (0-11)
-		const year = taskDate.getFullYear(); // Obtener año
-		const monthYear = `${year}-${month + 1}`; // Mes/Año (ej. "2025-1")
+	// Lista con todos los meses
+	const allMonths = [
+		'Enero',
+		'Febrero',
+		'Marzo',
+		'Abril',
+		'Mayo',
+		'Junio',
+		'Julio',
+		'Agosto',
+		'Septiembre',
+		'Octubre',
+		'Noviembre',
+		'Diciembre',
+	];
 
-		return { ...task, monthYear: monthYear };
-	});
-
-	// Agrupar las tareas por mes/año
-	const tasksByMonth = tasksWithMonth.reduce((acc, task) => {
-		if (!acc[task.monthYear]) {
-			acc[task.monthYear] = [];
-		}
-		acc[task.monthYear].push(task);
+	// Objeto con todos los meses inicializados en 0
+	const tasksByMonth = allMonths.reduce((acc, month, index) => {
+		const year = new Date().getFullYear(); // Año actual
+		const monthYear = `${year}-${index + 1}`; // Formato "2025-1"
+		acc[monthYear] = 0; // Inicializa en 0 tareas
 		return acc;
 	}, {});
 
-	// Crear un array con los meses y el conteo de tareas por mes
-	const months = Object.keys(tasksByMonth); // Obtener los meses (ej. "2025-1")
-	const taskCounts = months.map((month) => tasksByMonth[month].length); // Contar tareas por mes
+	// Procesar las tareas existentes
+	tasks.forEach((task) => {
+		const taskDate = new Date(task.createTaskDate);
+		const monthYear = `${taskDate.getFullYear()}-${taskDate.getMonth() + 1}`;
 
-	return { months, taskCounts };
+		// Sumar la tarea al mes correspondiente
+		if (tasksByMonth[monthYear] !== undefined) {
+			tasksByMonth[monthYear]++;
+		}
+	});
+
+	return {
+		months: allMonths, // Siempre mostrará los 12 meses
+		taskCounts: Object.values(tasksByMonth), // Lista de valores (0 si no hay tareas)
+	};
 }

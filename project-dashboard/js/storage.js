@@ -44,7 +44,7 @@ export function deleteTaskFromStorage(index) {
 	saveGoalsToStorage(goals);
 
 	// Actualizar el progreso del objetivo (si tiene objetivo)
-	if (taskGoalId !== 'no-goal') {
+	if (taskGoalId !== 'no-goal' && goals[taskGoalId]) {
 		updateGoalProgressInStorage(taskGoalId);
 	}
 
@@ -58,6 +58,8 @@ export function updateGoalProgressInStorage(
 	totalTasks
 ) {
 	const goals = loadGoalsFromStorage();
+	if (goalId === 'no-goal' || !goals[goalId]) return; // Si no tiene objetivo no actualizar nada
+
 	const progress =
 		totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 	goals[goalId].progress = progress;
