@@ -5,35 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	renderChart();
 	updateStatsUI();
 	renderTagChart();
+	// renderChart2();
 });
 
 let myChart, myChart2;
 
-//opcion 1 total tareas (Global)
-// export function renderChart() {
-// 	const stats = getStats();
-// 	const ctx = document.getElementById('taskChart').getContext('2d');
-
-// 	if (myChart) {
-// 		myChart.destroy();
-// 	}
-
-// 	myChart = new Chart(ctx, {
-// 		type: 'bar',
-// 		data: {
-// 			labels: ['Tareas Totales', 'Tareas Completadas'],
-// 			datasets: [
-// 				{
-// 					label: 'Resumen de Tareas',
-// 					data: [stats.totalTasks, stats.completedTasks],
-// 					backgroundColor: ['#36a2eb', '#4caf50'],
-// 				},
-// 			],
-// 		},
-// 	});
-// }
-
-//Opción 2: Total tareas por mes
+//Total tareas por mes
 
 export function renderChart(chartData) {
 	const ctx = document.getElementById('taskChart').getContext('2d');
@@ -110,17 +87,24 @@ export function renderChart(chartData) {
 }
 
 export function renderTasksChart() {
-	const { months, taskCounts } = getTasksByMonth(); // Obtener los datos procesados
+	const { months, taskCounts, completedCounts } = getTasksByMonth(); // Obtener los datos procesados
 
 	// Crear los datos para el gráfico
 	const chartData = {
 		labels: months, // Meses (ej. "2025-1", "2025-2", etc.)
 		datasets: [
 			{
-				label: ['Número de Tareas'],
+				label: 'Tareas añadidas',
 				data: taskCounts, // Número de tareas por mes
 				backgroundColor: 'rgba(75, 192, 192, 0.2)',
 				borderColor: 'rgba(75, 192, 192, 1)',
+				borderWidth: 1,
+			},
+			{
+				label: 'Tareas completadas',
+				data: completedCounts,
+				backgroundColor: '(rgba(75, 192,192,0.6)',
+				borderColor: 'rgba(75,192,192,1)',
 				borderWidth: 1,
 			},
 		],
@@ -189,10 +173,15 @@ function getTasksByMonth() {
 	];
 
 	// Objeto con todos los meses inicializados en 0
+	const year = new Date().getFullYear(); // Año actual
+
 	const tasksByMonth = allMonths.reduce((acc, month, index) => {
-		const year = new Date().getFullYear(); // Año actual
 		const monthYear = `${year}-${index + 1}`; // Formato "2025-1"
-		acc[monthYear] = 0; // Inicializa en 0 tareas
+		acc[monthYear] = {
+			total: 0,
+			completed: 0,
+			label: month,
+		}; // Inicializa en 0 tareas
 		return acc;
 	}, {});
 
@@ -202,13 +191,21 @@ function getTasksByMonth() {
 		const monthYear = `${taskDate.getFullYear()}-${taskDate.getMonth() + 1}`;
 
 		// Sumar la tarea al mes correspondiente
-		if (tasksByMonth[monthYear] !== undefined) {
-			tasksByMonth[monthYear]++;
+		if (tasksByMonth[monthYear]) {
+			tasksByMonth[monthYear].total += 1;
+			if (task.isChecked) {
+				tasksByMonth[monthYear].completed += 1;
+			}
 		}
 	});
 
-	return {
-		months: allMonths, // Siempre mostrará los 12 meses
-		taskCounts: Object.values(tasksByMonth), // Lista de valores (0 si no hay tareas)
-	};
+	const months = allMonths;
+	const taskCounts = months.map(
+		(_, index) => tasksByMonth[`${year}-${index + 1}`].total
+	);
+	const completedCounts = months.map(
+		(_, index) => tasksByMonth[`${year}-${index + 1}`].completed
+	);
+
+	return { months, taskCounts, completedCounts };
 }
