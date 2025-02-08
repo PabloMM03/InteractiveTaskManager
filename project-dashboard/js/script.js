@@ -60,7 +60,6 @@ function addTask() {
 		updateGoalProgress(data.goalId);
 
 		//Actualizar gráficos después de añadir tarea
-		// renderChart();
 		renderTasksChart();
 
 		e.target.reset();
@@ -140,6 +139,7 @@ function addGoals() {
 		data.startDate = new Date().toISOString().split('T')[0];
 		data.progress = 0;
 		data.totalTasks = 0;
+		data.completedTasks = 0;
 
 		const goals = loadGoalsFromStorage();
 		goals.push(data);

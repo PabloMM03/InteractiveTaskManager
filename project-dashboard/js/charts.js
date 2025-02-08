@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	renderChart();
 	updateStatsUI();
 	renderTagChart();
-	// renderChart2();
 });
 
 let myChart, myChart2;
@@ -103,8 +102,8 @@ export function renderTasksChart() {
 			{
 				label: 'Tareas completadas',
 				data: completedCounts,
-				backgroundColor: '(rgba(75, 192,192,0.6)',
-				borderColor: 'rgba(75,192,192,1)',
+				backgroundColor: 'rgba(75, 192, 192, 0.6)',
+				borderColor: 'rgba(75, 192, 192, 1)',
 				borderWidth: 1,
 			},
 		],
@@ -150,7 +149,7 @@ function updateStatsUI() {
 		stats.completedPercentage.toFixed(2);
 }
 
-// renderTagChart();
+//renderTagChart();
 
 // Lógica para obtener tareas por mes
 function getTasksByMonth() {
@@ -172,9 +171,11 @@ function getTasksByMonth() {
 		'Diciembre',
 	];
 
-	// Objeto con todos los meses inicializados en 0
 	const year = new Date().getFullYear(); // Año actual
+	let storedCounts =
+		JSON.parse(localStorage.getItem('taskCountsHistory')) || {};
 
+	// Objeto con todos los meses inicializados en 0
 	const tasksByMonth = allMonths.reduce((acc, month, index) => {
 		const monthYear = `${year}-${index + 1}`; // Formato "2025-1"
 		acc[monthYear] = {
@@ -199,10 +200,15 @@ function getTasksByMonth() {
 		}
 	});
 
+	//Sobreescribir los datos en TaskCountsHistory
+	localStorage.setItem('taskCountsHistory', JSON.stringify(tasksByMonth));
+
+	//Mapear contadores por mese para añadir al gráfico
 	const months = allMonths;
 	const taskCounts = months.map(
 		(_, index) => tasksByMonth[`${year}-${index + 1}`].total
 	);
+
 	const completedCounts = months.map(
 		(_, index) => tasksByMonth[`${year}-${index + 1}`].completed
 	);
