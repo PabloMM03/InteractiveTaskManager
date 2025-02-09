@@ -1,4 +1,8 @@
-import { getStats } from './storage.js';
+import {
+	getStats,
+	loadTaskCountsHistory,
+	saveTaskCountsHistory,
+} from './storage.js';
 import { loadTasksFromStorage } from './storage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -79,8 +83,6 @@ export function renderChart(chartData) {
 					},
 				},
 			},
-			// Tienes que definir un tamaño adecuado en el contenedor de tu gráfico
-			// Esto lo puedes hacer en CSS
 		},
 	});
 }
@@ -152,10 +154,7 @@ function updateStatsUI() {
 //renderTagChart();
 
 // Lógica para obtener tareas por mes
-function getTasksByMonth() {
-	const tasks = loadTasksFromStorage();
-
-	// Lista con todos los meses
+export function getTasksByMonth() {
 	const allMonths = [
 		'Enero',
 		'Febrero',
@@ -171,47 +170,56 @@ function getTasksByMonth() {
 		'Diciembre',
 	];
 
-	const year = new Date().getFullYear(); // Año actual
-	let storedCounts =
-		JSON.parse(localStorage.getItem('taskCountsHistory')) || {};
+	const year = new Date().getFullYear();
+	let taskCountsHistory = loadTaskCountsHistory();
 
-	// Objeto con todos los meses inicializados en 0
-	const tasksByMonth = allMonths.reduce((acc, month, index) => {
-		const monthYear = `${year}-${index + 1}`; // Formato "2025-1"
-		acc[monthYear] = {
-			total: 0,
-			completed: 0,
-			label: month,
-		}; // Inicializa en 0 tareas
-		return acc;
-	}, {});
-
-	// Procesar las tareas existentes
-	tasks.forEach((task) => {
-		const taskDate = new Date(task.createTaskDate);
-		const monthYear = `${taskDate.getFullYear()}-${taskDate.getMonth() + 1}`;
-
-		// Sumar la tarea al mes correspondiente
-		if (tasksByMonth[monthYear]) {
-			tasksByMonth[monthYear].total += 1;
-			if (task.isChecked) {
-				tasksByMonth[monthYear].completed += 1;
-			}
-		}
-	});
-
-	//Sobreescribir los datos en TaskCountsHistory
-	localStorage.setItem('taskCountsHistory', JSON.stringify(tasksByMonth));
-
-	//Mapear contadores por mese para añadir al gráfico
 	const months = allMonths;
 	const taskCounts = months.map(
-		(_, index) => tasksByMonth[`${year}-${index + 1}`].total
+		(_, index) => taskCountsHistory[`${year}-${index + 1}`]?.total || 0
 	);
-
 	const completedCounts = months.map(
-		(_, index) => tasksByMonth[`${year}-${index + 1}`].completed
+		(_, index) => taskCountsHistory[`${year}-${index + 1}`]?.completed || 0
 	);
 
 	return { months, taskCounts, completedCounts };
+}
+
+export function updateTaskHistory(data) {
+	const allMonths = [
+		'Enero',
+		'Febrero',
+		'Marzo',
+		'Abril',
+		'Mayo',
+		'Junio',
+		'Julio',
+		'Agosto',
+		'Septiembre',
+		'Octubre',
+		'Noviembre',
+		'Diciembre',
+	];
+
+	let taskCountsHistory = loadTaskCountsHistory() || {}; // Cargar historial
+
+	const taskDate = new Date(data.createTaskDate);
+	const monthYear = `${taskDate.getFullYear()}-${taskDate.getMonth() + 1}`;
+
+	// Si el mes no existe en el historial, lo inicializamos
+	if (!taskCountsHistory[monthYear]) {
+		taskCountsHistory[monthYear] = {
+			total: 0,
+			completed: 0,
+			label: allMonths[taskDate.getMonth()],
+		};
+	}
+
+	// Actualizar solo el mes de la tarea que se acaba de crear
+	taskCountsHistory[monthYear].total += 1;
+	if (data.isChecked) {
+		taskCountsHistory[monthYear].completed += 1;
+	}
+
+	// Guardar historial actualizado en localStorage
+	saveTaskCountsHistory(taskCountsHistory);
 }

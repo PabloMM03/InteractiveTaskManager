@@ -1,4 +1,4 @@
-import { renderChart, renderTasksChart } from './charts.js';
+import { renderTasksChart, updateTaskHistory } from './charts.js';
 import {
 	loadTasksFromStorage,
 	saveTasksToStorage,
@@ -6,6 +6,8 @@ import {
 	saveGoalsToStorage,
 	deleteTaskFromStorage,
 	updateGoalProgressInStorage,
+	loadTaskCountsHistory,
+	saveTaskCountsHistory,
 } from './storage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -51,10 +53,15 @@ function addTask() {
 		tasks.push(data);
 		saveTasksToStorage(tasks);
 
+		// Actualizar el historial de tareas por mes
+		updateTaskHistory(data);
+
 		// Incrementar el total de tareas del objetivo
 		const goals = loadGoalsFromStorage();
-		goals[selectedGoalId].totalTasks += 1;
-		saveGoalsToStorage(goals);
+		if (selectedGoalId) {
+			goals[selectedGoalId].totalTasks += 1;
+			saveGoalsToStorage(goals);
+		}
 
 		loadTask(data.goalId);
 		updateGoalProgress(data.goalId);
@@ -100,15 +107,30 @@ export function loadTask(goalId) {
 // Actualizar el estado de la tarea
 function stateTask(index, task, span) {
 	const tasks = loadTasksFromStorage();
+	const countsHistory = loadTaskCountsHistory() || {};
+
 	task.isChecked = !task.isChecked; //Cambiar estado
 	tasks[index] = task;
 	saveTasksToStorage(tasks);
 
+	//Fecha de creación de tarea para incrementar o decrementar estado de completada por mes
+	const taskDate = new Date(task.createTaskDate);
+	const monthYear = `${taskDate.getFullYear()}-${taskDate.getMonth() + 1}`;
+
+	if (task.isChecked) {
+		countsHistory[monthYear].completed += 1;
+	} else {
+		countsHistory[monthYear].completed = Math.max(
+			0,
+			countsHistory[monthYear].completed - 1
+		);
+	}
+
+	saveTaskCountsHistory(countsHistory);
+
 	span.style.textDecoration = task.isChecked ? 'line-through' : 'none';
 	updateGoalProgress(task.goalId);
 
-	//Actualizar gráficos después de añadir tarea
-	// renderChart();
 	renderTasksChart();
 }
 
@@ -118,8 +140,6 @@ function deleteTask(index, goalId) {
 	loadTask(goalId);
 	updateGoalProgress(goalId);
 
-	//Actualizar gráficos después de añadir tarea
-	// renderChart();
 	renderTasksChart();
 
 	return wasChecked;
