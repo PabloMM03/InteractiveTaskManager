@@ -1,4 +1,9 @@
-import { renderTasksChart, updateTaskHistory } from './charts.js';
+import {
+	renderTagChart,
+	renderTasksChart,
+	updateStatsUI,
+	updateTaskHistory,
+} from './charts.js';
 import {
 	loadTasksFromStorage,
 	saveTasksToStorage,
@@ -68,6 +73,7 @@ function addTask() {
 
 		//Actualizar gráficos después de añadir tarea
 		renderTasksChart();
+		renderTagChart();
 
 		e.target.reset();
 	});
@@ -132,6 +138,7 @@ function stateTask(index, task, span) {
 	updateGoalProgress(task.goalId);
 
 	renderTasksChart();
+	updateStatsUI();
 }
 
 // Eliminar tareas y actualizar lista
@@ -141,6 +148,7 @@ function deleteTask(index, goalId) {
 	updateGoalProgress(goalId);
 
 	renderTasksChart();
+	renderTagChart();
 
 	return wasChecked;
 }
@@ -222,6 +230,8 @@ function deleteGoal(index) {
 	//Guardar almacenamiento y actualizar
 	saveGoalsToStorage(updatedGoals);
 	saveTasksToStorage(updatedTasks);
+	renderTagChart();
+
 	loadGoals();
 	loadTask(goalId);
 }

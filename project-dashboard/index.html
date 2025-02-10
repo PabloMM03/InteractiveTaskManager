@@ -144,7 +144,14 @@
 
 			<div class="charts">
 				<canvas id="taskChart"></canvas>
-				<canvas id="taskChart2"></canvas>
+
+				<!-- Modal -->
+				<div id="modal" class="modal-overlay">
+					<div class="modal-content">
+						<button class="modal-close" onclick="closeModal()">✖</button>
+						<p id="modal-content"></p>
+					</div>
+				</div>
 
 				<div id="stats">
 					<p>Total de tareas: <span id="totalTasks">0</span></p>

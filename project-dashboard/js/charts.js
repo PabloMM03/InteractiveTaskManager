@@ -3,7 +3,6 @@ import {
 	loadTaskCountsHistory,
 	saveTaskCountsHistory,
 } from './storage.js';
-import { loadTasksFromStorage } from './storage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 	renderChart();
@@ -27,18 +26,18 @@ export function renderChart(chartData) {
 		type: 'bar',
 		data: chartData,
 		options: {
-			responsive: true, // Se ajusta automáticamente al tamaño del contenedor
-			maintainAspectRatio: true, // Permite cambiar el tamaño manualmente
+			responsive: true,
+			maintainAspectRatio: true,
 			plugins: {
 				legend: {
 					display: true,
 					labels: {
 						font: {
-							size: 16, // Aumenta el tamaño de la fuente de la leyenda
+							size: 16,
 							weight: 'bold',
 						},
 						color: '#4B5563',
-						padding: 20, // Más espacio alrededor de la leyenda
+						padding: 20,
 					},
 				},
 				tooltip: {
@@ -46,7 +45,7 @@ export function renderChart(chartData) {
 					titleColor: '#F9FAFB',
 					bodyColor: '#D1D5DB',
 					cornerRadius: 5,
-					padding: 15, // Un poco más de espacio en el tooltip
+					padding: 15,
 				},
 				animation: {
 					duration: 800,
@@ -57,7 +56,7 @@ export function renderChart(chartData) {
 				x: {
 					ticks: {
 						font: {
-							size: 14, // Aumenta el tamaño de las etiquetas en eje X
+							size: 14,
 							family: 'Arial',
 							weight: '600',
 						},
@@ -67,7 +66,7 @@ export function renderChart(chartData) {
 						display: true,
 						text: 'Meses',
 						font: {
-							size: 18, // Título más grande
+							size: 18,
 							weight: 'bold',
 						},
 						color: '#111827',
@@ -75,18 +74,56 @@ export function renderChart(chartData) {
 				},
 				y: {
 					ticks: {
-						display: false, // Ocultar los números del eje Y
+						display: false,
 					},
 					grid: {
 						drawTicks: false,
 						color: 'transparent',
 					},
 				},
+			}, //Cambiar cursor al haber información
+			onHover: (event, elements) => {
+				if (elements.length > 0) {
+					event.native.target.style.cursor = 'pointer';
+				} else {
+					event.native.target.style.cursor = 'default';
+				}
+			},
+
+			onClick: (event, elements) => {
+				// Mostrar detalles por mes
+				if (elements.length > 0) {
+					const datasetIndex = elements[0].datasetIndex;
+					const dataIndex = elements[0].index;
+
+					const month = chartData.labels[dataIndex];
+					const tasks = chartData.datasets[datasetIndex].data[dataIndex];
+
+					showModal(`Mes: ${month}<br>Tareas: ${tasks}`);
+					// showModal(`<input type='date'>`);
+				}
 			},
 		},
 	});
 }
 
+//Mostrar y cerrar modal con detalles
+function showModal(content) {
+	const modal = document.getElementById('modal');
+	const modalContent = document.getElementById('modal-content');
+
+	modalContent.innerHTML = content;
+	modal.style.opacity = '1';
+	modal.style.visibility = 'visible';
+}
+
+window.closeModal = function () {
+	const modal = document.getElementById('modal');
+	modal.style.opacity = '0';
+	modal.style.visibility = 'hidden';
+};
+
+//renderizar las tareas
 export function renderTasksChart() {
 	const { months, taskCounts, completedCounts } = getTasksByMonth(); // Obtener los datos procesados
 
@@ -115,7 +152,7 @@ export function renderTasksChart() {
 	renderChart(chartData);
 }
 
-function renderTagChart() {
+export function renderTagChart() {
 	const stats = getStats();
 	const ctx = document.getElementById('tagChart').getContext('2d');
 
@@ -143,7 +180,8 @@ function renderTagChart() {
 	});
 }
 
-function updateStatsUI() {
+//Actualizar estado del global de tareas y %
+export function updateStatsUI() {
 	const stats = getStats();
 	document.getElementById('totalTasks').textContent = stats.totalTasks;
 	document.getElementById('completedTasks').textContent = stats.completedTasks;
