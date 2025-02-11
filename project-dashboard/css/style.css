@@ -94,7 +94,9 @@ body {
 	border-radius: 10px;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 	text-align: center;
-	width: 300px;
+	align-content: center;
+	width: 500px;
+	height: 250px;
 	position: relative;
 }
 

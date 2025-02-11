@@ -6,11 +6,12 @@ import {
 
 document.addEventListener('DOMContentLoaded', () => {
 	renderChart();
+	renderChartByDay();
 	updateStatsUI();
 	renderTagChart();
 });
 
-let myChart, myChart2;
+let myChart, myChart2, myChart3;
 
 //Total tareas por mes
 
@@ -99,8 +100,8 @@ export function renderChart(chartData) {
 					const month = chartData.labels[dataIndex];
 					const tasks = chartData.datasets[datasetIndex].data[dataIndex];
 
-					showModal(`Mes: ${month}<br>Tareas: ${tasks}`);
-					// showModal(`<input type='date'>`);
+					const days = renderTasksChartByDay(dataIndex);
+					showModal(month, tasks, days);
 				}
 			},
 		},
@@ -108,10 +109,12 @@ export function renderChart(chartData) {
 }
 
 //Mostrar y cerrar modal con detalles
-function showModal(content) {
+function showModal(month, tasks, content) {
 	const modal = document.getElementById('modal');
-	const modalContent = document.getElementById('modal-content');
-
+	const modalContent = document.getElementById('modal-content2');
+	const modalText = document.getElementById('modal-text');
+	// Generar el segundo gráfico
+	modalText.innerHTML = `${month}-${tasks}`;
 	modalContent.innerHTML = content;
 	modal.style.opacity = '1';
 	modal.style.visibility = 'visible';
@@ -260,4 +263,141 @@ export function updateTaskHistory(data) {
 
 	// Guardar historial actualizado en localStorage
 	saveTaskCountsHistory(taskCountsHistory);
+}
+
+//Funcion obtener dias del mes
+function daysPerMonth(dataIndex) {
+	const year = new Date().getFullYear();
+	const month = Number(dataIndex); // Asegurar que sea número válido
+	if (isNaN(month) || month < 0 || month > 11) {
+		return [];
+	}
+
+	const lastDay = new Date(year, month + 1, 0).getDate();
+	const calendar = Array.from({ length: lastDay }, (_, i) => i + 1);
+
+	return calendar;
+}
+
+function renderChartByDay(chartData) {
+	const ctx = document.getElementById('taskChart2').getContext('2d');
+	if (myChart3) {
+		myChart3.destroy(); // Eliminar gráfico anterior si existe
+	}
+
+	// Crear el nuevo gráfico de barras
+	myChart3 = new Chart(ctx, {
+		type: 'bar',
+		data: chartData,
+		options: {
+			responsive: true,
+			maintainAspectRatio: true,
+			plugins: {
+				legend: {
+					display: true,
+					labels: {
+						font: {
+							size: 16,
+							weight: 'bold',
+						},
+						color: '#4B5563',
+						padding: 20,
+					},
+				},
+				tooltip: {
+					backgroundColor: '#1F2937',
+					titleColor: '#F9FAFB',
+					bodyColor: '#D1D5DB',
+					cornerRadius: 5,
+					padding: 15,
+				},
+				animation: {
+					duration: 800,
+					easing: 'easeInOutQuad',
+				},
+			},
+			scales: {
+				x: {
+					ticks: {
+						font: {
+							size: 14,
+							family: 'Arial',
+							weight: '600',
+						},
+						color: '#374151',
+					},
+					title: {
+						display: true,
+						text: 'Días',
+						font: {
+							size: 18,
+							weight: 'bold',
+						},
+						color: '#111827',
+					},
+				},
+				y: {
+					ticks: {
+						display: false,
+					},
+					grid: {
+						drawTicks: false,
+						color: 'transparent',
+					},
+				},
+			}, //Cambiar cursor al haber información
+			onHover: (event, elements) => {
+				if (elements.length > 0) {
+					event.native.target.style.cursor = 'pointer';
+				} else {
+					event.native.target.style.cursor = 'default';
+				}
+			},
+
+			// onClick: (event, elements) => {
+			// 	// Mostrar detalles por mes
+			// 	if (elements.length > 0) {
+			// 		const datasetIndex = elements[0].datasetIndex;
+			// 		const dataIndex = elements[0].index;
+
+			// 		const month = chartData.labels[dataIndex];
+			// 		const tasks = chartData.datasets[datasetIndex].data[dataIndex];
+
+			// 		const calendar = daysPerMonth(dataIndex);
+
+			// 		showModal(`Mes: ${month}<br>Tareas: ${tasks}`);
+			// 		// showModal(`${calendar.join('')}`);
+			// 	}
+			// },
+		},
+	});
+}
+
+function renderTasksChartByDay(dataIndex) {
+	// const { months, taskCounts, completedCounts } = getTasksByMonth(); // Obtener los datos procesados
+	const calendar = daysPerMonth(dataIndex);
+	// console.log(calendar);
+	// Crear los datos para el gráfico
+	const chartData = {
+		labels: calendar,
+		datasets: [
+			{
+				label: 'Tareas añadidas',
+				data: [1, 2, 2], // Número de tareas por mes
+				backgroundColor: 'rgba(75, 192, 192, 0.2)',
+				borderColor: 'rgba(75, 192, 192, 1)',
+				borderWidth: 1,
+			},
+			{
+				label: 'Tareas completadas',
+				data: [1, 2, 3, 4],
+				backgroundColor: 'rgba(75, 192, 192, 0.6)',
+				borderColor: 'rgba(75, 192, 192, 1)',
+				borderWidth: 1,
+			},
+		],
+	};
+
+	// Llamar a renderChart para mostrar el gráfico
+	renderChartByDay(chartData);
 }
