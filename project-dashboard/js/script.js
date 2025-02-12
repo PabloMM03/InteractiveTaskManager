@@ -98,6 +98,7 @@ export function loadTask(goalId) {
 		});
 
 		const deleteButton = document.createElement('button');
+		deleteButton.classList.add('form-buttons');
 		deleteButton.textContent = 'Eliminar';
 		deleteButton.addEventListener('click', (e) => {
 			e.stopPropagation();

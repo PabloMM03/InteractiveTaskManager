@@ -109,13 +109,11 @@ export function renderChart(chartData) {
 }
 
 //Mostrar y cerrar modal con detalles
-function showModal(month, tasks, content) {
+function showModal(month, tasks) {
 	const modal = document.getElementById('modal');
-	const modalContent = document.getElementById('modal-content2');
 	const modalText = document.getElementById('modal-text');
 	// Generar el segundo gráfico
-	modalText.innerHTML = `${month}-${tasks}`;
-	modalContent.innerHTML = content;
+	//modalText.innerHTML = `${month} - ${tasks} Tareas`;
 	modal.style.opacity = '1';
 	modal.style.visibility = 'visible';
 }
@@ -374,9 +372,7 @@ function renderChartByDay(chartData) {
 }
 
 function renderTasksChartByDay(dataIndex) {
-	// const { months, taskCounts, completedCounts } = getTasksByMonth(); // Obtener los datos procesados
 	const calendar = daysPerMonth(dataIndex);
-	// console.log(calendar);
 	// Crear los datos para el gráfico
 	const chartData = {
 		labels: calendar,
