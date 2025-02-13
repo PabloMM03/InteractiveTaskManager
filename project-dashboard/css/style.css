@@ -7,6 +7,7 @@
 body {
 	margin: 0;
 	font-family: Arial, sans-serif;
+	margin-bottom: 100px;
 }
 
 /* Contenedor sección formulario */
@@ -41,7 +42,7 @@ body {
 
 #gtags-container,
 #ttags-container {
-	position: relative; /* Asegura que la lista de sugerencias se posicione correctamente */
+	position: relative;
 	width: 100%;
 }
 /*Lista con etiquetas */
@@ -96,7 +97,7 @@ body {
 	text-align: center;
 	align-content: center;
 	width: 700px;
-	height: 350px;
+	height: 375px;
 	position: relative;
 }
 

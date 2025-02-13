@@ -94,14 +94,9 @@ export function renderChart(chartData) {
 			onClick: (event, elements) => {
 				// Mostrar detalles por mes
 				if (elements.length > 0) {
-					const datasetIndex = elements[0].datasetIndex;
 					const dataIndex = elements[0].index;
-
-					const month = chartData.labels[dataIndex];
-					const tasks = chartData.datasets[datasetIndex].data[dataIndex];
-
-					const days = renderTasksChartByDay(dataIndex);
-					showModal(month, tasks, days);
+					renderTasksChartByDay(dataIndex, chartData);
+					showModal();
 				}
 			},
 		},
@@ -109,11 +104,10 @@ export function renderChart(chartData) {
 }
 
 //Mostrar y cerrar modal con detalles
-function showModal(month, tasks) {
+function showModal() {
 	const modal = document.getElementById('modal');
 	const modalText = document.getElementById('modal-text');
 	// Generar el segundo gráfico
-	//modalText.innerHTML = `${month} - ${tasks} Tareas`;
 	modal.style.opacity = '1';
 	modal.style.visibility = 'visible';
 }
@@ -130,20 +124,20 @@ export function renderTasksChart() {
 
 	// Crear los datos para el gráfico
 	const chartData = {
-		labels: months, // Meses (ej. "2025-1", "2025-2", etc.)
+		labels: months,
 		datasets: [
 			{
 				label: 'Tareas añadidas',
 				data: taskCounts, // Número de tareas por mes
-				backgroundColor: 'rgba(75, 192, 192, 0.2)',
-				borderColor: 'rgba(75, 192, 192, 1)',
+				backgroundColor: 'rgba(255, 99, 132, 0.6)',
+				borderColor: 'rgba(255, 99, 132, 1)',
 				borderWidth: 1,
 			},
 			{
 				label: 'Tareas completadas',
 				data: completedCounts,
-				backgroundColor: 'rgba(75, 192, 192, 0.6)',
-				borderColor: 'rgba(75, 192, 192, 1)',
+				backgroundColor: 'rgba(255, 159, 64, 0.6)',
+				borderColor: 'rgba(255, 159, 64, 1)',
 				borderWidth: 1,
 			},
 		],
@@ -265,19 +259,37 @@ export function updateTaskHistory(data) {
 
 //Funcion obtener dias del mes
 function daysPerMonth(dataIndex) {
+	const { taskCounts, completedCounts } = getTasksByMonth();
+
 	const year = new Date().getFullYear();
 	const month = Number(dataIndex); // Asegurar que sea número válido
 	if (isNaN(month) || month < 0 || month > 11) {
 		return [];
 	}
 
+	// Obtener calendario con los dias del mes indicado
 	const lastDay = new Date(year, month + 1, 0).getDate();
 	const calendar = Array.from({ length: lastDay }, (_, i) => i + 1);
 
-	return calendar;
+	// Funcion interna para asignar aleatoriamente las tareas a los dias del mes
+	const totalTasks = taskCounts[dataIndex] || 0;
+	const completedTasks = completedCounts[dataIndex] || 0;
+
+	function distributeTasks(total, lastDay) {
+		return Array.from({ length: total }).reduce((acc, _) => {
+			const randomDay = Math.floor(Math.random() * lastDay) + 1;
+			acc[randomDay] = (acc[randomDay] || 0) + 1;
+			return acc;
+		}, {});
+	}
+
+	const taskDays = distributeTasks(totalTasks, lastDay);
+	const completed = distributeTasks(completedTasks, lastDay);
+
+	return { calendar, taskDays, completed };
 }
 
-function renderChartByDay(chartData) {
+function renderChartByDay(chartData, month) {
 	const ctx = document.getElementById('taskChart2').getContext('2d');
 	if (myChart3) {
 		myChart3.destroy(); // Eliminar gráfico anterior si existe
@@ -326,10 +338,11 @@ function renderChartByDay(chartData) {
 					},
 					title: {
 						display: true,
-						text: 'Días',
+						text: month,
 						font: {
 							size: 18,
 							weight: 'bold',
+							family: 'Arial',
 						},
 						color: '#111827',
 					},
@@ -371,29 +384,31 @@ function renderChartByDay(chartData) {
 	});
 }
 
-function renderTasksChartByDay(dataIndex) {
-	const calendar = daysPerMonth(dataIndex);
+function renderTasksChartByDay(dataIndex, charMonth) {
+	const { calendar, taskDays, completed } = daysPerMonth(dataIndex);
+	const month = charMonth.labels[dataIndex];
+
 	// Crear los datos para el gráfico
 	const chartData = {
 		labels: calendar,
 		datasets: [
 			{
 				label: 'Tareas añadidas',
-				data: [1, 2, 2], // Número de tareas por mes
-				backgroundColor: 'rgba(75, 192, 192, 0.2)',
-				borderColor: 'rgba(75, 192, 192, 1)',
+				data: calendar.map((day) => taskDays[day] || 0), // Número de tareas por mes
+				backgroundColor: 'rgba(255, 99, 132, 0.6)',
+				borderColor: 'rgba(255, 99, 132, 1)',
 				borderWidth: 1,
 			},
 			{
 				label: 'Tareas completadas',
-				data: [1, 2, 3, 4],
-				backgroundColor: 'rgba(75, 192, 192, 0.6)',
-				borderColor: 'rgba(75, 192, 192, 1)',
+				data: calendar.map((day) => completed[day] || 0),
+				backgroundColor: 'rgba(255, 159, 64, 0.6)',
+				borderColor: 'rgba(255, 159, 64, 1)',
 				borderWidth: 1,
 			},
 		],
 	};
 
 	// Llamar a renderChart para mostrar el gráfico
-	renderChartByDay(chartData);
+	renderChartByDay(chartData, month);
 }
