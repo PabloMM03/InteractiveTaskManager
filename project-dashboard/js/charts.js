@@ -36,6 +36,7 @@ export function renderChart(chartData) {
 						font: {
 							size: 16,
 							weight: 'bold',
+							family: 'Segoe UI',
 						},
 						color: '#4B5563',
 						padding: 20,
@@ -63,8 +64,8 @@ export function renderChart(chartData) {
 				x: {
 					ticks: {
 						font: {
-							size: 14,
-							family: 'Arial',
+							size: 16,
+							family: 'Segoe UI',
 							weight: '600',
 						},
 						color: '#374151',
@@ -75,6 +76,7 @@ export function renderChart(chartData) {
 						font: {
 							size: 18,
 							weight: 'bold',
+							family: 'Segoe UI',
 						},
 						color: '#111827',
 					},
@@ -176,6 +178,23 @@ export function renderTagChart() {
 					],
 				},
 			],
+		},
+		options: {
+			plugins: {
+				legend: {
+					labels: {
+						font: {
+							family: 'Segoe UI', // Especifica la fuente aquí
+						},
+					},
+					onHover: (event) => {
+						event.native.target.style.cursor = 'pointer';
+					},
+					onLeave: (event) => {
+						event.native.target.style.cursor = 'default';
+					},
+				},
+			},
 		},
 	});
 }
@@ -318,6 +337,7 @@ function renderChartByDay(chartData, month) {
 						font: {
 							size: 16,
 							weight: 'bold',
+							family: 'Segoe UI',
 						},
 						color: '#4B5563',
 						padding: 20,
@@ -346,7 +366,7 @@ function renderChartByDay(chartData, month) {
 					ticks: {
 						font: {
 							size: 14,
-							family: 'Arial',
+							family: 'Segoe UI',
 							weight: '600',
 						},
 						color: '#374151',
@@ -357,7 +377,7 @@ function renderChartByDay(chartData, month) {
 						font: {
 							size: 18,
 							weight: 'bold',
-							family: 'Arial',
+							family: 'Segoe UI',
 						},
 						color: '#111827',
 					},

@@ -65,6 +65,8 @@ body {
 	width: 80vw; /* 80% del ancho de la ventana */
 	height: 400px; /* Altura específica */
 	margin: auto;
+	padding: 40px;
+	position: relative;
 }
 
 .hidden {
@@ -141,8 +143,16 @@ body {
 	border-radius: 20px;
 	padding: 10px;
 	margin-right: 10px;
+} */
+
+#stats {
+	display: flex;
+	position: absolute;
+	top: 0;
 }
 
 #stats p {
-	color: white;
-} */
+	margin: 10px;
+	font-size: 20px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

@@ -35,56 +35,76 @@
 			<div class="container">
 				<!-- Sección del formulario -->
 				<section id="form-section">
-					<h2>Crear Nueva Tarea</h2>
 					<form id="task-form">
-						<label for="goal-select">Objetivo:</label>
-						<select id="goal-select"></select>
-						<!-- Se llenará dinámicamente -->
+						<h2>Crear Nueva Tarea</h2>
 
-						<input
-							type="text"
-							name="title"
-							placeholder="Nombre de la tarea"
-							required
-						/>
-						<input type="date" name="due_date" required />
-						<select name="priority">
-							<option value="Baja">Baja</option>
-							<option value="Media">Media</option>
-							<option value="Alta">Alta</option>
-						</select>
+						<div class="step active" id="step-1">
+							<label for="goal-select">Objetivo:</label>
+							<select id="goal-select"></select>
+							<button class="form-buttons" type="button" onclick="nextStep(2)">
+								Siguiente
+							</button>
+						</div>
 
-						<div id="ttags-container">
-							<label for="ttags">Etiquetas:</label>
+						<div class="step" id="step-2">
+							<input
+								type="text"
+								name="title"
+								placeholder="Nombre de la tarea"
+								required
+							/>
+							<button class="form-buttons" type="button" onclick="nextStep(3)">
+								Siguiente
+							</button>
+						</div>
+
+						<div class="step" id="step-3">
+							<input type="date" name="due_date" required />
+							<label for="priority">Prioridad:</label>
+							<select name="priority">
+								<option value="Baja">Baja</option>
+								<option value="Media">Media</option>
+								<option value="Alta">Alta</option>
+							</select>
+							<button class="form-buttons" type="button" onclick="nextStep(4)">
+								Siguiente
+							</button>
+						</div>
+
+						<div class="step" id="step-4">
+							<label for="ttag">Etiquetas:</label>
 							<input
 								type="text"
 								id="ttag"
 								name="ttag"
 								placeholder="Busca o escribe una etiqueta..."
-								oninput="filterTags()"
 								required
 							/>
-							<ul id="ttags-suggestions" class="hidden">
-								<!-- Las opciones de etiquetas se mostrarán aquí -->
-							</ul>
+							<button class="form-buttons" type="button" onclick="nextStep(5)">
+								Siguiente
+							</button>
 						</div>
 
-						<label for="assigned-to">Asignado a:</label>
-						<input
-							type="text"
-							id="assigned-to"
-							name="assigned_to"
-							placeholder="Nombre de la persona"
-						/>
-
-						<div class="checkbox-container">
-							<input type="checkbox" id="notifications" name="notifications" />
-							<label for="notifications" style="margin: 0"
-								>Recordarme antes de la fecha de vencimiento</label
-							>
+						<div class="step" id="step-5">
+							<label for="assigned-to">Asignado a:</label>
+							<input
+								type="text"
+								id="assigned-to"
+								name="assigned_to"
+								placeholder="Nombre de la persona"
+							/>
+							<div class="checkbox-container">
+								<input
+									type="checkbox"
+									id="notifications"
+									name="notifications"
+								/>
+								<label for="notifications"
+									>Recordarme antes de la fecha de vencimiento</label
+								>
+							</div>
+							<button class="form-buttons" type="submit">Crear tarea</button>
 						</div>
-
-						<button class="form-buttons" type="submit">Crear tarea</button>
 					</form>
 				</section>
 
@@ -143,6 +163,11 @@
 			</div>
 
 			<div class="charts">
+				<div id="stats">
+					<p>Total de tareas: <span id="totalTasks">0</span></p>
+					<p>Tareas completadas: <span id="completedTasks">0</span></p>
+					<p>Progreso total: <span id="completedPercentage">0</span>%</p>
+				</div>
 				<canvas id="taskChart"></canvas>
 
 				<!-- Modal -->
@@ -154,11 +179,6 @@
 					</div>
 				</div>
 
-				<div id="stats">
-					<p>Total de tareas: <span id="totalTasks">0</span></p>
-					<p>Tareas completadas: <span id="completedTasks">0</span></p>
-					<p>Progreso total: <span id="completedPercentage">0</span>%</p>
-				</div>
 				<canvas id="tagChart"></canvas>
 			</div>
 		</main>
@@ -168,5 +188,13 @@
 		<script type="module" src="./js/charts.js"></script>
 		<script src="./js/autocompleteSearchTag.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script>
+			function nextStep(step) {
+				document
+					.querySelectorAll('.step')
+					.forEach((el) => el.classList.remove('active'));
+				document.getElementById('step-' + step).classList.add('active');
+			}
+		</script>
 	</body>
 </html>
