@@ -91,12 +91,13 @@ body {
 /* Contenedor del modal */
 .modal-content {
 	background: white;
-	padding: 20px;
+	padding: 40px;
+	padding-top: 0;
 	border-radius: 10px;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 	text-align: center;
 	align-content: center;
-	width: 700px;
+	width: 750px;
 	height: 375px;
 	position: relative;
 }
@@ -121,3 +122,27 @@ body {
 .modal-close:active {
 	transform: scale(0.1);
 }
+
+/* #taskChart {
+	background-color: white;
+	border-radius: 20px;
+	padding: 10px;
+	margin-right: 10px;
+}
+
+.charts {
+	background-color: midnightblue;
+	border-radius: 20px;
+	padding: 40px;
+}
+
+#tagChart {
+	background-color: white;
+	border-radius: 20px;
+	padding: 10px;
+	margin-right: 10px;
+}
+
+#stats p {
+	color: white;
+} */

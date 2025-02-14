@@ -40,6 +40,12 @@ export function renderChart(chartData) {
 						color: '#4B5563',
 						padding: 20,
 					},
+					onHover: (event) => {
+						event.native.target.style.cursor = 'pointer';
+					},
+					onLeave: (event) => {
+						event.native.target.style.cursor = 'default';
+					},
 				},
 				tooltip: {
 					backgroundColor: '#1F2937',
@@ -106,7 +112,6 @@ export function renderChart(chartData) {
 //Mostrar y cerrar modal con detalles
 function showModal() {
 	const modal = document.getElementById('modal');
-	const modalText = document.getElementById('modal-text');
 	// Generar el segundo gráfico
 	modal.style.opacity = '1';
 	modal.style.visibility = 'visible';
@@ -269,25 +274,29 @@ function daysPerMonth(dataIndex) {
 
 	// Obtener calendario con los dias del mes indicado
 	const lastDay = new Date(year, month + 1, 0).getDate();
+	const day = new Date().getDate();
+
 	const calendar = Array.from({ length: lastDay }, (_, i) => i + 1);
 
 	// Funcion interna para asignar aleatoriamente las tareas a los dias del mes
 	const totalTasks = taskCounts[dataIndex] || 0;
 	const completedTasks = completedCounts[dataIndex] || 0;
 
-	function distributeTasks(total, lastDay) {
+	function distributeTasks(total, day) {
 		return Array.from({ length: total }).reduce((acc, _) => {
-			const randomDay = Math.floor(Math.random() * lastDay) + 1;
+			const randomDay = Math.floor(Math.random() * day) + 1;
 			acc[randomDay] = (acc[randomDay] || 0) + 1;
 			return acc;
 		}, {});
 	}
 
-	const taskDays = distributeTasks(totalTasks, lastDay);
-	const completed = distributeTasks(completedTasks, lastDay);
+	const taskDays = distributeTasks(totalTasks, day);
+	const completed = distributeTasks(completedTasks, day);
 
 	return { calendar, taskDays, completed };
 }
+
+//Renderizar gráfico mostrar tareas por dias del mes
 
 function renderChartByDay(chartData, month) {
 	const ctx = document.getElementById('taskChart2').getContext('2d');
@@ -312,6 +321,12 @@ function renderChartByDay(chartData, month) {
 						},
 						color: '#4B5563',
 						padding: 20,
+					},
+					onHover: (event) => {
+						event.native.target.style.cursor = 'pointer';
+					},
+					onLeave: (event) => {
+						event.native.target.style.cursor = 'default';
 					},
 				},
 				tooltip: {
@@ -364,22 +379,6 @@ function renderChartByDay(chartData, month) {
 					event.native.target.style.cursor = 'default';
 				}
 			},
-
-			// onClick: (event, elements) => {
-			// 	// Mostrar detalles por mes
-			// 	if (elements.length > 0) {
-			// 		const datasetIndex = elements[0].datasetIndex;
-			// 		const dataIndex = elements[0].index;
-
-			// 		const month = chartData.labels[dataIndex];
-			// 		const tasks = chartData.datasets[datasetIndex].data[dataIndex];
-
-			// 		const calendar = daysPerMonth(dataIndex);
-
-			// 		showModal(`Mes: ${month}<br>Tareas: ${tasks}`);
-			// 		// showModal(`${calendar.join('')}`);
-			// 	}
-			// },
 		},
 	});
 }
