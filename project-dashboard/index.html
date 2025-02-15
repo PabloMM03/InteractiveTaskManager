@@ -105,6 +105,9 @@
 							</div>
 							<button class="form-buttons" type="submit">Crear tarea</button>
 						</div>
+						<button class="back-button" type="button" onclick="previousStep()">
+							🠠 Volver
+						</button>
 					</form>
 				</section>
 
@@ -188,13 +191,5 @@
 		<script type="module" src="./js/charts.js"></script>
 		<script src="./js/autocompleteSearchTag.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-		<script>
-			function nextStep(step) {
-				document
-					.querySelectorAll('.step')
-					.forEach((el) => el.classList.remove('active'));
-				document.getElementById('step-' + step).classList.add('active');
-			}
-		</script>
 	</body>
 </html>

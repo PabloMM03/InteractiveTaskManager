@@ -14,10 +14,13 @@ section#form-section h2 {
 	text-align: center;
 }
 .step {
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out, visibility 0.5s;
 	display: none;
 }
 .step.active {
 	display: block;
+	opacity: 1;
 }
 label {
 	font-weight: bold;
@@ -63,4 +66,9 @@ button {
 
 .form-buttons:hover {
 	background-color: #0056b3;
+}
+
+.back-button {
+	background: transparent;
+	color: gray;
 }
