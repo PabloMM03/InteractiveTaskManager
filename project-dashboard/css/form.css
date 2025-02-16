@@ -1,18 +1,25 @@
 /* Formulario */
 section#form-section {
+	min-width: 400px;
+	min-height: 400px;
+}
+
+form#task-form {
 	background-color: white;
 	padding: 2rem;
 	border-radius: 10px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	width: 100%;
-	max-width: 400px;
 }
+
 section#form-section h2 {
 	font-size: 1.5em;
 	font-weight: bold;
 	margin-bottom: 15px;
 	text-align: center;
 }
+
+/* Animación de avance o retroceso*/
 .step {
 	opacity: 0;
 	transition: opacity 0.5s ease-in-out, visibility 0.5s;
@@ -22,6 +29,9 @@ section#form-section h2 {
 	display: block;
 	opacity: 1;
 }
+
+/* Estilos de los campos*/
+
 label {
 	font-weight: bold;
 	display: block;
@@ -29,16 +39,49 @@ label {
 	color: #555;
 }
 
-select,
 input[type='text'],
 input[type='date'],
 textarea {
-	width: 96%;
+	width: 93%;
 	padding: 0.8rem;
 	margin-bottom: 1rem;
-	border: 1px solid #ccc;
-	border-radius: 5px;
+	/* border: 1px solid #ccc; */
+	border: none;
+	background-color: rgba(240, 240, 240, 0.7);
+	border-radius: 2px;
 	font-size: 1rem;
+	outline: none;
+	transition: border-bottom 0.1s;
+}
+
+select {
+	width: 100%;
+	-webkit-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	padding: 0.8rem;
+	font-size: 1rem;
+	border: none;
+	border-radius: 2px;
+	background-color: rgba(240, 240, 240, 0.7);
+	cursor: pointer;
+	margin-bottom: 1rem;
+	outline: none;
+}
+
+select:focus,
+input[type='text']:focus,
+input[type='date']:focus,
+textarea:focus {
+	border-bottom: 2px solid #007bff;
+}
+
+select,
+input[type='text'],
+input[type='date'],
+textarea::placeholder {
+	font-size: 12px;
+	color: lightslategray;
 }
 
 textarea {
@@ -71,4 +114,28 @@ button {
 .back-button {
 	background: transparent;
 	color: gray;
+	width: 120px;
+	position: relative;
+	font-size: 14px;
+	padding-left: 0;
+}
+
+/* Barra de progreso*/
+
+.progress-bar {
+	width: 100%;
+	height: 6px;
+	position: relative;
+	background-color: #ccc;
+	border-radius: 6px;
+	overflow: hidden;
+	margin: 30px 0 5px 0;
+}
+
+.progress {
+	width: 17%;
+	height: 100%;
+	background-color: dodgerblue;
+	border-radius: 6px;
+	transition: width 0.4s ease-in-out;
 }

@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<header>
-			<nav>
+			<nav id="navbar">
 				<div class="logo">
 					<img src="/project-dashboard/assets/logo.jpg" alt="PM" />
 					<li><b>daily</b> work management</li>
@@ -17,13 +17,13 @@
 				<!-- Menú-->
 				<ul>
 					<li>
-						<button class="button">Tareas</button>
+						<button class="button" data-target="#tasksNav">Tareas</button>
 					</li>
 					<li>
-						<button class="button">Objetivos</button>
+						<button class="button" data-target="#goalsNav">Objetivos</button>
 					</li>
 					<li>
-						<button class="button">Estadísticas</button>
+						<button class="button" data-target="#statsNav">Estadísticas</button>
 					</li>
 				</ul>
 
@@ -32,14 +32,13 @@
 		</header>
 
 		<main>
-			<div class="container">
+			<div class="container" id="tasksNav">
 				<!-- Sección del formulario -->
 				<section id="form-section">
 					<form id="task-form">
 						<h2>Crear Nueva Tarea</h2>
 
 						<div class="step active" id="step-1">
-							<label for="goal-select">Objetivo:</label>
 							<select id="goal-select"></select>
 							<button class="form-buttons" type="button" onclick="nextStep(2)">
 								Siguiente
@@ -105,6 +104,10 @@
 							</div>
 							<button class="form-buttons" type="submit">Crear tarea</button>
 						</div>
+
+						<div class="progress-bar">
+							<div class="progress"></div>
+						</div>
 						<button class="back-button" type="button" onclick="previousStep()">
 							🠠 Volver
 						</button>
@@ -120,7 +123,7 @@
 				</section>
 			</div>
 
-			<div class="container">
+			<div class="container" id="goalsNav">
 				<!-- Sección del formulario de objetivos -->
 				<section id="goals-form-section">
 					<h2>Crear Nuevo Objetivo</h2>
@@ -165,7 +168,7 @@
 				</section>
 			</div>
 
-			<div class="charts">
+			<div class="charts" id="statsNav">
 				<div id="stats">
 					<p>Total de tareas: <span id="totalTasks">0</span></p>
 					<p>Tareas completadas: <span id="completedTasks">0</span></p>

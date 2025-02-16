@@ -70,6 +70,7 @@ nav ul li .button {
 	color: #0056b3;
 	cursor: pointer;
 	transition: background-color 0.3s, color 0.3s;
+	text-decoration: none;
 }
 
 nav .btn {
