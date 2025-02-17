@@ -5,10 +5,16 @@ section#task-section {
 	border-radius: 10px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	width: 45%;
+	max-height: 400px;
+	overflow-y: auto;
 }
 
 section#task-section h2 {
 	margin-top: 0;
+}
+
+.taskScroll {
+	margin: 20px;
 }
 
 section#task-section ul {

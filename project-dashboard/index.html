@@ -39,7 +39,14 @@
 						<h2>Crear Nueva Tarea</h2>
 
 						<div class="step active" id="step-1">
-							<select id="goal-select"></select>
+							<div class="dropdown">
+								<div class="select" id="goal-select" tabindex="0">
+									<span class="selected">Selecciona un objetivo</span>
+									<div class="caret"></div>
+								</div>
+								<ul class="menu"></ul>
+							</div>
+							<!-- <select id="goal-select"></select> -->
 							<button class="form-buttons" type="button" onclick="nextStep(2)">
 								Siguiente
 							</button>
@@ -71,14 +78,17 @@
 						</div>
 
 						<div class="step" id="step-4">
-							<label for="ttag">Etiquetas:</label>
+							<label for="ttags">Etiquetas:</label>
 							<input
 								type="text"
 								id="ttag"
 								name="ttag"
 								placeholder="Busca o escribe una etiqueta..."
+								oninput="filterTags()"
 								required
 							/>
+							<ul id="ttags-suggestions" class="hidden"></ul>
+							<!-- Las opciones de etiquetas se mostrarán aquí -->
 							<button class="form-buttons" type="button" onclick="nextStep(5)">
 								Siguiente
 							</button>
@@ -115,11 +125,14 @@
 				</section>
 
 				<!-- Sección de tareas -->
+
 				<section id="task-section">
-					<h2>Tareas Creadas</h2>
-					<ul id="task-list">
-						<li>Ejemplo de tarea</li>
-					</ul>
+					<div class="taskScroll">
+						<h2>Tareas Creadas</h2>
+						<ul id="task-list">
+							<li>Ejemplo de tarea</li>
+						</ul>
+					</div>
 				</section>
 			</div>
 

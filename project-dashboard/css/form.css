@@ -45,42 +45,26 @@ textarea {
 	width: 93%;
 	padding: 0.8rem;
 	margin-bottom: 1rem;
-	/* border: 1px solid #ccc; */
 	border: none;
 	background-color: rgba(240, 240, 240, 0.7);
 	border-radius: 2px;
 	font-size: 1rem;
+	border-bottom: 2px solid lightslategray;
 	outline: none;
-	transition: border-bottom 0.1s;
+	transition: border-bottom 0.3s;
 }
 
-select {
-	width: 100%;
-	-webkit-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
-	padding: 0.8rem;
-	font-size: 1rem;
-	border: none;
-	border-radius: 2px;
-	background-color: rgba(240, 240, 240, 0.7);
-	cursor: pointer;
-	margin-bottom: 1rem;
-	outline: none;
-}
-
-select:focus,
 input[type='text']:focus,
 input[type='date']:focus,
 textarea:focus {
 	border-bottom: 2px solid #007bff;
 }
 
-select,
+.select,
 input[type='text'],
 input[type='date'],
 textarea::placeholder {
-	font-size: 12px;
+	font-size: 15px;
 	color: lightslategray;
 }
 
@@ -138,4 +122,97 @@ button {
 	background-color: dodgerblue;
 	border-radius: 6px;
 	transition: width 0.4s ease-in-out;
+}
+
+/* Desplegable de selects personalizados*/
+.dropdown {
+	position: relative;
+	margin-bottom: 1rem;
+}
+
+.dropdown * {
+	box-sizing: border-box;
+}
+
+/*Opcion seleccionada*/
+.select {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: none;
+	border-bottom: 2px solid lightslategray;
+	background-color: rgba(240, 240, 240, 0.7);
+	padding: 1em;
+	cursor: pointer;
+	transition: background 0.3s;
+	position: relative;
+}
+
+.select-clicked {
+	box-shadow: 0 0 0.8em rgba(240, 240, 240, 0.9);
+}
+
+.select:hover {
+	background: ghostwhite;
+}
+
+.select:focus {
+	border-bottom: 2px solid #007bff;
+}
+
+/*Icono despliegue*/
+.caret {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 6px solid black;
+	transition: transform 0.3s;
+	margin-left: 10px;
+}
+
+.caret-rotate {
+	transform: rotate(180deg);
+}
+
+/*Opciones del menu*/
+.menu {
+	list-style: none;
+	padding: 0.5em 0;
+	background: white;
+	border: 1px solid #363a43;
+	border-radius: 0.5em;
+	color: #9fa5b5;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	opacity: 0;
+	transform: scaleY(0);
+	transform-origin: top;
+	transition: opacity 0.2s, transform 0.2s;
+	z-index: 10;
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+.menu-open {
+	opacity: 1;
+	transform: scaleY(1);
+}
+
+.menu li {
+	padding: 0.7em 1em;
+	margin: 0.3em 0;
+	border-radius: 0.5em;
+	cursor: pointer;
+	transition: background 0.3s;
+}
+
+.menu li:hover {
+	background-color: ghostwhite;
+}
+
+.active {
+	background: white;
 }

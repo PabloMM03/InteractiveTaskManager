@@ -3,6 +3,10 @@
 @import url('tasks.css');
 @import url('goals.css');
 
+* {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /* Estilos generales */
 body {
 	margin: 0;
@@ -124,26 +128,6 @@ body {
 .modal-close:active {
 	transform: scale(0.1);
 }
-
-/* #taskChart {
-	background-color: white;
-	border-radius: 20px;
-	padding: 10px;
-	margin-right: 10px;
-}
-
-.charts {
-	background-color: midnightblue;
-	border-radius: 20px;
-	padding: 40px;
-}
-
-#tagChart {
-	background-color: white;
-	border-radius: 20px;
-	padding: 10px;
-	margin-right: 10px;
-} */
 
 #stats {
 	display: flex;

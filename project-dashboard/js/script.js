@@ -183,18 +183,34 @@ function addGoals() {
 function loadGoals() {
 	const goals = loadGoalsFromStorage();
 	const goalsList = document.getElementById('goals-list');
-	const goalSelect = document.getElementById('goal-select');
+	const menu = document.querySelector('.menu');
 
-	//Añadir campo de seleccion al crear tarea
+	// Limpiar listas
 	goalsList.innerHTML = '';
-	goalSelect.innerHTML = '<option value="">Selecciona un objetivo</option>';
+	menu.innerHTML = '';
 
-	// Obtener objetivos y crear lista dinámica para mostrar
-	goals.forEach((goal, index) => {
-		const span = document.createElement('span');
+	// Función auxiliar para crear opciones
+	const createOption = (text, value = '') => {
 		const li = document.createElement('li');
-		span.textContent = `${goal.gtitle} - ${goal.gtag} - ${goal.gdate} - Progreso: ${goal.progress}%`;
+		li.textContent = text;
+		li.dataset.value = value;
+		li.addEventListener('click', () => {
+			document.querySelector('.selected').textContent = text;
+			menu.classList.remove('menu-open');
+		});
+		return li;
+	};
 
+	// Agregar opciones iniciales
+	menu.append(createOption('Sin objetivo', 'none'));
+
+	// Generar lista de objetivos
+	goals.forEach((goal, index) => {
+		// Crear elemento de la lista de objetivos
+		const li = document.createElement('li');
+		li.innerHTML = `<span>${goal.gtitle} - ${goal.gtag} - ${goal.gdate} - Progreso: ${goal.progress}%</span>`;
+
+		// Botón de eliminar
 		const deleteButton = document.createElement('button');
 		deleteButton.textContent = 'Eliminar';
 		deleteButton.dataset.index = index;
@@ -203,18 +219,14 @@ function loadGoals() {
 			deleteGoal(index);
 		});
 
-		li.appendChild(span);
-		li.appendChild(deleteButton);
-		goalsList.appendChild(li);
+		li.append(deleteButton);
+		goalsList.append(li);
 
-		//Añadir el objetivo a las opciones del form-task
-		const option = document.createElement('option');
-		option.value = index;
-		option.textContent = goal.gtitle;
-		goalSelect.appendChild(option);
+		// Agregar opción al menú desplegable
+		menu.append(createOption(goal.gtitle, index));
 	});
 
-	goalSelect.addEventListener('change', loadTask);
+	menu.addEventListener('change', loadTask);
 }
 
 // Eliminar objetivos
