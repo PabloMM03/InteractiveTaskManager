@@ -10,12 +10,16 @@ form#task-form {
 	border-radius: 10px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	width: 100%;
+	min-width: 360px;
+	min-height: 422px;
+
+	position: relative;
 }
 
 section#form-section h2 {
 	font-size: 1.5em;
 	font-weight: bold;
-	margin-bottom: 15px;
+	margin-bottom: 75px;
 	text-align: center;
 }
 
@@ -46,12 +50,17 @@ textarea {
 	padding: 0.8rem;
 	margin-bottom: 1rem;
 	border: none;
-	background-color: rgba(240, 240, 240, 0.7);
-	border-radius: 2px;
+	background: transparent;
 	font-size: 1rem;
-	border-bottom: 2px solid lightslategray;
 	outline: none;
 	transition: border-bottom 0.3s;
+	border: 2px solid black;
+	border-radius: 4px;
+
+	position: absolute;
+	line-height: 20px;
+	transition: 0.1s ease;
+	z-index: 1111;
 }
 
 input[type='text']:focus,
@@ -60,23 +69,9 @@ textarea:focus {
 	border-bottom: 2px solid #007bff;
 }
 
-.select,
-input[type='text'],
-input[type='date'],
-textarea::placeholder {
-	font-size: 15px;
-	color: lightslategray;
-}
-
 textarea {
 	resize: none;
 	height: 100px;
-}
-
-.checkbox-container {
-	display: flex;
-	align-items: center;
-	margin-bottom: 1rem;
 }
 
 button {
@@ -98,7 +93,7 @@ button {
 .back-button {
 	background: transparent;
 	color: gray;
-	width: 120px;
+	width: 100px;
 	position: relative;
 	font-size: 14px;
 	padding-left: 0;
@@ -113,7 +108,7 @@ button {
 	background-color: #ccc;
 	border-radius: 6px;
 	overflow: hidden;
-	margin: 30px 0 5px 0;
+	margin: 10px 0 5px 0;
 }
 
 .progress {
@@ -141,17 +136,21 @@ button {
 	align-items: center;
 	border: none;
 	border-bottom: 2px solid lightslategray;
-	background-color: rgba(240, 240, 240, 0.7);
+	background-color: transparent;
 	padding: 1em;
 	cursor: pointer;
 	transition: background 0.3s;
 	position: relative;
+	border: 2px solid black;
+	border-radius: 4px;
+	height: 57px;
 }
 
 .select-clicked {
 	box-shadow: 0 0 0.8em rgba(240, 240, 240, 0.9);
 }
 
+input[type='date']:hover,
 .select:hover {
 	background: ghostwhite;
 }
@@ -215,4 +214,115 @@ button {
 
 .active {
 	background: white;
+}
+
+.containerInputs {
+	width: 100%;
+}
+
+.entryarea {
+	position: relative;
+	height: 90px;
+	line-height: 45px;
+}
+
+.labelline {
+	position: absolute;
+	padding: 0 5px;
+	margin: 0 20px;
+	background-color: white;
+	transition: 0.2s ease;
+}
+
+.labellineSelect {
+	position: absolute;
+	padding: 0 5px;
+	background-color: white;
+	transition: 0.2s ease;
+}
+
+.labellineDate {
+	position: absolute;
+	padding: 0 0 0 150px;
+	margin: 0 40px;
+	background-color: white;
+	transition: 0.2s ease;
+}
+
+/* .select:focus + .labellineSelect,
+.select:valid + .labellineSelect,  */
+input[type='date'] + .labellineDate,
+/* input[type='date']:focus + .labellineDate, */
+/* input[type='date']:valid + .labellineDate, */
+input[type='text']:focus + .labelline,
+input[type='text']:valid + .labelline {
+	height: 30px;
+	transform: translate(-22px, -23px) scale(0.88);
+	z-index: 1111;
+	padding: 0 12px;
+}
+
+/*Cambia de color el labelline cuando hace hover en select*/
+.select:hover .labellineSelect {
+	background-color: ghostwhite;
+}
+
+.progress-container {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 95%;
+	padding: 10px;
+	margin-bottom: 10px;
+	align-items: center;
+}
+
+/*Checkbox notificaciones*/
+
+.checkbox-container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+/*Parte de fuera del checkbox*/
+.lbl-switch {
+	display: inline-block;
+	width: 55px;
+	height: 26px;
+	border-radius: 100px;
+	cursor: pointer;
+	position: relative;
+	background: gray;
+	border: 2px solid ghostwhite;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#notifications:checked ~ .lbl-switch {
+	background: #007bff;
+}
+
+/*Parte de dentro del checkbox*/
+.lbl-switch::before {
+	position: absolute;
+	content: '';
+	width: 18px;
+	height: 18px;
+	background: #fff;
+	top: 4px;
+	left: 5px;
+	transition: 0.3s;
+	border-radius: 100px;
+}
+
+#notifications {
+	display: none;
+}
+
+#notifications:checked ~ .lbl-switch::before {
+	transform: translateX(27px);
+}
+
+.lbl-switch2 {
+	margin-left: 10px;
 }

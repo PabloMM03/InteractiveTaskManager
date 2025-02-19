@@ -1,20 +1,23 @@
 /* Lista de tareas */
 section#task-section {
-	background: #f8f9fa;
-	padding: 1.5rem;
+	background: white;
+	padding: 1rem;
 	border-radius: 10px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	width: 45%;
-	max-height: 400px;
-	overflow-y: auto;
 }
 
 section#task-section h2 {
 	margin-top: 0;
+	display: flex;
+	justify-content: center;
+	margin-top: 25px;
 }
 
 .taskScroll {
 	margin: 20px;
+	max-height: 460px;
+	overflow-y: auto;
 }
 
 section#task-section ul {
@@ -24,13 +27,15 @@ section#task-section ul {
 
 section#task-section ul li {
 	display: flex; /* Usamos flexbox para organizar los elementos dentro de li */
-	justify-content: space-between; /* Esto alinea los elementos (texto y botón) en los extremos */
+	justify-content: space-between; /* alinea los elementos (texto y botón) en los extremos */
 	align-items: center;
 	background: #007bff;
 	color: white;
 	padding: 10px;
 	margin-bottom: 5px;
 	border-radius: 5px;
+	margin-right: 30px;
+	margin-left: 30px;
 	transition: transform 0.3s ease; /* Transición suave al agrandar */
 }
 section#task-section ul li:hover {

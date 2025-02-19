@@ -222,3 +222,22 @@ dropdowns.forEach((dropdown) => {
 		});
 	});
 });
+
+//Campos selects con animación de label
+
+const selects = document.querySelectorAll('.select');
+
+selects.forEach((select) => {
+	const labelline = select.querySelector('.labellineSelect');
+	const selectedSpan = select.querySelector('.selected');
+	// Cuando el select recibe el foco
+	select.addEventListener('focus', function () {
+		// Si el valor está vacío, solo muestra la animación
+		if (selectedSpan.textContent !== 'Selecciona un objetivo') {
+			labelline.style.transform = 'translate(-22px, -23px) scale(0.88)';
+			labelline.style.zIndex = 1111;
+			labelline.style.padding = '0 12px';
+			labelline.style.height = '30px';
+		}
+	});
+});

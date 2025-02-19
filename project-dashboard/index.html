@@ -41,52 +41,71 @@
 						<div class="step active" id="step-1">
 							<div class="dropdown">
 								<div class="select" id="goal-select" tabindex="0">
-									<span class="selected">Selecciona un objetivo</span>
+									<span class="selected"></span>
 									<div class="caret"></div>
+									<div class="labellineSelect">Seleccione un objetivo</div>
 								</div>
 								<ul class="menu"></ul>
 							</div>
-							<!-- <select id="goal-select"></select> -->
 							<button class="form-buttons" type="button" onclick="nextStep(2)">
 								Siguiente
 							</button>
 						</div>
 
 						<div class="step" id="step-2">
-							<input
-								type="text"
-								name="title"
-								placeholder="Nombre de la tarea"
-								required
-							/>
+							<!-- <label for="title">Titulo</label> -->
+							<div class="containerInputs">
+								<div class="entryarea">
+									<input type="text" name="title" required />
+									<div class="labelline">Nombre de la tarea</div>
+								</div>
+							</div>
+
 							<button class="form-buttons" type="button" onclick="nextStep(3)">
 								Siguiente
 							</button>
 						</div>
 
 						<div class="step" id="step-3">
-							<input type="date" name="due_date" required />
-							<label for="priority">Prioridad:</label>
-							<select name="priority">
-								<option value="Baja">Baja</option>
-								<option value="Media">Media</option>
-								<option value="Alta">Alta</option>
-							</select>
+							<div class="containerInputs">
+								<div class="entryarea">
+									<input type="date" name="due_date" required />
+									<div class="labellineDate">Fecha de vencimiento</div>
+								</div>
+							</div>
+
+							<div class="dropdown">
+								<div class="select" tabindex="0">
+									<span class="selected"></span>
+									<div class="caret"></div>
+									<div class="labellineSelect">Seleccione la prioridad</div>
+								</div>
+								<ul class="menu" id="priority" name="priority">
+									<li id="baja" data-priority="Baja">Baja</li>
+									<li id="media" data-priority="Media">Media</li>
+									<li id="alta" data-priority="Alta">Alta</li>
+								</ul>
+							</div>
+
 							<button class="form-buttons" type="button" onclick="nextStep(4)">
 								Siguiente
 							</button>
 						</div>
 
 						<div class="step" id="step-4">
-							<label for="ttags">Etiquetas:</label>
-							<input
-								type="text"
-								id="ttag"
-								name="ttag"
-								placeholder="Busca o escribe una etiqueta..."
-								oninput="filterTags()"
-								required
-							/>
+							<div class="containerInputs">
+								<div class="entryarea">
+									<input
+										type="text"
+										id="ttag"
+										name="ttag"
+										oninput="filterTags()"
+										required
+									/>
+									<div class="labelline">Busca o escribe una etiqueta...</div>
+								</div>
+							</div>
+
 							<ul id="ttags-suggestions" class="hidden"></ul>
 							<!-- Las opciones de etiquetas se mostrarán aquí -->
 							<button class="form-buttons" type="button" onclick="nextStep(5)">
@@ -95,40 +114,52 @@
 						</div>
 
 						<div class="step" id="step-5">
-							<label for="assigned-to">Asignado a:</label>
-							<input
-								type="text"
-								id="assigned-to"
-								name="assigned_to"
-								placeholder="Nombre de la persona"
-							/>
+							<div class="containerInputs">
+								<div class="entryarea">
+									<input
+										type="text"
+										id="assigned-to"
+										name="assigned_to"
+										required
+									/>
+									<div class="labelline">Persona asignada</div>
+								</div>
+							</div>
+
 							<div class="checkbox-container">
 								<input
 									type="checkbox"
 									id="notifications"
 									name="notifications"
 								/>
-								<label for="notifications"
+								<label for="notifications" class="lbl-switch"></label>
+								<label for="notifications" class="lbl-switch2"
 									>Recordarme antes de la fecha de vencimiento</label
 								>
 							</div>
 							<button class="form-buttons" type="submit">Crear tarea</button>
 						</div>
 
-						<div class="progress-bar">
-							<div class="progress"></div>
+						<div class="progress-container">
+							<button
+								class="back-button"
+								type="button"
+								onclick="previousStep()"
+							>
+								🠠 Volver
+							</button>
+							<div class="progress-bar">
+								<div class="progress"></div>
+							</div>
 						</div>
-						<button class="back-button" type="button" onclick="previousStep()">
-							🠠 Volver
-						</button>
 					</form>
 				</section>
 
 				<!-- Sección de tareas -->
 
 				<section id="task-section">
+					<h2>Tareas Creadas</h2>
 					<div class="taskScroll">
-						<h2>Tareas Creadas</h2>
 						<ul id="task-list">
 							<li>Ejemplo de tarea</li>
 						</ul>

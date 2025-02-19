@@ -38,6 +38,12 @@ function addTask() {
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData.entries());
 
+		//Capturar la prioridad seleccionada
+		const selects = document.querySelectorAll('.select');
+		const priority = selects[1];
+		const selected = priority.querySelector('.selected').textContent;
+		data.priority = selected;
+
 		// Datos externos al formulario para info
 		data.notifications = formData.get('notifications') === 'on';
 		data.isChecked = false;
@@ -269,6 +275,19 @@ function updateGoalProgress(goalId) {
 		loadGoals();
 	}
 }
+
+/**Eliminar la tarea por fecha de vencimiento pasada */
+function deleteTaskByDueDate() {
+	const tasks = loadTasksFromStorage();
+	const today = new Date(); //Fecha de hoy
+	const formattedToday = today.toISOString().split('T')[0];
+
+	const activeTasks = tasks.filter((task) => task.due_date >= formattedToday);
+
+	saveTasksToStorage(activeTasks);
+}
+
+setInterval(deleteTaskByDueDate, 60000); //Comprobar cada 1 minuto
 
 //Silmular una tarea
 function addSampleTask() {
