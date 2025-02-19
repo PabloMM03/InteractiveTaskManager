@@ -39,6 +39,12 @@
 						<h2>Crear Nueva Tarea</h2>
 
 						<div class="step active" id="step-1">
+							<div class="containerInputs">
+								<div class="entryarea">
+									<input type="text" name="title" required />
+									<div class="labelline">Nombre de la tarea</div>
+								</div>
+							</div>
 							<div class="dropdown">
 								<div class="select" id="goal-select" tabindex="0">
 									<span class="selected"></span>
@@ -47,26 +53,18 @@
 								</div>
 								<ul class="menu"></ul>
 							</div>
-							<button class="form-buttons" type="button" onclick="nextStep(2)">
+
+							<button
+								class="form-buttons"
+								style="margin-top: 35px"
+								type="button"
+								onclick="nextStep(2)"
+							>
 								Siguiente
 							</button>
 						</div>
 
 						<div class="step" id="step-2">
-							<!-- <label for="title">Titulo</label> -->
-							<div class="containerInputs">
-								<div class="entryarea">
-									<input type="text" name="title" required />
-									<div class="labelline">Nombre de la tarea</div>
-								</div>
-							</div>
-
-							<button class="form-buttons" type="button" onclick="nextStep(3)">
-								Siguiente
-							</button>
-						</div>
-
-						<div class="step" id="step-3">
 							<div class="containerInputs">
 								<div class="entryarea">
 									<input type="date" name="due_date" required />
@@ -87,12 +85,17 @@
 								</ul>
 							</div>
 
-							<button class="form-buttons" type="button" onclick="nextStep(4)">
+							<button
+								class="form-buttons"
+								style="margin-top: 35px"
+								type="button"
+								onclick="nextStep(3)"
+							>
 								Siguiente
 							</button>
 						</div>
 
-						<div class="step" id="step-4">
+						<div class="step" id="step-3">
 							<div class="containerInputs">
 								<div class="entryarea">
 									<input
@@ -108,12 +111,18 @@
 
 							<ul id="ttags-suggestions" class="hidden"></ul>
 							<!-- Las opciones de etiquetas se mostrarán aquí -->
-							<button class="form-buttons" type="button" onclick="nextStep(5)">
+
+							<button
+								class="form-buttons"
+								style="margin-top: 50px"
+								type="button"
+								onclick="nextStep(4)"
+							>
 								Siguiente
 							</button>
 						</div>
 
-						<div class="step" id="step-5">
+						<div class="step" id="step-4">
 							<div class="containerInputs">
 								<div class="entryarea">
 									<input
@@ -137,8 +146,18 @@
 									>Recordarme antes de la fecha de vencimiento</label
 								>
 							</div>
-							<button class="form-buttons" type="submit">Crear tarea</button>
+							<button
+								class="form-buttons"
+								style="margin-top: 40px"
+								type="submit"
+							>
+								Crear tarea
+							</button>
 						</div>
+
+						<!-- <div class="step" id="step-5">
+							
+						</div> -->
 
 						<div class="progress-container">
 							<button
@@ -172,31 +191,40 @@
 				<section id="goals-form-section">
 					<h2>Crear Nuevo Objetivo</h2>
 					<form id="goal-form">
-						<label for="gtitle">Título del objetivo:</label>
-						<input
-							type="text"
-							id="gtitle"
-							name="gtitle"
-							placeholder="Escribe tu objetivo..."
-							required
-						/>
-						<div id="gtags-container">
-							<label for="gtag">Etiqueta:</label>
-							<input
-								type="text"
-								id="gtag"
-								name="gtag"
-								placeholder="Busca o escribe una etiqueta..."
-								oninput="filterTags()"
-								required
-							/>
-							<ul id="gtags-suggestions" class="hidden">
-								<!-- Las opciones de etiquetas se mostrarán aquí -->
-							</ul>
+						<div class="containerInputs">
+							<div class="entryarea">
+								<input type="text" id="gtitle" name="gtitle" required />
+								<div class="labelline">Titulo del objetivo</div>
+							</div>
 						</div>
 
-						<label for="gdate">Fecha de vencimiento:</label>
-						<input type="date" id="gdate" name="gdate" required />
+						<div class="containerInputs">
+							<div class="entryarea">
+								<input type="date" id="gdate" name="gdate" required />
+								<div class="labellineDate">Fecha de vencimiento</div>
+							</div>
+						</div>
+
+						<div class="containerInputs">
+							<div class="entryarea">
+								<input
+									type="text"
+									id="gtag"
+									name="gtag"
+									oninput="filterTags()"
+									required
+								/>
+								<div class="labelline">Busca o escribe una etiqueta...</div>
+							</div>
+						</div>
+
+						<ul id="gtags-suggestions" class="hidden">
+							<!-- Las opciones de etiquetas se mostrarán aquí -->
+						</ul>
+
+						<!-- <div id="gtags-container">
+							<label for="gtag">Etiqueta:</label>							
+						</div> -->
 
 						<button class="form-buttons" type="submit">Agregar Objetivo</button>
 					</form>

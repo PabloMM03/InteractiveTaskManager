@@ -2,8 +2,13 @@
 #goals-section {
 	margin-top: 20px;
 	padding: 20px;
-	background: #f4f4f4;
-	border-radius: 8px;
+	background: white;
+
+	border-radius: 10px;
+	position: relative;
+	min-width: 360px;
+	min-height: 422px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #goals-list {

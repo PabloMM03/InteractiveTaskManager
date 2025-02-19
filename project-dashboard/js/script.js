@@ -38,7 +38,7 @@ function addTask() {
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData.entries());
 
-		//Capturar la prioridad seleccionada
+		// Capturar la prioridad seleccionada
 		const selects = document.querySelectorAll('.select');
 		const priority = selects[1];
 		const selected = priority.querySelector('.selected').textContent;
@@ -50,13 +50,13 @@ function addTask() {
 		data.createTaskDate = new Date().toISOString().split('T')[0];
 		data.isActive = true;
 
-		const selectedGoalId = document.getElementById('goal-select').value;
-		if (!selectedGoalId) {
-			// alert('Por favor, selecciona un objetivo.');
-			// return;
+		// Obtener el ID del objetivo seleccionado
+		const selectedGoalElement = document.querySelector('#goal-select');
+		const selectedGoalId = selectedGoalElement.getAttribute('data-selected-id');
+
+		if (!selectedGoalId || selectedGoalId === 'none') {
 			data.goalId = 'no-goal';
 		} else {
-			// Añadir id del campo seleccionable de objetivos
 			data.goalId = parseInt(selectedGoalId);
 		}
 
@@ -68,8 +68,8 @@ function addTask() {
 		updateTaskHistory(data);
 
 		// Incrementar el total de tareas del objetivo
-		const goals = loadGoalsFromStorage();
-		if (selectedGoalId) {
+		if (selectedGoalId && selectedGoalId !== 'none') {
+			const goals = loadGoalsFromStorage();
 			goals[selectedGoalId].totalTasks += 1;
 			saveGoalsToStorage(goals);
 		}
@@ -195,13 +195,18 @@ function loadGoals() {
 	goalsList.innerHTML = '';
 	menu.innerHTML = '';
 
-	// Función auxiliar para crear opciones
+	//Añadir opción al selector de objetivos en Tareas
+
 	const createOption = (text, value = '') => {
 		const li = document.createElement('li');
 		li.textContent = text;
 		li.dataset.value = value;
 		li.addEventListener('click', () => {
-			document.querySelector('.selected').textContent = text;
+			const selectedElement = document.querySelector('.selected');
+			selectedElement.textContent = text;
+			document
+				.getElementById('goal-select')
+				.setAttribute('data-selected-id', value);
 			menu.classList.remove('menu-open');
 		});
 		return li;
@@ -287,7 +292,7 @@ function deleteTaskByDueDate() {
 	saveTasksToStorage(activeTasks);
 }
 
-setInterval(deleteTaskByDueDate, 60000); //Comprobar cada 1 minuto
+// setInterval(deleteTaskByDueDate, 60000); //Comprobar cada 1 minuto
 
 //Silmular una tarea
 function addSampleTask() {
