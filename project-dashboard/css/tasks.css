@@ -1,3 +1,36 @@
+/* Formulario */
+section#form-section {
+	min-width: 400px;
+	min-height: 400px;
+}
+
+form#task-form {
+	background-color: white;
+	padding: 2rem;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	width: 424px;
+	min-width: 360px;
+	min-height: 422px;
+	position: relative;
+}
+
+h2 {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: 55px;
+	text-align: center;
+	transition: transform 0.3s;
+}
+
+h2:hover {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: 55px;
+	text-align: center;
+	transform: scale(1.2);
+}
+
 /* Lista de tareas */
 section#task-section {
 	background: white;
@@ -5,6 +38,7 @@ section#task-section {
 	border-radius: 10px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	width: 45%;
+	margin-top: 150px;
 }
 
 section#task-section h2 {

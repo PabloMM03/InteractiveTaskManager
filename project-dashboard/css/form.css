@@ -1,43 +1,21 @@
-/* Formulario */
-section#form-section {
-	min-width: 400px;
-	min-height: 400px;
-}
-
-form#task-form {
-	background-color: white;
-	padding: 2rem;
-	border-radius: 10px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	min-width: 360px;
-	min-height: 422px;
-	position: relative;
-}
-
-section#form-section h2 {
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-bottom: 75px;
-	text-align: center;
-	transition: transform 0.2s;
-}
-
-section#form-section h2:hover {
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-bottom: 75px;
-	text-align: center;
-	transform: scale(1.2);
-}
-
-/* Animación de avance o retroceso*/
+/* Animación de avance o retroceso tasks*/
 .step {
 	opacity: 0;
 	transition: opacity 0.5s ease-in-out, visibility 0.5s;
 	display: none;
 }
 .step.active {
+	display: block;
+	opacity: 1;
+}
+
+/* Animación de avance o retroceso goals*/
+.step-goal {
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out, visibility 0.5s;
+	display: none;
+}
+.step-goal.active {
 	display: block;
 	opacity: 1;
 }
@@ -98,7 +76,16 @@ button {
 	background-color: #0056b3;
 }
 
-.back-button {
+.back-button-task {
+	background: transparent;
+	color: gray;
+	width: 100px;
+	position: relative;
+	font-size: 14px;
+	padding-left: 0;
+}
+
+.back-button-goal {
 	background: transparent;
 	color: gray;
 	width: 100px;
@@ -119,7 +106,15 @@ button {
 	margin: 10px 0 5px 0;
 }
 
-.progress {
+.progress-task {
+	width: 17%;
+	height: 100%;
+	background-color: dodgerblue;
+	border-radius: 6px;
+	transition: width 0.4s ease-in-out;
+}
+
+.progress-goal {
 	width: 17%;
 	height: 100%;
 	background-color: dodgerblue;

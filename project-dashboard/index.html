@@ -58,7 +58,7 @@
 								class="form-buttons"
 								style="margin-top: 35px"
 								type="button"
-								onclick="nextStep(2)"
+								onclick="nextStep(2, 'task')"
 							>
 								Siguiente
 							</button>
@@ -89,7 +89,7 @@
 								class="form-buttons"
 								style="margin-top: 35px"
 								type="button"
-								onclick="nextStep(3)"
+								onclick="nextStep(3, 'task')"
 							>
 								Siguiente
 							</button>
@@ -116,7 +116,7 @@
 								class="form-buttons"
 								style="margin-top: 50px"
 								type="button"
-								onclick="nextStep(4)"
+								onclick="nextStep(4, 'task')"
 							>
 								Siguiente
 							</button>
@@ -161,14 +161,14 @@
 
 						<div class="progress-container">
 							<button
-								class="back-button"
+								class="back-button-task"
 								type="button"
-								onclick="previousStep()"
+								onclick="previousStep('task')"
 							>
 								🠠 Volver
 							</button>
 							<div class="progress-bar">
-								<div class="progress"></div>
+								<div class="progress-task"></div>
 							</div>
 						</div>
 					</form>
@@ -179,9 +179,7 @@
 				<section id="task-section">
 					<h2>Tareas Creadas</h2>
 					<div class="taskScroll">
-						<ul id="task-list">
-							<li>Ejemplo de tarea</li>
-						</ul>
+						<ul id="task-list"></ul>
 					</div>
 				</section>
 			</div>
@@ -191,42 +189,73 @@
 				<section id="goals-form-section">
 					<h2>Crear Nuevo Objetivo</h2>
 					<form id="goal-form">
-						<div class="containerInputs">
-							<div class="entryarea">
-								<input type="text" id="gtitle" name="gtitle" required />
-								<div class="labelline">Titulo del objetivo</div>
+						<div class="step-goal active" id="step-goal-1">
+							<div class="containerInputs">
+								<div class="entryarea">
+									<input type="text" id="gtitle" name="gtitle" required />
+									<div class="labelline">Titulo del objetivo</div>
+								</div>
 							</div>
+
+							<button
+								class="form-buttons"
+								type="button"
+								onclick="nextStep(2, 'goal')"
+							>
+								Siguiente
+							</button>
+						</div>
+						<div class="step-goal" id="step-goal-2">
+							<div class="containerInputs">
+								<div class="entryarea">
+									<input type="date" id="gdate" name="gdate" required />
+									<div class="labellineDate">Fecha de vencimiento</div>
+								</div>
+							</div>
+							<button
+								class="form-buttons"
+								type="button"
+								onclick="nextStep(3, 'goal')"
+							>
+								Siguiente
+							</button>
 						</div>
 
-						<div class="containerInputs">
-							<div class="entryarea">
-								<input type="date" id="gdate" name="gdate" required />
-								<div class="labellineDate">Fecha de vencimiento</div>
+						<div class="step-goal" id="step-goal-3">
+							<div class="containerInputs">
+								<div class="entryarea">
+									<input
+										type="text"
+										id="gtag"
+										name="gtag"
+										oninput="filterTags()"
+										required
+									/>
+									<div class="labelline">Busca o escribe una etiqueta...</div>
+								</div>
 							</div>
+
+							<ul id="gtags-suggestions" class="hidden">
+								<!-- Las opciones de etiquetas se mostrarán aquí -->
+							</ul>
+
+							<button class="form-buttons" type="submit">
+								Agregar Objetivo
+							</button>
 						</div>
 
-						<div class="containerInputs">
-							<div class="entryarea">
-								<input
-									type="text"
-									id="gtag"
-									name="gtag"
-									oninput="filterTags()"
-									required
-								/>
-								<div class="labelline">Busca o escribe una etiqueta...</div>
+						<div class="progress-container">
+							<button
+								class="back-button-goal"
+								type="button"
+								onclick="previousStep('goal')"
+							>
+								🠠 Volver
+							</button>
+							<div class="progress-bar">
+								<div class="progress-goal"></div>
 							</div>
 						</div>
-
-						<ul id="gtags-suggestions" class="hidden">
-							<!-- Las opciones de etiquetas se mostrarán aquí -->
-						</ul>
-
-						<!-- <div id="gtags-container">
-							<label for="gtag">Etiqueta:</label>							
-						</div> -->
-
-						<button class="form-buttons" type="submit">Agregar Objetivo</button>
 					</form>
 				</section>
 
