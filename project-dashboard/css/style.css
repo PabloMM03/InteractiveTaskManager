@@ -14,7 +14,7 @@ body {
 	margin-bottom: 100px;
 }
 
-/* Contenedor sección formulario */
+/* Contenedor sección formulario tasks */
 .container {
 	display: flex;
 	justify-content: space-between;
@@ -22,6 +22,18 @@ body {
 	gap: 20px;
 	padding: 2rem;
 	max-width: 1200px;
+	margin: auto;
+	margin-top: 6rem;
+}
+
+/* Contenedor sección formulario goals */
+.containerGoals {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 20px;
+	padding: 2rem;
+	max-width: 1350px;
 	margin: auto;
 	margin-top: 6rem;
 }

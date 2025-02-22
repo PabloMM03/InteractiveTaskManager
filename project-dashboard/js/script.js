@@ -233,8 +233,19 @@ function loadGoals() {
 
 
 		// Botón de eliminar
-		const deleteButton = document.createElement('button');
-		deleteButton.textContent = 'Eliminar';
+		// const deleteButton = document.createElement('button');
+		// deleteButton.textContent = 'Eliminar';
+		// deleteButton.dataset.index = index;
+		// deleteButton.addEventListener('click', (e) => {
+		// 	e.stopPropagation();
+		// 	deleteGoal(index);
+		// });
+
+
+		// Botón de eliminar
+		const deleteButton = document.createElement('img');
+		deleteButton.src = '/project-dashboard/assets/delete.gif';
+		deleteButton.alt = 'Eliminar';
 		deleteButton.dataset.index = index;
 		deleteButton.addEventListener('click', (e) => {
 			e.stopPropagation();

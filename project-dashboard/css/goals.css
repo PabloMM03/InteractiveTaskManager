@@ -13,13 +13,14 @@
 
 #goals-section {
 	margin-top: 20px;
+	margin-left: 100px;
 	padding: 20px;
 	background: white;
 
 	border-radius: 10px;
 	position: relative;
-	width: 600px;
-	height: 400px;
+	width: 900px;
+	height: 500px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -35,49 +36,56 @@
 	margin: 5px 0;
 	border-radius: 4px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 }
 
 #goals-list li span {
-	background-color:#007bff;
 	padding: 10px;
 	border-radius: 10px;
 	margin-bottom: 10px;
-	color: white;
+	color: black;
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	border-bottom: 2px solid black;
+	transition: transform 0.3s ease, color 0.3s ease;
+	height: 40px;
+	width: 268px;
+	max-width: 300px;
+}
+
+#goals-list li img {
+	color: white;
+	padding: 5px;
+	cursor: pointer;
+	width: 45px;
+	height: 45px;
 	transition: transform 0.3s ease;
 }
 
-#goals-list li span:hover {
-	transform: translateY(10px);
-} 
-
-#goals-list li button {
-	background: red;
-	color: white;
-	border: none;
-	padding: 5px;
-	cursor: pointer;
-	width: 150px;
-	height: 40px;
+#goals-list li img:hover {
+	transform: translateX(20px);
 }
+
+#goals-list li span:hover {
+	transform: scale(1.1);
+} 
 
 /* Oculta las sugerencias cuando no hay entrada */
 .hidden {
 	display: none;
 }
 
+/*Barras de progreso de los objetivos*/
 .progressContentGoal {
 	/* width: 100%; background: #ddd; border-radius: 10px; overflow: hidden; */
 	width: 30%; 
-	height: 6px;
-	margin: 0 10px;
+	height: 10px;
+	margin: 10px 30px;
 	background: #ccc; 
 	border-radius: 10px;
 	overflow: hidden;
-
 }
 
 .progressGoal {
@@ -85,4 +93,11 @@
 	height: 100%; 
 	background: #4caf50; 
 	transition: width 0.5s ease-in-out;
+}
+
+/*Scroll lista de objetivos*/
+.goalScroll {
+	margin: 20px;
+	max-height: 350px;
+	overflow-y: auto;
 }
