@@ -1,0 +1,104 @@
+/*Task chart modificado*/
+#taskChart {
+    width: 1450px !important;
+    height: 400px !important;  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 0 20px 10px 20px;
+}
+  
+#tagChart {
+margin-top: 30px;
+}
+
+/*Sección de Gráficos*/
+.charts {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 1500px;
+	height: 400px; 
+	margin: auto;
+	padding: 60px;
+	position: relative;
+}
+
+.secondChart {
+	display: flex;
+	justify-content: space-around; 
+	align-items: center;
+	width: 80vw;
+	height: 400px; 
+	margin: auto;
+	padding: 60px;
+	position: relative;
+}
+
+.hidden {
+	display: none;
+}
+
+/* Fondo oscuro semi-transparente */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.9s ease, visibility 0.3s ease;
+}
+
+/* Contenedor del modal */
+.modal-content {
+	background: white;
+	padding: 40px;
+	padding-top: 0;
+	border-radius: 10px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	text-align: center;
+	align-content: center;
+	width: 750px;
+	height: 375px;
+	position: relative;
+}
+
+/* Botón de cierre de modal */
+.modal-close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 50px;
+	background: transparent;
+	border: none;
+	font-size: 18px;
+	cursor: pointer;
+	color: #333;
+	transition: transform 0.3s ease;
+}
+
+.modal-close:hover {
+	transform: scale(1.05) rotate(-90deg);
+}
+.modal-close:active {
+	transform: scale(0.1);
+}
+
+#stats {
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 30%;
+}
+
+#stats p {
+	margin: 10px;
+	font-size: 20px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
