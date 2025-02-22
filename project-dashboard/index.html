@@ -270,25 +270,35 @@
 				</section>
 			</div>
 
-			<div class="charts" id="statsNav">
-				<div id="stats">
-					<p>Total de tareas: <span id="totalTasks">0</span></p>
-					<p>Tareas completadas: <span id="completedTasks">0</span></p>
-					<p>Progreso total: <span id="completedPercentage">0</span>%</p>
-				</div>
-				<canvas id="taskChart"></canvas>
-
-				<!-- Modal -->
-				<div id="modal" class="modal-overlay">
-					<div class="modal-content">
-						<button class="modal-close" onclick="closeModal()">✖</button>
-						<p id="modal-content2"></p>
-						<canvas id="taskChart2"></canvas>
+				<div class="charts" id="statsNav">
+					<div id="stats">
+						<p>Total de tareas: <span id="totalTasks">0</span></p>
+						<p>Tareas completadas: <span id="completedTasks">0</span></p>
+						<p>Progreso total: <span id="completedPercentage">0</span>%</p>
 					</div>
-				</div>
+					<canvas id="taskChart"></canvas>
 
-				<canvas id="tagChart"></canvas>
-			</div>
+					<!-- Modal -->
+					<div id="modal" class="modal-overlay">
+						<div class="modal-content">
+							<button class="modal-close" onclick="closeModal()">✖</button>
+							<p id="modal-content2"></p>
+							<canvas id="taskChart2"></canvas>
+						</div>
+					</div>
+
+					<div class="secondChart">
+						<canvas id="tagChart"></canvas>
+						<iframe width="640" height="360" 
+							src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6" 
+							frameborder="0" allowfullscreen>
+						</iframe>
+
+						<!-- <video width="640" height="360" controls>
+							<source src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6">
+						</video> -->
+						</div>
+					</div>
 		</main>
 
 		<script type="module" src="./js/script.js"></script>

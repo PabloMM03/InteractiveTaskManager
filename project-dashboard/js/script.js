@@ -230,18 +230,6 @@ function loadGoals() {
 		setTimeout(() => {
 			li.querySelector('.progressGoal').style.width = `${goal.progress}%`;
 		}, 10);
-
-
-		// Botón de eliminar
-		// const deleteButton = document.createElement('button');
-		// deleteButton.textContent = 'Eliminar';
-		// deleteButton.dataset.index = index;
-		// deleteButton.addEventListener('click', (e) => {
-		// 	e.stopPropagation();
-		// 	deleteGoal(index);
-		// });
-
-
 		// Botón de eliminar
 		const deleteButton = document.createElement('img');
 		deleteButton.src = '/project-dashboard/assets/delete.gif';

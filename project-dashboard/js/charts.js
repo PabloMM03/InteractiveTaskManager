@@ -28,13 +28,13 @@ export function renderChart(chartData) {
 		data: chartData,
 		options: {
 			responsive: true,
-			maintainAspectRatio: true,
+			maintainAspectRatio: false,
 			plugins: {
 				legend: {
 					display: true,
 					labels: {
 						font: {
-							size: 16,
+							size: 18,
 							weight: 'bold',
 							family: 'Segoe UI',
 						},

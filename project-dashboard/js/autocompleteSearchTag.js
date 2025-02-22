@@ -277,11 +277,3 @@ selects.forEach((select) => {
 		}
 	});
 });
-
-
-function changeDeleteButton() {
-	const span = document.querySelector('.spanli');
-	console.log(span);
-}
-
-changeDeleteButton();
