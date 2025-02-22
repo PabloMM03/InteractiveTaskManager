@@ -153,6 +153,7 @@ function deleteTask(index, goalId) {
 	const wasChecked = deleteTaskFromStorage(index);
 	loadTask(goalId);
 	updateGoalProgress(goalId);
+	loadGoals();
 
 	renderTasksChart();
 	renderTagChart();
@@ -219,7 +220,17 @@ function loadGoals() {
 	goals.forEach((goal, index) => {
 		// Crear elemento de la lista de objetivos
 		const li = document.createElement('li');
-		li.innerHTML = `<span>${goal.gtitle} - ${goal.gtag} - ${goal.gdate} - Progreso: ${goal.progress}%</span>`;
+		li.innerHTML = `<span>${goal.gtitle} - ${goal.gtag} - ${goal.gdate}</span>`;
+
+		const div = document.createElement('div');
+		div.classList.add('progressContentGoal');
+		div.innerHTML = `<div class='progressGoal' ></div>`;
+		li.appendChild(div);
+
+		setTimeout(() => {
+			li.querySelector('.progressGoal').style.width = `${goal.progress}%`;
+		}, 10);
+
 
 		// Botón de eliminar
 		const deleteButton = document.createElement('button');
