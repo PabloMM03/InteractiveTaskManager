@@ -89,7 +89,7 @@ function addTask() {
 export function loadTask(goalId) {
 	const tasks = loadTasksFromStorage();
 	const taskList = document.getElementById('task-list');
-	taskList.innerHTML = '';
+	taskList.innerHTML = ''; //Limpiar la lista antes de cargar las tareas
 
 	tasks.forEach((task, index) => {
 		if (!task.isActive) return;
@@ -115,6 +115,18 @@ export function loadTask(goalId) {
 		li.appendChild(deleteButton);
 		taskList.appendChild(li);
 	});
+
+	//Si no hay tareas mostrar el mensaje
+	if(taskList.children.length === 0) {
+		const message = document.createElement('p');
+		message.textContent = 'No tienes tareas pendientes';
+		message.style.color = 'gray';
+		taskList.appendChild(message);
+
+		setTimeout(() => {
+			message.classList.add('show');
+		},10);
+	}
 }
 
 // Actualizar el estado de la tarea
@@ -177,6 +189,8 @@ function addGoals() {
 		data.totalTasks = 0;
 		data.completedTasks = 0;
 
+		
+
 		const goals = loadGoalsFromStorage();
 		goals.push(data);
 		saveGoalsToStorage(goals);
@@ -197,7 +211,6 @@ function loadGoals() {
 	menu.innerHTML = '';
 
 	//Añadir opción al selector de objetivos en Tareas
-
 	const createOption = (text, value = '') => {
 		const li = document.createElement('li');
 		li.textContent = text;
@@ -220,16 +233,19 @@ function loadGoals() {
 	goals.forEach((goal, index) => {
 		// Crear elemento de la lista de objetivos
 		const li = document.createElement('li');
-		li.innerHTML = `<span>${goal.gtitle} - ${goal.gtag} - ${goal.gdate}</span>`;
+		li.innerHTML = `<span>${goal.gtitle} - ${goal.gtag} - ${goal.gdate}</span>`;		
 
+		// Barra de progreso 
 		const div = document.createElement('div');
 		div.classList.add('progressContentGoal');
-		div.innerHTML = `<div class='progressGoal' ></div>`;
+		div.innerHTML = `<div class='progressGoal'></div>`;
 		li.appendChild(div);
 
+		
 		setTimeout(() => {
 			li.querySelector('.progressGoal').style.width = `${goal.progress}%`;
-		}, 10);
+		}, 50);
+
 		// Botón de eliminar
 		const deleteButton = document.createElement('img');
 		deleteButton.src = '/project-dashboard/assets/delete.gif';
@@ -246,6 +262,18 @@ function loadGoals() {
 		// Agregar opción al menú desplegable
 		menu.append(createOption(goal.gtitle, index));
 	});
+
+	//Si no hay tareas mostrar el mensaje
+	if(goalsList.children.length === 0) {
+		const message = document.createElement('p');
+		message.textContent = 'No tienes objetivos pendientes';
+		message.style.color = 'gray';
+		goalsList.appendChild(message);
+
+		setTimeout(() => {
+			message.classList.add('show');
+		},10);
+	}
 
 	menu.addEventListener('change', loadTask);
 }
@@ -300,6 +328,7 @@ function deleteTaskByDueDate() {
 	const activeTasks = tasks.filter((task) => task.due_date >= formattedToday);
 
 	saveTasksToStorage(activeTasks);
+	loadGoals()
 }
 
 // setInterval(deleteTaskByDueDate, 60000); //Comprobar cada 1 minuto

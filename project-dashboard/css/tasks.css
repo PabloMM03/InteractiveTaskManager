@@ -23,7 +23,7 @@ h2 {
 	transition: transform 0.3s;
 }
 
-h2:hover {
+h2:not(.tagChartH2):hover {
 	font-size: 1.5em;
 	font-weight: bold;
 	margin-bottom: 55px;
@@ -99,4 +99,20 @@ section#task-section ul li span:hover {
 /* Oculta las sugerencias cuando no hay entrada */
 .hidden {
 	display: none;
+}
+
+/*Mensaje ~sin tareas~ */
+#task-list p {
+	display: flex;
+	justify-content: center;
+	margin-top: 70px;
+	opacity: 0;
+	transform: translateY(-80px);
+	transition: transform 0.9s ease, opacity 0.5s ease;
+	font-size: 17px;
+}
+
+#task-list p.show {
+	opacity: 1;
+	transform: translateY(0);
 }

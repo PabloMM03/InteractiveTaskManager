@@ -184,7 +184,7 @@ export function renderTagChart() {
 				legend: {
 					labels: {
 						font: {
-							family: 'Segoe UI', // Especifica la fuente aquí
+							family: 'Segoe UI',
 						},
 					},
 					onHover: (event) => {
@@ -196,7 +196,26 @@ export function renderTagChart() {
 				},
 			},
 		},
-	});
+		plugins: [
+			{
+				id: 'noDataMessage',
+				beforeDraw: (chart) => {
+					const dataExists = chart.data.datasets.some(dataset => dataset.data.some(value => value > 0));
+					if (!dataExists) {
+						const ctx = chart.ctx;
+						const { width, height } = chart;
+						ctx.save();
+						ctx.textAlign = 'center';
+						ctx.textBaseline = 'middle';
+						ctx.font = '18px Segoe UI';
+						ctx.fillStyle = '#007bff'; // Color del texto
+						ctx.fillText('No hay datos registrados por el momento', width / 2, height / 2);
+						ctx.restore();
+					}
+				},
+			},
+		],
+	});	
 }
 
 //Actualizar estado del global de tareas y %

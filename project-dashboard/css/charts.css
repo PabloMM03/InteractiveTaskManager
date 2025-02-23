@@ -30,7 +30,7 @@ margin-top: 30px;
 	width: 80vw;
 	height: 400px; 
 	margin: auto;
-	padding: 60px;
+	padding: 0 60px 60px 60px;
 	position: relative;
 }
 
@@ -95,10 +95,33 @@ margin-top: 30px;
 	position: absolute;
 	top: 0;
 	left: 30%;
+	border-bottom: 2px solid transparent;
+	transition: border-color 0.3s ease-in-out;
+	border-radius: 10px;
+	overflow: hidden;
+	
+}
+#stats:hover {
+	border-color: #007bff;
 }
 
 #stats p {
 	margin: 10px;
-	font-size: 20px;
+	font-size: 25px;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.tagChartH2 {
+	all: unset;
+	font-size: 1.5em;
+	font-weight: bold;
+	width: 63%;
+	text-align: left;
+	padding-top: 40px;
+	transition: transform 0.3s;
+}
+
+.tagChartH2:hover {
+	transform: translateX(50px);
 }

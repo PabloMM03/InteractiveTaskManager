@@ -272,7 +272,7 @@
 
 				<div class="charts" id="statsNav">
 					<div id="stats">
-						<p>Total de tareas: <span id="totalTasks">0</span></p>
+						<p>Tareas totales: <span id="totalTasks">0</span></p>
 						<p>Tareas completadas: <span id="completedTasks">0</span></p>
 						<p>Progreso total: <span id="completedPercentage">0</span>%</p>
 					</div>
@@ -286,23 +286,24 @@
 							<canvas id="taskChart2"></canvas>
 						</div>
 					</div>
+					<h2 class="tagChartH2">Etiquetas Activas</h2>
 
 					<div class="secondChart">
 						<canvas id="tagChart"></canvas>
-						<iframe width="640" height="360" 
+						<!-- <iframe width="640" height="360"
 							src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6" 
 							frameborder="0" allowfullscreen>
-						</iframe>
+						</iframe> -->
 
-						<!-- <video width="640" height="360" controls>
+						<video width="640" height="360" controls>
 							<source src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6">
-						</video> -->
+						</video>
 						</div>
 					</div>
 		</main>
 
 		<script type="module" src="./js/script.js"></script>
-		<script src="./js/storage.js"></script>
+		<script type="module" src="./js/storage.js"></script>
 		<script type="module" src="./js/charts.js"></script>
 		<script src="./js/autocompleteSearchTag.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
