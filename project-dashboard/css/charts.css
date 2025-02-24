@@ -9,6 +9,7 @@
   
 #tagChart {
 margin-top: 30px;
+margin-left: 100px;
 }
 
 /*Sección de Gráficos*/
@@ -125,3 +126,13 @@ margin-top: 30px;
 .tagChartH2:hover {
 	transform: translateX(50px);
 }
+/*Mensaje sin tagChart*/
+.no-data-message {
+	transform: translate(-115%, -115%);
+	font-family: 'Segoe UI', sans-serif;
+	font-size: 17px;
+	color: gray;
+	opacity: 0;  
+	transition: opacity 1.5s ease-in-out;
+  }
+  

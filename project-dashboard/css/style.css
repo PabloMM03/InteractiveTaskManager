@@ -3,17 +3,31 @@
 @import url('tasks.css');
 @import url('goals.css');
 @import url('charts.css');
+@import url('startImg.css');
+@import url('footer.css');
 
 * {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Estilos generales */
-body {
-	margin: 0;
-	font-family: Arial, sans-serif;
-	margin-bottom: 100px;
+html,body {
+    height: 100%;
+    margin: 0;
+	padding: 0;
+    display: flex;
+    flex-direction: column;
 }
+
+main {
+	flex: 1;
+}
+
+.all {
+	display: grid;
+	min-height: 100dvh;
+	grid-template-rows: auto 1fr auto;
+}
+
 
 /* Contenedor sección formulario tasks */
 .container {

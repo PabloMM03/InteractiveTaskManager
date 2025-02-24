@@ -198,23 +198,22 @@ export function renderTagChart() {
 		},
 		plugins: [
 			{
-				id: 'noDataMessage',
-				beforeDraw: (chart) => {
-					const dataExists = chart.data.datasets.some(dataset => dataset.data.some(value => value > 0));
-					if (!dataExists) {
-						const ctx = chart.ctx;
-						const { width, height } = chart;
-						ctx.save();
-						ctx.textAlign = 'center';
-						ctx.textBaseline = 'middle';
-						ctx.font = '18px Segoe UI';
-						ctx.fillStyle = '#007bff'; // Color del texto
-						ctx.fillText('No hay datos registrados por el momento', width / 2, height / 2);
-						ctx.restore();
-					}
-				},
+			  id: 'noDataMessage',
+			  beforeDraw: (chart) => {
+				const dataExists = chart.data.datasets.some(dataset => dataset.data.some(value => value > 0));
+		  
+				const noDataMessage = document.getElementById('noDataMessage');
+				if (!dataExists) {
+				  // Muestra el mensaje
+				  noDataMessage.style.opacity = 1;  // La opacidad sube a 1 (visible)
+				} else {
+				  // Oculta el mensaje
+				  noDataMessage.style.opacity = 0;  // La opacidad baja a 0 (invisible)
+				}
+			  },
 			},
-		],
+		  ],
+		  
 	});	
 }
 

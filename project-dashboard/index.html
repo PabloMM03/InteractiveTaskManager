@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
+		<div class="all">
 		<header>
 			<nav id="navbar">
 				<div class="logo">
@@ -32,6 +33,27 @@
 		</header>
 
 		<main>
+			
+			<header>
+				<div class="headerStart">
+					<div class="headerText">
+						<h1>Diseño de Tareas ilimitado</h1>
+						<p>La aplicación permite la creación y gestión ilimitada de tareas organizadas en objetivos, ofreciendo un sistema flexible y dinámico. Además, el progreso de los objetivos se visualiza en tiempo real, proporcionando un control eficiente y una mejor planificación del trabajo.
+						<img src="./assets/Success.gif" alt="Success" style="display: inline; width: 20px; height: auto;">
+						</p>
+					</div>
+					<div class="headerVideo">
+						<video width="350" height="200" class="homeVideo" controls>
+							<source src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6">
+						</video>
+						<img src="./assets/header.jpg" alt="">
+					</div>	
+				</div>
+			</header>
+
+
+
+
 			<div class="container" id="tasksNav">
 				<!-- Sección del formulario -->
 				<section id="form-section">
@@ -294,18 +316,51 @@
 							src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6" 
 							frameborder="0" allowfullscreen>
 						</iframe> -->
+						<p id="noDataMessage" class="no-data-message">
+							No hay datos registrados por el momento
+						</p>
 
 						<video width="640" height="360" controls>
 							<source src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6">
 						</video>
-						</div>
 					</div>
+				</div>
 		</main>
+
+		<div class="footer"> 
+			<footer>
+				<div class="waves">
+					<div class="waves" id="wave1"></div>
+					<div class="waves" id="wave2"></div>
+					<div class="waves" id="wave3"></div>
+					<div class="waves" id="wave4"></div>
+				</div>
+				<ul class="social_icon">
+				<li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+				<li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+				<li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+				<li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+				<li><a href="https://github.com/PabloMM03"><ion-icon name="logo-github"></ion-icon></a></li>
+				</ul>
+				<ul class="menuf">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Services</a></li>
+					<li><a href="#">Team</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+				<p>@2025 Pablo Millán |  All Rights Reserved</p>
+			</footer>
+		</div>
+	</div>
 
 		<script type="module" src="./js/script.js"></script>
 		<script type="module" src="./js/storage.js"></script>
 		<script type="module" src="./js/charts.js"></script>
 		<script src="./js/autocompleteSearchTag.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<!-- Ionicons -->
+		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+   		<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>    
 	</body>
 </html>
