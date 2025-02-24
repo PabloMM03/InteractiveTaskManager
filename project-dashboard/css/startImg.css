@@ -1,0 +1,49 @@
+/*Cabecera principal*/
+.headerStart {
+    margin-top: 150px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;    
+    opacity: 0;
+    transform: translateY(-60px);
+    animation: fadeIn 1.5s ease-out forwards;
+}
+/*Texto*/ 
+.headerText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 550px;
+}
+
+.headerText h1 {
+    width: 300px;
+}
+
+/*Video*/
+.headerVideo {
+    display: flex;
+    position: relative;
+}
+
+.homeVideo {
+   border-radius: 10px;
+   margin-top: 117px;
+   position: absolute;
+}
+
+.headerVideo img {
+    margin-left: 90px;
+}
+
+/*animación mostrar principal*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
