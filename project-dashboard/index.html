@@ -63,18 +63,23 @@
 						<div class="step active" id="step-1">
 							<div class="containerInputs">
 								<div class="entryarea">
-									<input type="text" name="title" required />
+									<input type="text" name="title" id="titulo"/>
 									<div class="labelline">Nombre de la tarea</div>
 								</div>
 							</div>
-							<div class="dropdown">
-								<div class="select" id="goal-select" tabindex="0">
-									<span class="selected"></span>
-									<div class="caret"></div>
-									<div class="labellineSelect">Seleccione un objetivo</div>
+							<div class="containerInputs">
+								<div class="entryarea">
+									<div class="dropdown">
+										<div class="select" id="goal-select" tabindex="0">
+											<span class="selected"></span>
+											<div class="caret"></div>
+											<div class="labellineSelect">Seleccione un objetivo</div>
+										</div>
+										<ul class="menu"></ul>
+									</div>
 								</div>
-								<ul class="menu"></ul>
 							</div>
+							
 
 							<button
 								class="form-buttons"
@@ -89,24 +94,28 @@
 						<div class="step" id="step-2">
 							<div class="containerInputs">
 								<div class="entryarea">
-									<input type="date" name="due_date" required />
-									<div class="labellineDate">Fecha de vencimiento</div>
+									<input type="date" name="due_date" id="dateField" required/>
+									<div class="labellineDate" style="left: 150px;">Fecha de vencimiento</div>
 								</div>
 							</div>
 
-							<div class="dropdown">
-								<div class="select" tabindex="0">
-									<span class="selected"></span>
-									<div class="caret"></div>
-									<div class="labellineSelect">Seleccione la prioridad</div>
+							<div class="containerInputs">
+								<div class="entryarea">
+									<div class="dropdown">
+										<div class="select" tabindex="0">
+											<span class="selected"></span>
+											<div class="caret"></div>
+											<div class="labellineSelect">Seleccione la prioridad</div>
+										</div>
+										<ul class="menu" id="priority" name="priority">
+											<li id="baja" data-priority="Baja">Baja</li>
+											<li id="media" data-priority="Media">Media</li>
+											<li id="alta" data-priority="Alta">Alta</li>
+										</ul>
+									</div>
 								</div>
-								<ul class="menu" id="priority" name="priority">
-									<li id="baja" data-priority="Baja">Baja</li>
-									<li id="media" data-priority="Media">Media</li>
-									<li id="alta" data-priority="Alta">Alta</li>
-								</ul>
 							</div>
-
+							
 							<button
 								class="form-buttons"
 								style="margin-top: 35px"
@@ -125,7 +134,7 @@
 										id="ttag"
 										name="ttag"
 										oninput="filterTags()"
-										required
+										
 									/>
 									<div class="labelline">Busca o escribe una etiqueta...</div>
 								</div>
@@ -151,7 +160,6 @@
 										type="text"
 										id="assigned-to"
 										name="assigned_to"
-										required
 									/>
 									<div class="labelline">Persona asignada</div>
 								</div>
@@ -231,7 +239,7 @@
 							<div class="containerInputs">
 								<div class="entryarea">
 									<input type="date" id="gdate" name="gdate" required />
-									<div class="labellineDate">Fecha de vencimiento</div>
+									<div class="labellineDate" style="left: 100px;">Fecha de vencimiento</div>
 								</div>
 							</div>
 							<button
@@ -358,6 +366,7 @@
 		<script type="module" src="./js/storage.js"></script>
 		<script type="module" src="./js/charts.js"></script>
 		<script src="./js/autocompleteSearchTag.js"></script>
+		<script src="./js/validateForms.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<!-- Ionicons -->
 		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

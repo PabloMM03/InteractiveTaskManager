@@ -229,7 +229,7 @@ function scrollToNav() {
 
 scrollToNav();
 
-//Desplegable
+//Desplegable de selección
 
 const dropdowns = document.querySelectorAll('.dropdown');
 
@@ -260,20 +260,69 @@ dropdowns.forEach((dropdown) => {
 });
 
 //Campos selects con animación de label
+document.addEventListener("DOMContentLoaded", function () {
+    const selects = document.querySelectorAll('.entryarea .select');
 
-const selects = document.querySelectorAll('.select');
+    selects.forEach((select) => {
+        const labelline = select.querySelector('.labellineSelect');
+        const selectedSpan = select.querySelector('.selected');
+        const menu = select.nextElementSibling; 
 
-selects.forEach((select) => {
-	const labelline = select.querySelector('.labellineSelect');
-	const selectedSpan = select.querySelector('.selected');
-	// Cuando el select recibe el foco
-	select.addEventListener('focus', function () {
-		// Si el valor está vacío, solo muestra la animación
-		if (selectedSpan.textContent !== 'Selecciona un objetivo') {
-			labelline.style.transform = 'translate(-22px, -23px) scale(0.88)';
-			labelline.style.zIndex = 1111;
-			labelline.style.padding = '0 12px';
-			labelline.style.height = '30px';
-		}
-	});
+        if (!menu) return; // Evitar errores si no hay menú asociado
+
+		  // Cuando el contenedor recibe el foco
+		  select.addEventListener('focus', function () {
+            labelline.classList.add('active');
+        });
+
+        // Manejo de selección de opciones del menú
+        menu.addEventListener('click', function (e) {
+            const option = e.target;
+            if (option.tagName === 'LI') {
+                selectedSpan.textContent = option.dataset.priority || option.textContent; // Usa el atributo data o el texto
+                labelline.classList.add('active');
+                select.classList.remove('active'); 
+			}
+        });
+
+        // Ocultar label si no hay valor
+        select.addEventListener('blur', function () {
+            setTimeout(() => {
+                if (!selectedSpan.textContent.trim()) {
+                    labelline.classList.remove('active');
+					menu.classList.remove('menu-open');
+                }
+            }, 100);
+        });
+    });
+});
+
+//Campos inputs con animación de label
+document.addEventListener("DOMContentLoaded", function () {
+    const inputs = document.querySelectorAll(".entryarea input");
+
+    inputs.forEach((input) => {
+        const label = input.nextElementSibling; // La etiqueta labelline
+
+        // Evento cuando el usuario escribe
+        input.addEventListener("input", function () {
+            if (this.value.trim() !== "") {
+                label.classList.add("active");
+            } else {
+                label.classList.remove("active");
+            }
+        });
+
+        // Evento cuando el campo gana el foco
+        input.addEventListener("focus", function () {
+            label.classList.add("active");
+        });
+
+        // Evento cuando el campo pierde el foco y está vacío
+        input.addEventListener("blur", function () {
+            if (this.value.trim() === "") {
+                label.classList.remove("active");
+            }
+        });
+    });
 });

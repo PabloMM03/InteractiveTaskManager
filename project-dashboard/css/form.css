@@ -43,7 +43,7 @@ textarea {
 	border: 2px solid black;
 	border-radius: 4px;
 
-	position: absolute;
+	position: relative;
 	line-height: 20px;
 	transition: 0.1s ease;
 	z-index: 1111;
@@ -147,6 +147,8 @@ button {
 	border: 2px solid black;
 	border-radius: 4px;
 	height: 51px;
+	margin-top: 20px;
+	font-size: 1rem;
 }
 
 .select-clicked {
@@ -204,7 +206,7 @@ input[type='date']:hover,
 }
 
 .menu li {
-	padding: 0.7em 1em;
+	padding: 0 1em;
 	margin: 0.3em 0;
 	border-radius: 0.5em;
 	cursor: pointer;
@@ -227,14 +229,18 @@ input[type='date']:hover,
 	position: relative;
 	height: 90px;
 	line-height: 45px;
+	display: flex;
+    flex-direction: column;
 }
 
 .labelline {
 	position: absolute;
 	padding: 0 5px;
-	margin: 0 20px;
 	background-color: white;
 	transition: 0.2s ease;
+	transform: translate(0, 0), scale(1);
+	z-index: 1110;
+	left: 20px;
 }
 
 .labellineSelect {
@@ -242,27 +248,51 @@ input[type='date']:hover,
 	padding: 0 5px;
 	background-color: white;
 	transition: 0.2s ease;
+	transform: translate(0, 0), scale(1);
 }
 
 .labellineDate {
 	position: absolute;
-	padding: 0 0 0 150px;
+	padding:0;
 	margin: 0 40px;
 	background-color: white;
 	transition: 0.2s ease;
+	transform: translate(0, 0), scale(1);
+	z-index: 1110;
+}
+
+/* Cuando el campo tiene texto o está en foco */
+.labelline.active {
+	z-index: 1111;
+    transform: translate(-22px, -23px) scale(0.88);
+	padding: 0 12px;
+	left: 30px;
+}
+
+.labellineSelect.active {
+	z-index: 1111;
+	transform: translate(-22px, -23px) scale(0.88);
+	padding: 0 12px;
+	left: 20px;
+	height: 50px;
+}
+
+.selected {
+	z-index: 1112;
 }
 
 /* .select:focus + .labellineSelect,
 .select:valid + .labellineSelect,  */
-input[type='date'] + .labellineDate,
-/* input[type='date']:focus + .labellineDate, */
-/* input[type='date']:valid + .labellineDate, */
-input[type='text']:focus + .labelline,
-input[type='text']:valid + .labelline {
+input[type='date']:focus + .labellineDate, 
+ input[type='date']:valid + .labellineDate
+/* input[type='text']:focus + .labelline,
+input[type='text']:valid + .labelline   */
+{
 	height: 30px;
 	transform: translate(-22px, -23px) scale(0.88);
 	z-index: 1111;
 	padding: 0 12px;
+	left: -22px;
 }
 
 /*Cambia de color el labelline cuando hace hover en select*/
@@ -328,4 +358,20 @@ input[type='text']:valid + .labelline {
 
 .lbl-switch2 {
 	margin-left: 10px;
+}
+
+.campoError {
+    color: red;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: -20px; /* Lo posiciona debajo del input */
+    left: 0;
+    width: 100%;
+}
+
+/* Oculta el mensaje de error cuando está vacío */
+.campoError:empty {
+    display: none;
 }
