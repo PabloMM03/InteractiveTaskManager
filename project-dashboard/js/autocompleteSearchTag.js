@@ -107,6 +107,7 @@ function nextStep(step, formType) {
 		let currentStep = document.querySelector(stepActive);
 		let nextStep = document.getElementById(stepType + step);
 
+
 		if (currentStep && nextStep) {
 			currentStep.style.opacity = '0'; // Inicia la animación de desaparición
 			setTimeout(() => {

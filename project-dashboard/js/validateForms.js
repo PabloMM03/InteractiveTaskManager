@@ -77,7 +77,7 @@ function updateTtagErrors(ttag) {
 
     if(content === '') {
         message = `El campo ${ttag.id} no puede estar vacío`;
-    } else if((content.length < MIN_CHAR) && content.length > 0) {
+    } else if((content.length < 3) && content.length > 0) {
         message = `El campo ${ttag.id} debe tener al menos ${MIN_CHAR} caracteres`;
     } else if(content.length > 25) {
         message = `El campo ${ttag.id} no puede tener más de 25 caracteres`;
@@ -92,7 +92,7 @@ function updateAssignedErrors(assigned) {
 
         if(content === '') {
             message = `El campo ${assigned.id} no puede estar vacío`;
-        } else if((content.length <MIN_CHAR) && content.length > 0) {
+        } else if((content.length <3) && content.length > 0) {
             message = `El camppo ${assigned.id} debe tener al nenos ${MIN_CHAR} caracteres`;
         } else if(content.length > 25) {
             message = `El campo ${assigned.id} no puede tener más de 25 caracteres`;

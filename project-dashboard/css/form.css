@@ -253,7 +253,7 @@ input[type='date']:hover,
 
 .labellineDate {
 	position: absolute;
-	padding:0;
+	padding:0 0 0 150px;
 	margin: 0 40px;
 	background-color: white;
 	transition: 0.2s ease;

@@ -82,6 +82,7 @@ function addTask() {
 		renderTagChart();
 
 		e.target.reset();
+		location.reload();
 	});
 }
 
@@ -197,6 +198,7 @@ function addGoals() {
 
 		loadGoals();
 		e.target.reset();
+		location.reload();
 	});
 }
 
@@ -319,19 +321,27 @@ function updateGoalProgress(goalId) {
 	}
 }
 
-/**Eliminar la tarea por fecha de vencimiento pasada */
-function deleteTaskByDueDate() {
+/**Eliminar por fecha de vencimiento pasada */
+function deleteByDueDate() {
+	//Tasks
 	const tasks = loadTasksFromStorage();
 	const today = new Date(); //Fecha de hoy
 	const formattedToday = today.toISOString().split('T')[0];
 
 	const activeTasks = tasks.filter((task) => task.due_date >= formattedToday);
 
+
+	//Goals
+
+	const goals = loadGoalsFromStorage();
+	const activeGoals = goals.filter((goal) => goal.gdate >= formattedToday);
+
 	saveTasksToStorage(activeTasks);
+	saveGoalsToStorage(activeGoals);
 	loadGoals()
 }
 
-// setInterval(deleteTaskByDueDate, 60000); //Comprobar cada 1 minuto
+setInterval(deleteByDueDate, 60000); //Comprobar cada 1 minuto
 
 //Silmular una tarea
 function addSampleTask() {
