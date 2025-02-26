@@ -261,6 +261,16 @@ input[type='date']:hover,
 	z-index: 1110;
 }
 
+.labellineDate1 {
+	position: absolute;
+	padding:0 0 0 100px;
+	margin: 0 40px;
+	background-color: white;
+	transition: 0.2s ease;
+	transform: translate(0, 0), scale(1);
+	z-index: 1110;
+}
+
 /* Cuando el campo tiene texto o está en foco */
 .labelline.active {
 	z-index: 1111;
@@ -281,12 +291,8 @@ input[type='date']:hover,
 	z-index: 1112;
 }
 
-/* .select:focus + .labellineSelect,
-.select:valid + .labellineSelect,  */
 input[type='date']:focus + .labellineDate, 
- input[type='date']:valid + .labellineDate
-/* input[type='text']:focus + .labelline,
-input[type='text']:valid + .labelline   */
+input[type='date']:valid + .labellineDate
 {
 	height: 30px;
 	transform: translate(-22px, -23px) scale(0.88);
@@ -294,6 +300,15 @@ input[type='text']:valid + .labelline   */
 	padding: 0 12px;
 	left: -22px;
 }
+
+input[type='date']:focus + .labellineDate1, 
+input[type='date']:valid + .labellineDate1 {
+	height: 30px;
+	transform: translate(-22px, -23px) scale(0.88);
+	z-index: 1111;
+	padding: 0 12px 0 0;
+	left: -5px;
+ }
 
 /*Cambia de color el labelline cuando hace hover en select*/
 .select:hover .labellineSelect {

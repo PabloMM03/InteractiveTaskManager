@@ -15,6 +15,10 @@ import {
 	saveTaskCountsHistory,
 } from './storage.js';
 
+import {
+	validateFormEvent
+} from './validateForms.js';
+
 document.addEventListener('DOMContentLoaded', () => {
 	loadTask(); // Cargar tareas guardadas al iniciar
 	addTask(); // Agregar eventos al formulario
@@ -31,60 +35,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Añadir tareas y guardar al enviar
 function addTask() {
-	document.querySelector('#task-form').addEventListener('submit', function (e) {
-		e.preventDefault();
+    const form = document.querySelector('#task-form');
 
-		// Capturar formulario de tareas y obtener sus datos
-		const formData = new FormData(e.target);
-		const data = Object.fromEntries(formData.entries());
+    // Verificar si ya tiene el evento de submit para evitar duplicados
+    if (!form.dataset.listenerAdded) {
+        form.dataset.listenerAdded = 'true'; // Marcar que ya tiene un listener
+        
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevenir envío inmediato
 
-		// Capturar la prioridad seleccionada
-		const selects = document.querySelectorAll('.select');
-		const priority = selects[1];
-		const selected = priority.querySelector('.selected').textContent;
-		data.priority = selected;
+            if (!validateFormEvent(e)) { 
+                return; // Detener la función si hay errores
+            }
 
-		// Datos externos al formulario para info
-		data.notifications = formData.get('notifications') === 'on';
-		data.isChecked = false;
-		data.createTaskDate = new Date().toISOString().split('T')[0];
-		data.isActive = true;
+            // Capturar formulario de tareas y obtener sus datos
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
 
-		// Obtener el ID del objetivo seleccionado
-		const selectedGoalElement = document.querySelector('#goal-select');
-		const selectedGoalId = selectedGoalElement.getAttribute('data-selected-id');
+            // Capturar la prioridad seleccionada
+            const selects = document.querySelectorAll('.select');
+            const priority = selects[1];
+            const selected = priority.querySelector('.selected').textContent;
+            data.priority = selected;
 
-		if (!selectedGoalId || selectedGoalId === 'none') {
-			data.goalId = 'no-goal';
-		} else {
-			data.goalId = parseInt(selectedGoalId);
-		}
+            // Datos adicionales
+            data.notifications = formData.get('notifications') === 'on';
+            data.isChecked = false;
+            data.createTaskDate = new Date().toISOString().split('T')[0];
+            data.isActive = true;
 
-		const tasks = loadTasksFromStorage();
-		tasks.push(data);
-		saveTasksToStorage(tasks);
+            // Obtener el ID del objetivo seleccionado
+            const selectedGoalElement = document.querySelector('#goal-select');
+            const selectedGoalId = selectedGoalElement.getAttribute('data-selected-id');
 
-		// Actualizar el historial de tareas por mes
-		updateTaskHistory(data);
+            data.goalId = selectedGoalId && selectedGoalId !== 'none' ? parseInt(selectedGoalId) : 'no-goal';
 
-		// Incrementar el total de tareas del objetivo
-		if (selectedGoalId && selectedGoalId !== 'none') {
-			const goals = loadGoalsFromStorage();
-			goals[selectedGoalId].totalTasks += 1;
-			saveGoalsToStorage(goals);
-		}
+            // Guardar en localStorage
+            const tasks = loadTasksFromStorage();
+            tasks.push(data);
+            saveTasksToStorage(tasks);
 
-		loadTask(data.goalId);
-		updateGoalProgress(data.goalId);
+            // Actualizar historial y progreso
+            updateTaskHistory(data);
+            if (selectedGoalId && selectedGoalId !== 'none') {
+                const goals = loadGoalsFromStorage();
+                goals[selectedGoalId].totalTasks += 1;
+                saveGoalsToStorage(goals);
+            }
 
-		//Actualizar gráficos después de añadir tarea
-		renderTasksChart();
-		renderTagChart();
+            loadTask(data.goalId);
+            updateGoalProgress(data.goalId);
 
-		e.target.reset();
-		location.reload();
-	});
+            //Actualizar gráficos después de añadir tarea
+            renderTasksChart();
+            renderTagChart();
+
+            e.target.reset();
+			 location.reload();
+        });
+    }
 }
+
 
 // Cargar y mostrar tareas
 export function loadTask(goalId) {

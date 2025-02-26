@@ -9,200 +9,103 @@ document.addEventListener('DOMContentLoaded', createListeners)
 function createListeners() {
 
     //No validate al formulario
-    document.getElementById('task-form').setAttribute('novalidate', true);
+  const form = document.getElementById('task-form');
+  form.setAttribute('novalidate', true)
 
-    document.getElementById('titulo').addEventListener('keyup', validateTitleEvent, false);
-    document.getElementById('titulo').addEventListener('invalid', titleEventNotifyError, false);
-    document.getElementById('titulo').addEventListener('input', reviewErrorsEventsTitle, false);
+  const fields = form.querySelectorAll('input');
 
-    document.getElementById('ttag').addEventListener('keyup', validateTtagEvent, false);
-    document.getElementById('ttag').addEventListener('invalid', ttagEventNotifyError, false);
-    document.getElementById('ttag').addEventListener('input', reviewErrorsEventsTtag, false);
-
-    document.getElementById('assigned-to').addEventListener('keyup', validateAssignedEvent, false);
-    document.getElementById('assigned-to').addEventListener('invalid', assignedEventNotifyError, false);
-    document.getElementById('assigned-to').addEventListener('input', reviewErrorsEventsAssigned, false);
-
-    document.getElementById('dateField').addEventListener('input', validateDateEvent, false);
-    document.getElementById('dateField').addEventListener('invalid', dateEventNotifyError, false);
-    document.getElementById('dateField').addEventListener('input', reviewErrorsEventsDate, false);
+    fields.forEach(field => {     
+            field.addEventListener('keyup', validateField, false);
+            field.addEventListener('invalid', notifyFieldError, false);
+            field.addEventListener('input', reviewFieldErrors, false); 
+    });
+    console.log(fields);
 
 
-    document.getElementById('task-form').addEventListener('submit', validateFormEvent, false);
+    form.addEventListener('submit', validateFormEvent,false);
 
 }
 
-function validateTitleEvent(e) {
-    const title = e.target;
-    updateTitleErrors(title);
-    validateField(title);
+
+function validateField(e) {
+    const field = e.target;
+    updateFieldErrors(field);
+    validateField1(field);
 }
 
-function validateTtagEvent(e) {
-    const ttag =  e.target;
-    updateTtagErrors(ttag); 
-    validateField(ttag);
-}
 
-function validateAssignedEvent(e) {
-    let assigned = e.target;
-    updateAssignedErrors(assigned);
-    validateField(assigned);
-}
+function updateFieldErrors(field) {
+    const content = field.value;
+    let messages = [];
 
-function validateDateEvent(e) {
-    const dateField = e.target;
-    updateDateErrors(dateField);
-    validateField(dateField);
-}
-
-function updateTitleErrors(title) {
-    const content = title.value;
-    let message = '';
-
-    if(content === '') {
-        message = `El campo ${title.id} no puede estar vacío`;
-    } else if((content.length < MIN_CHAR) && content.length > 0) {
-        message = `El campo ${title.id} debe tener al menos ${MIN_CHAR} caracteres`;
-    } else if(content.length > 25) {
-        message = `El campo ${title.id} no puede tener más de 25 caracteres`;
+    if(field.id === 'dateField') {
+        validateDateField(content, messages);
+    }else  {
+        validateTextField(field, content, messages);
     }
 
-    title.setCustomValidity(message);
-}
-
-function updateTtagErrors(ttag) {
-    const content = ttag.value;
-    let message = '';
-
-    if(content === '') {
-        message = `El campo ${ttag.id} no puede estar vacío`;
-    } else if((content.length < 3) && content.length > 0) {
-        message = `El campo ${ttag.id} debe tener al menos ${MIN_CHAR} caracteres`;
-    } else if(content.length > 25) {
-        message = `El campo ${ttag.id} no puede tener más de 25 caracteres`;
+    field.setCustomValidity(messages.length > 0 ? messages.join('. ') : '')
+  
+    // Mostrar mensaje de error personalizado en el DOM
+    if (messages.length > 0) {
+        showErrorMessage(messages, field);
+    } else {
+        deleteErrors(field);
     }
-
-    ttag.setCustomValidity(message)
 }
 
-function updateAssignedErrors(assigned) {
-    const content = assigned.value;
-        let message = '';
-
-        if(content === '') {
-            message = `El campo ${assigned.id} no puede estar vacío`;
-        } else if((content.length <3) && content.length > 0) {
-            message = `El camppo ${assigned.id} debe tener al nenos ${MIN_CHAR} caracteres`;
-        } else if(content.length > 25) {
-            message = `El campo ${assigned.id} no puede tener más de 25 caracteres`;
-        }
-    assigned.setCustomValidity(message);
-}
-
-// Función para actualizar los errores del campo de fecha
-function updateDateErrors(dateField) {
-    const content = dateField.value;
-    let message = '';
-
-    // Verificar si el campo está vacío
-    if(content === '') {
-        message = `El campo ${dateField.id} no puede estar vacío`;
+function validateDateField(content, messages) {
+   
+    if (content === '') {
+        messages.push(`El campo no puede estar vacío`);
     } else {
         const today = new Date();
+        today.setHours(0, 0, 0, 0); // Ignorar la hora para comparación correcta
         const selectedDate = new Date(content);
 
-        // Comprobar que la fecha no sea futura
-        if(selectedDate < today) {
-            message = `La fecha no puede ser en el pasado`;
+        if (selectedDate < today) {
+            messages.push(`La fecha no puede ser en el pasado`);
         }
-    }
-
-    dateField.setCustomValidity(message);
+     }
+    
 }
 
-function reviewErrorsEventsTitle(e) {
-    const title = e.target;
-    updateTitleErrors(title);
-    if(title.validity.valid) {
-        deleteErrors(title);
-    }
-}
+function validateTextField(field, content, messages) {
+    const minLength = field.id === 'ttag' || field.id === 'assigned-to' ? 3: MIN_CHAR;
 
-function reviewErrorsEventsTtag(e) {
-    const ttag = e.target;
-    updateTtagErrors(ttag);
-    if(ttag.validity.valid) {
-        deleteErrors(ttag);
+    if (content === '') {
+        messages.push(`El campo no puede estar vacío`);
+    } else if (content.length < minLength) {
+        messages.push(`El campo debe tener al menos ${minLength} caracteres`);
+    } else if (content.length > 25) {
+        messages.push(`El campo no puede tener más de 25 caracteres`);
     }
 }
 
-function reviewErrorsEventsAssigned(e) {
-    const assigned = e.target;
-    updateAssignedErrors(assigned);
-    if(assigned.validity.valid) {
-        deleteErrors(assigned);   
+function reviewFieldErrors(e) {
+    const field =  e.target;
+    updateFieldErrors(field);
+    if(field.validity.valid) {
+        deleteErrors(field);
     }
 }
 
-// Función para revisar los errores del campo de fecha
-function reviewErrorsEventsDate(e) {
-    const dateField = e.target;
-    updateDateErrors(dateField);
-    if(dateField.validity.valid) {
-        deleteErrors(dateField);
-    }
-}
-
-function validateField(field) {
+function validateField1(field) {
     deleteErrors(field);
     return field.checkValidity();   
 }
 
-function titleEventNotifyError(e) {
-    const title = e.target;
+function notifyFieldError(e) {
+    const field = e.target;
     let messages = [];
 
-    if(title.validity.customError) {
-        messages.push(title.validationMessage);
+    if(field.validity.customError) {
+        messages.push(field.validationMessage);
     }
 
-    showErrorMessage(messages, title);
+    showErrorMessage(messages, field);
 }
 
-function ttagEventNotifyError(e) {
-    const ttag = e.target;
-    let messages = [];
-
-    if(ttag.validity.customError) {
-        messages.push(ttag.validationMessage);
-    }
-
-    showErrorMessage(messages, ttag);
-}
-
-function assignedEventNotifyError(e){
-    const assigned = e.target;
-    let messages = [];
-
-    if(assigned.validity.customError) {
-        messages.push(assigned.validationMessage);
-    }
-
-    showErrorMessage(messages, assigned);
-}
-
-// Función para notificar el error del campo de fecha
-function dateEventNotifyError(e) {
-    const dateField = e.target;
-    let messages = [];
-
-    if(dateField.validity.customError) {
-        messages.push(dateField.validationMessage);
-    }
-
-    showErrorMessage(messages, dateField);
-}
 
 function isErrorField(field) {
     return field.classList.contains(ERROR_CAMPO);
@@ -220,6 +123,9 @@ function deleteErrors(field){
 }
 
 function showErrorMessage(messages, field) {
+    deleteErrors(field);
+
+    if(messages.length === 0) return;
     field.classList.add(ERROR_CAMPO)
 
     let containerMessages = document.createElement('div');
@@ -245,25 +151,23 @@ function insertAfter(referencefield, fieldAdd) {
     }
 }
 
-function validateFormEvent(e) {
-    let form = document.getElementById('task-form').querySelectorAll('input');
+export function validateFormEvent(e) {
+    let form = e.target;
+    let validForm = true;
 
-    for(let i = 0; i<form.length; i++) {
-        if(!form[i].checkValidity()) {
-            form[i].focus();
-            break;
+    // Verificar la validez de cada campo
+    form.querySelectorAll('input').forEach(field => {
+        if (!field.checkValidity()) {
+            validForm = false;
+            field.focus();  // Focalizar en el primer campo inválido
         }
-    }
+    });
 
-    let validForm = validateField(document.getElementById('titulo'));
-    validForm = validateField(document.getElementById('ttag')) && validForm;
-    validForm = validateField(document.getElementById('assigned-to')) && validForm;
-    validForm =  validateField(document.getElementById('dateField')) && validForm;
+    // Validar campos específicos
+    validForm = validateField1(document.getElementById('titulo')) && validForm;
+    validForm = validateField1(document.getElementById('ttag')) && validForm;
+    validForm = validateField1(document.getElementById('assigned-to')) && validForm;
+    validForm = validateField1(document.getElementById('dateField')) && validForm;
 
-    if(validForm) {
-        console.log('Formulario válido');
-    }else{
-        e.preventDefault();
-        console.error('El formulario no ha podidio ser validado debido a un error');
-    }
+    return validForm;
 }

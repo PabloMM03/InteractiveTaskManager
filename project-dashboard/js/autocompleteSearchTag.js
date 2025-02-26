@@ -101,12 +101,12 @@ function updateProgress(step, formType) {
 }
 
 // Animaciones del formulario
+// Animaciones del formulario
 function nextStep(step, formType) {
 	function typeOfStep(stepActive, stepType) {
 		//Siguiente paso
 		let currentStep = document.querySelector(stepActive);
 		let nextStep = document.getElementById(stepType + step);
-
 
 		if (currentStep && nextStep) {
 			currentStep.style.opacity = '0'; // Inicia la animación de desaparición
@@ -126,13 +126,22 @@ function nextStep(step, formType) {
 	}
 
 	//Comprobar de que tipo es el formulario
-
 	if (formType === 'task') {
 		typeOfStep('.step.active', 'step-');
 	} else if (formType === 'goal') {
 		typeOfStep('.step-goal.active', 'step-goal-');
 	}
+
+	// Añadir event listener para evitar que el Enter haga algo
+	const form = document.querySelector(`#${formType}-form`);
+	form.addEventListener('keydown', function (e) {
+		if (e.key === 'Enter') {
+			// Prevenir el comportamiento por defecto de Enter (que normalmente envía el formulario o pasa al siguiente campo)
+			e.preventDefault();
+		}
+	});
 }
+
 
 function previousStep(formType) {
 	//Paso anterior
