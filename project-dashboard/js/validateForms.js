@@ -1,30 +1,33 @@
 /*Validación de formularios*/
 const ERROR_CAMPO = 'error';
 const ERROR_MENSAJES = 'campoError';
-const MIN_CHAR = 8;
+const MIN_CHAR = 5;
 
 
 document.addEventListener('DOMContentLoaded', createListeners)
 
 function createListeners() {
+    // Obtenemos todos los formularios
+    const forms = document.querySelectorAll('form');
 
-    //No validate al formulario
-  const form = document.getElementById('task-form');
-  form.setAttribute('novalidate', true)
+    // Recorremos cada formulario y añadimos los listeners correspondientes
+    forms.forEach(form => {
+        // No validar al formulario
+        form.setAttribute('novalidate', true);
 
-  const fields = form.querySelectorAll('input');
+        const fields = form.querySelectorAll('input');
 
-    fields.forEach(field => {     
+        fields.forEach(field => {     
             field.addEventListener('keyup', validateField, false);
             field.addEventListener('invalid', notifyFieldError, false);
             field.addEventListener('input', reviewFieldErrors, false); 
+        });
+
+        // Añadir el listener de submit para cada formulario
+        form.addEventListener('submit', (e) => validateFormEvent(e, form), false);
     });
-    console.log(fields);
-
-
-    form.addEventListener('submit', validateFormEvent,false);
-
 }
+
 
 
 function validateField(e) {
@@ -38,7 +41,7 @@ function updateFieldErrors(field) {
     const content = field.value;
     let messages = [];
 
-    if(field.id === 'dateField') {
+    if(field.id === 'dateField' || field.id === 'gdate') {
         validateDateField(content, messages);
     }else  {
         validateTextField(field, content, messages);
@@ -71,7 +74,7 @@ function validateDateField(content, messages) {
 }
 
 function validateTextField(field, content, messages) {
-    const minLength = field.id === 'ttag' || field.id === 'assigned-to' ? 3: MIN_CHAR;
+    const minLength = field.id === 'ttag' || field.id === 'assigned-to' || field.id === 'gtag' ? 3: MIN_CHAR;
 
     if (content === '') {
         messages.push(`El campo no puede estar vacío`);
@@ -107,11 +110,7 @@ function notifyFieldError(e) {
 }
 
 
-function isErrorField(field) {
-    return field.classList.contains(ERROR_CAMPO);
-}
-
-function deleteErrors(field){
+export function deleteErrors(field){
 
     field.classList.remove(ERROR_CAMPO);
 
@@ -122,7 +121,7 @@ function deleteErrors(field){
     }
 }
 
-function showErrorMessage(messages, field) {
+export function showErrorMessage(messages, field) {
     deleteErrors(field);
 
     if(messages.length === 0) return;
@@ -151,23 +150,36 @@ function insertAfter(referencefield, fieldAdd) {
     }
 }
 
-export function validateFormEvent(e) {
-    let form = e.target;
+export function validateFormEvent(e, form) {
     let validForm = true;
 
     // Verificar la validez de cada campo
     form.querySelectorAll('input').forEach(field => {
-        if (!field.checkValidity()) {
+        if (updateFieldErrors(field)) {
             validForm = false;
-            field.focus();  // Focalizar en el primer campo inválido
+            field.focus(); // Focalizar en el primer campo inválido
         }
     });
 
-    // Validar campos específicos
-    validForm = validateField1(document.getElementById('titulo')) && validForm;
-    validForm = validateField1(document.getElementById('ttag')) && validForm;
-    validForm = validateField1(document.getElementById('assigned-to')) && validForm;
-    validForm = validateField1(document.getElementById('dateField')) && validForm;
+    // Validar campos específicos según el formulario
+    if (form.id === 'task-form') {
+        validForm = validateField1(document.getElementById('titulo')) && validForm;
+        validForm = validateField1(document.getElementById('ttag')) && validForm;
+        validForm = validateField1(document.getElementById('assigned-to')) && validForm;
+        validForm = validateField1(document.getElementById('dateField')) && validForm;
+    }
+
+    if (form.id === 'goal-form') {
+        // Validar campos específicos de otro formulario (Ejemplo)
+        validForm = validateField1(document.getElementById('gtitle')) && validForm;
+        validForm = validateField1(document.getElementById('gdate')) && validForm;
+        validForm = validateField1(document.getElementById('gtag')) && validForm;
+
+    }
+
+    if (!validForm) {
+        e.preventDefault(); // Prevenir el envío si hay errores
+    }
 
     return validForm;
 }

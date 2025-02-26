@@ -44,7 +44,7 @@ function addTask() {
         form.addEventListener('submit', function (e) {
             e.preventDefault(); // Prevenir envío inmediato
 
-            if (!validateFormEvent(e)) { 
+            if (!validateFormEvent(e, form)) { 
                 return; // Detener la función si hay errores
             }
 
@@ -191,26 +191,38 @@ function deleteTask(index, goalId) {
 
 // Añadir objetivos
 function addGoals() {
-	document.querySelector('#goal-form').addEventListener('submit', function (e) {
-		e.preventDefault();
+		const form = document.querySelector('#goal-form');
 
-		const formData = new FormData(e.target);
-		const data = Object.fromEntries(formData.entries());
-		data.startDate = new Date().toISOString().split('T')[0];
-		data.progress = 0;
-		data.totalTasks = 0;
-		data.completedTasks = 0;
+		// Verificar si ya tiene el evento de submit para evitar duplicados
+		if (!form.dataset.listenerAdded) {
+			form.dataset.listenerAdded = 'true'; // Marcar que ya tiene un listener
+			
+			form.addEventListener('submit', function (e) {
+				e.preventDefault(); // Prevenir envío inmediato
 
-		
+				if (!validateFormEvent(e, form)) { 
+					return; // Detener la función si hay errores
+				}
 
-		const goals = loadGoalsFromStorage();
-		goals.push(data);
-		saveGoalsToStorage(goals);
 
-		loadGoals();
-		e.target.reset();
-		location.reload();
-	});
+			const formData = new FormData(e.target);
+			const data = Object.fromEntries(formData.entries());
+			data.startDate = new Date().toISOString().split('T')[0];
+			data.progress = 0;
+			data.totalTasks = 0;
+			data.completedTasks = 0;
+
+			
+
+			const goals = loadGoalsFromStorage();
+			goals.push(data);
+			saveGoalsToStorage(goals);
+
+			loadGoals();
+			e.target.reset();
+			location.reload();
+		});
+	}
 }
 
 // Cargar objetivos creados

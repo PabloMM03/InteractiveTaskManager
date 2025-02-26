@@ -101,7 +101,6 @@ function updateProgress(step, formType) {
 }
 
 // Animaciones del formulario
-// Animaciones del formulario
 function nextStep(step, formType) {
 	function typeOfStep(stepActive, stepType) {
 		//Siguiente paso
@@ -334,5 +333,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 label.classList.remove("active");
             }
         });
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll("section");
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }else{
+					// entry.target.classList.remove("visible");
+				}
+            });
+        },
+        {
+            threshold: [0, 0.5, 1], // Detecta cuando el 0%, 50% o 100% del elemento es visible
+        }
+    );
+
+    sections.forEach((section) => {
+        observer.observe(section);
     });
 });

@@ -216,7 +216,7 @@
 
 			<div class="containerGoals" id="goalsNav">
 				<!-- Sección del formulario de objetivos -->
-				<section id="goals-form-section">
+				<section id="goals-form-section" class="animatedRtoL">
 					<h2>Crear Nuevo Objetivo</h2>
 					<form id="goal-form">
 						<div class="step-goal active" id="step-goal-1">
@@ -290,7 +290,7 @@
 				</section>
 
 				<!-- Sección donde se mostrarán los objetivos -->
-				<section id="goals-section">
+				<section id="goals-section" class="animatedRtoL">
 					<h2>Lista de Objetivos</h2>
 					<div class="goalScroll">
 						<ul id="goals-list">
@@ -306,8 +306,9 @@
 						<p>Tareas completadas: <span id="completedTasks">0</span></p>
 						<p>Progreso total: <span id="completedPercentage">0</span>%</p>
 					</div>
-					<canvas id="taskChart"></canvas>
-
+					<section>					
+						<canvas id="taskChart"></canvas>
+					</section>
 					<!-- Modal -->
 					<div id="modal" class="modal-overlay">
 						<div class="modal-content">
@@ -318,20 +319,23 @@
 					</div>
 					<h2 class="tagChartH2">Etiquetas Activas</h2>
 
-					<div class="secondChart">
-						<canvas id="tagChart"></canvas>
-						<!-- <iframe width="640" height="360"
-							src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6" 
-							frameborder="0" allowfullscreen>
-						</iframe> -->
-						<p id="noDataMessage" class="no-data-message">
-							No hay datos registrados por el momento
-						</p>
+					<section class="animatedLtoR">
 
-						<video width="640" height="360" controls>
-							<source src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6">
-						</video>
-					</div>
+						<div class="secondChart">
+							<canvas id="tagChart"></canvas>
+							<!-- <iframe width="640" height="360"
+								src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6" 
+								frameborder="0" allowfullscreen>
+							</iframe> -->
+							<p id="noDataMessage" class="no-data-message">
+								No hay datos registrados por el momento
+							</p>
+
+							<video width="640" height="360" controls>
+								<source src="https://www.youtube.com/watch?v=av2yfDokA6k&list=RDgT4IVJRjw4w&index=6">
+							</video>
+						</div>
+					</section>
 				</div>
 		</main>
 

@@ -264,7 +264,7 @@ input[type='date']:hover,
 .labellineDate1 {
 	position: absolute;
 	padding:0 0 0 100px;
-	margin: 0 40px;
+	margin: 0 30px;
 	background-color: white;
 	transition: 0.2s ease;
 	transform: translate(0, 0), scale(1);
@@ -306,7 +306,7 @@ input[type='date']:valid + .labellineDate1 {
 	height: 30px;
 	transform: translate(-22px, -23px) scale(0.88);
 	z-index: 1111;
-	padding: 0 12px 0 0;
+	padding: 0 12px;
 	left: -5px;
  }
 
@@ -384,7 +384,16 @@ input[type='date']:valid + .labellineDate1 {
     bottom: -20px; /* Lo posiciona debajo del input */
     left: 0;
     width: 100%;
+	/* opacity: 0;
+	transform: translateX(10px);
+	transition: opacity 0.3s ease, transform 0.3s ease; */
 }
+
+/* .campoError.show {
+	opacity: 1;
+	transform: translateX(0);
+} */
+
 
 /* Oculta el mensaje de error cuando está vacío */
 .campoError:empty {
