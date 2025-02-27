@@ -124,3 +124,11 @@ section.visible {
 	opacity: 1;
     transform: translateX(0);
 }
+
+/*Mensaje personalizado para las notificacion*/
+.custom-alert {
+    font-size: 15px;
+    border-radius: 15px; 
+	color: black;
+	background: white;
+}

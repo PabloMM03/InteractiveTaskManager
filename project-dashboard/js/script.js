@@ -105,13 +105,31 @@ function addTask() {
             hiddenField.style.display = 'block';  
             setTimeout(() => {
                 hiddenField.style.transform = 'translateX(600px) translateY(100px)';
-            }, 10); 
+            }, 50); 
 
 
 			//Temporizador después de crear animación
 			setTimeout(function() {
-				location.reload();
+				Swal.fire({
+					title: '¡Éxito!',
+					text: 'Tarea añadida',
+					icon: 'success',
+					showConfirmButton: false,  
+					timer: 3000,  
+					width: '200px', 
+					position: 'center',  
+					customClass: {
+						popup: 'custom-alert'  
+					}
+				});
+			
+				// Recargar la página después de que la alerta desaparezca
+				setTimeout(() => {
+					location.reload();
+				}, 3100);
 			}, 2500);
+			
+			
 
 		});
    	 }
@@ -203,6 +221,22 @@ function deleteTask(index, goalId) {
 	renderTasksChart();
 	renderTagChart();
 
+	//Notificación eliminar tareas
+	setTimeout(function() {
+		Swal.fire({
+			title: '¡Éxito!',
+			text: 'Tarea eliminada',
+			icon: 'success',
+			showConfirmButton: false,  
+			timer: 3000,  
+			width: '200px', 
+			position: 'center',  
+			customClass: {
+				popup: 'custom-alert'  
+			}
+		});
+	}, 500);
+
 	return wasChecked;
 }
 
@@ -257,11 +291,26 @@ function addGoals() {
 				hiddenField.style.transform = 'translateX(500px) translateY(150px)';
 			}, 10); 
 
-
-			// //Temporizador después de crear animación
+			//Notificación de añadir 
 			setTimeout(function() {
-				location.reload();
-			}, 2600);
+				Swal.fire({
+					title: '¡Éxito!',
+					text: 'Objetivo añadido',
+					icon: 'success',
+					showConfirmButton: false,  
+					timer: 3000,  
+					width: '200px', 
+					position: 'center',  
+					customClass: {
+						popup: 'custom-alert'  
+					}
+				});
+			
+				// Recargar la página después de que la alerta desaparezca
+				setTimeout(() => {
+					location.reload();
+				}, 3100);
+			}, 2500);
 
 		});
 	}
@@ -330,7 +379,7 @@ function loadGoals() {
 		menu.append(createOption(goal.gtitle, index));
 	});
 
-	//Si no hay tareas mostrar el mensaje
+	//Si no hay objetivos mostrar el mensaje
 	if(goalsList.children.length === 0) {
 		const message = document.createElement('p');
 		message.textContent = 'No tienes objetivos pendientes';
@@ -363,6 +412,22 @@ function deleteGoal(index) {
 
 	loadGoals();
 	loadTask(goalId);
+
+	//Notificación eliminar objetivos
+	setTimeout(function() {
+		Swal.fire({
+			title: '¡Éxito!',
+			text: 'Objetivo eliminado',
+			icon: 'success',
+			showConfirmButton: false,  
+			timer: 3000,  
+			width: '200px', 
+			position: 'center',  
+			customClass: {
+				popup: 'custom-alert'  
+			}
+		});
+	}, 500);
 }
 
 // Actualizar progreso de objetivos
