@@ -41,6 +41,9 @@ function updateFieldErrors(field) {
     const content = field.value;
     let messages = [];
 
+    // si los campos tienen estos dos ids no mostrar errores
+    if(field.id === 'task-info' || field.id === 'notifications' ||field.id === 'goal-info') { return; }
+
     if(field.id === 'dateField' || field.id === 'gdate') {
         validateDateField(content, messages);
     }else  {
@@ -124,7 +127,10 @@ export function deleteErrors(field){
 export function showErrorMessage(messages, field) {
     deleteErrors(field);
 
-    if(messages.length === 0) return;
+    if(messages.length === 0){
+        return;
+    } 
+
     field.classList.add(ERROR_CAMPO)
 
     let containerMessages = document.createElement('div');
