@@ -170,6 +170,7 @@
 									type="checkbox"
 									id="notifications"
 									name="notifications"
+									disabled="true"
 								/>
 								<label for="notifications" class="lbl-switch"></label>
 								<label for="notifications" class="lbl-switch2"
@@ -183,6 +184,11 @@
 							>
 								Crear tarea
 							</button>
+
+							<div id="hidden-field" style="display: none; overflow: hidden; transition: transform 2s;">
+								<input type="text" id="task-info" readonly/>
+							</div>
+
 						</div>
 
 						<!-- <div class="step" id="step-5">
@@ -272,6 +278,10 @@
 							<button class="form-buttons" type="submit">
 								Agregar Objetivo
 							</button>
+
+							<div id="hidden-field-goal" style="display: none; overflow: hidden; transition: transform 2s;">
+								<input type="text" id="goal-info" readonly/>
+							</div>
 						</div>
 
 						<div class="progress-container">

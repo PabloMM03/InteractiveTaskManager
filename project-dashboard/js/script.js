@@ -83,17 +83,38 @@ function addTask() {
                 saveGoalsToStorage(goals);
             }
 
-            loadTask(data.goalId);
+            setTimeout(() => {
+				loadTask(data.goalId);
+			},2150)
+
             updateGoalProgress(data.goalId);
 
             //Actualizar gráficos después de añadir tarea
             renderTasksChart();
             renderTagChart();
+		
 
             e.target.reset();
-			 location.reload();
-        });
-    }
+
+			//Añadir datos y animación al crear tarea 
+            const taskInfoField = document.querySelector('#task-info');
+            taskInfoField.value = `${data.title} - ${data.priority} - ${data.due_date}`;			
+
+            const hiddenField = document.querySelector('#hidden-field');
+
+            hiddenField.style.display = 'block';  
+            setTimeout(() => {
+                hiddenField.style.transform = 'translateX(600px) translateY(100px)';
+            }, 10); 
+
+
+			//Temporizador después de crear animación
+			setTimeout(function() {
+				location.reload();
+			}, 2500);
+
+		});
+   	 }
 }
 
 
@@ -218,9 +239,30 @@ function addGoals() {
 			goals.push(data);
 			saveGoalsToStorage(goals);
 
-			loadGoals();
+			setTimeout(() => {
+				loadGoals();
+			}, 2200);
+			
 			e.target.reset();
-			location.reload();
+
+
+			//Añadir datos y animación al crear tarea 
+			const taskInfoField = document.querySelector('#goal-info');
+			taskInfoField.value = `${data.gtitle} - ${data.gtag} - ${data.gdate}`;			
+
+			const hiddenField = document.querySelector('#hidden-field-goal');
+
+			hiddenField.style.display = 'block';  
+			setTimeout(() => {
+				hiddenField.style.transform = 'translateX(500px) translateY(150px)';
+			}, 10); 
+
+
+			// //Temporizador después de crear animación
+			setTimeout(function() {
+				location.reload();
+			}, 2600);
+
 		});
 	}
 }
