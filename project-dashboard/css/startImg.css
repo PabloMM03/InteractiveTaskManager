@@ -6,7 +6,7 @@
     align-items: center;    
     opacity: 0;
     transform: translateY(-60px);
-    animation: fadeIn 1.5s ease-out forwards;
+    animation: fadeIn 2s ease-out forwards;
     margin-bottom: 200px;
 }
 /*Texto*/ 
@@ -41,7 +41,7 @@
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-60px);
+        transform: translateY(-100px);
     }
     to {
         opacity: 1;
