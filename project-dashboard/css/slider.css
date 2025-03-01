@@ -1,0 +1,82 @@
+/* Contenedor del slider */
+.slider-container {
+    position: relative;
+    width: 40%;
+    margin: auto;
+    overflow: hidden; /* Oculta los elementos fuera del área visible */
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+  }
+  
+  /* Contenedor de las slides */
+  .slider {
+    display: flex;
+    transition: transform 0.5s ease; /* Deslizar suavemente */
+  }
+  
+  /* Cada slide */
+  .slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+	background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    height: 500px;
+    max-height: 500px;
+    max-width: 100%;
+    overflow-y: auto;
+    flex: 0 0 100%;
+  }
+  
+  h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .slide p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  /* Estilo de los botones de navegación */
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: black;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 25px;
+    z-index: 10;
+    width: 10%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .slider-container:hover .prev,
+  .slider-container:hover .next {
+    opacity: 1;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  /* Opcional: añadir efecto hover a los botones */
+  .prev:hover, .next:hover {
+    color: #007bff;
+  }
+  
+  .slide ul li {
+    list-style: none;
+    margin-bottom: 20px;
+  }
