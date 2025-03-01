@@ -5,6 +5,7 @@
 @import url('charts.css');
 @import url('startImg.css');
 @import url('footer.css');
+@import url('slider.css');
 
 * {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -131,4 +132,84 @@ section.visible {
     border-radius: 15px; 
 	color: black;
 	background: white;
+}
+
+/*Notificaciones de vencimiento*/
+
+.notifications-dueDate {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 120px;
+    height: 120px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+    font-size: 14px;
+	z-index: 10000;
+}
+
+.notifications-dueDate:hover {
+    width: 250px;
+    height: auto;
+    min-height: 150px;
+    max-height: 250px;
+    overflow-y: auto;
+    background: rgba(50, 50, 50, 0.95);
+    color: white;
+}
+
+.notifications-dueDate .header {
+    display: flex; /* Esto alinea el texto y el botón en fila */
+    justify-content: center; /* Espacia el texto y el botón */
+    margin-bottom: 10px; /* Espacio entre el header y el listado de notificaciones */
+    align-items: center; /* Centra verticalmente el texto y el botón */
+}
+
+.notifications-dueDate div {
+    font-weight: bold;
+    text-align: left; /* Alineación del texto "Vencimiento" */
+}
+
+#clearNotifications {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+	margin-left: 10px;
+}
+
+#clear {
+    width: 20px;
+    height: 20px;
+}
+
+.notifications-dueDate ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.notifications-dueDate ul li {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 13px;
+    word-wrap: break-word;
+}
+
+.notifications-dueDate ul li:hover {
+    background: rgba(255, 255, 255, 0.2);
 }

@@ -220,6 +220,33 @@
 				</section>
 			</div>
 
+			<section class="animatedLtoR">	
+			<!-- Slider de tareas-->
+				<div class="slider-container">
+					<div class="slider">
+					<div class="slide">
+						<h2>Vencimiento semanal</h2>
+						<p>Tareas con fecha de vencimiento esta semana.</p>
+						<ul class="dueDateWeekly"></ul>
+					</div>
+					<div class="slide">
+						<h2>Prioridad Alta</h2>
+						<p>Tareas con nivel de prioridad alta.</p>
+						<ul class="priorityHigh"></ul>
+					</div>
+					<div class="slide">
+						<h2>Tareas sin completar</h2>
+						<p>Tareas activas sin completar por el momento.</p>
+						<ul class="noChecked"></ul>
+					</div>
+					</div>
+				
+					<button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+					<button class="next" onclick="moveSlide(1)">&#10095;</button>
+				</div>
+			</section> 
+
+
 			<div class="containerGoals" id="goalsNav">
 				<!-- Sección del formulario de objetivos -->
 				<section id="goals-form-section" class="animatedRtoL">
@@ -346,6 +373,16 @@
 							</video>
 						</div>
 					</section>
+				</div>
+
+				<div class="notifications-dueDate">
+					<div class="header">
+						<div>Vencimiento</div>
+						<button id="clearNotifications">
+							<img src="/project-dashboard/assets/delete.gif" id="clear" alt="Limpiar Notificaciones">
+						</button>
+					</div>	
+					<ul></ul>
 				</div>
 		</main>
 

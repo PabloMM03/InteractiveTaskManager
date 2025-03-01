@@ -359,3 +359,50 @@ document.addEventListener("DOMContentLoaded", function () {
         observer.observe(section);
     });
 });
+
+
+let currentSlide = 0;
+let slideInterval;
+
+function moveSlide(direction = 1) {
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+
+  // Calcular el índice del siguiente slide
+  currentSlide += direction;
+
+  // Si llega al final, vuelve al primer slide
+  if (currentSlide >= totalSlides) {
+    currentSlide = 0;
+  } else if (currentSlide < 0) {
+    currentSlide = totalSlides - 1;
+  }
+
+  // Mover el slider
+  const slider = document.querySelector('.slider');
+  slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+// Función para iniciar el slider automático
+function startSlider() {
+	slideInterval = setInterval(() => {
+	  moveSlide();
+	}, 3000);
+  }
+
+//Detener slider
+
+function stopSlider() {
+	clearInterval(slideInterval);
+}
+
+startSlider();
+
+// Obtener el contenedor del slider
+const sliderContainer = document.querySelector('.slider-container');
+
+// Pausar cuando el mouse esté sobre el slider
+sliderContainer.addEventListener('mouseover', stopSlider);
+
+// Reanudar cuando el mouse salga
+sliderContainer.addEventListener('mouseout', startSlider);

@@ -20,12 +20,13 @@ import {
 } from './validateForms.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-	loadTask(); // Cargar tareas guardadas al iniciar
-	addTask(); // Agregar eventos al formulario
-	loadGoals(); // Cargar objetivos guardados al iniciar
-	addGoals(); // Agregar eventos al formulario
+	loadTask(); 
+	addTask(); 
+	loadGoals(); 
+	addGoals(); 
 	renderTasksChart();
-
+	slider();
+	
 	//addSampleTask(); // Añadir tarea simulada
 });
 
@@ -459,8 +460,6 @@ function deleteByDueDate() {
 	const formattedToday = today.toISOString().split('T')[0];
 
 	const activeTasks = tasks.filter((task) => task.due_date >= formattedToday);
-
-
 	//Goals
 
 	const goals = loadGoalsFromStorage();
@@ -491,3 +490,223 @@ function addSampleTask() {
 
 	saveTasksToStorage(tasks); // Guardar las tareas en el localStorage
 }
+
+/*Mostrar notificaciones de vencimiento x dias antes de su finalización */
+function dueDateNotifications() {
+	const tasks = loadTasksFromStorage();
+
+	const tasksNotCompleted = tasks.filter(task => !task.isChecked && task.notifications && !task.notified);
+
+	const today = new Date();
+	const todayStr = today.toISOString().split('T')[0];
+
+	// Almacenar tareas por fechas 
+	const tasksReminder5days = [];
+	const tasksReminder2days = [];
+	const tasksReminder1day = [];
+
+	tasksNotCompleted.forEach(task => {
+		if (!task.due_date) return;
+
+		const dueDate = new Date(task.due_date);
+
+		// Calcular recordatorios
+		const reminder5Days = new Date(dueDate);
+		reminder5Days.setDate(dueDate.getDate() - 5);
+
+		const reminder2Days = new Date(dueDate);
+		reminder2Days.setDate(dueDate.getDate() - 2);
+
+		const reminder1Day = new Date(dueDate);
+		reminder1Day.setDate(dueDate.getDate() - 1);
+
+		// Almacenar tareas con fechas de notificación
+		tasksReminder5days.push({ task, reminderDate: reminder5Days });
+		tasksReminder2days.push({ task, reminderDate: reminder2Days });
+		tasksReminder1day.push({ task, reminderDate: reminder1Day });
+	});
+
+	function checkNotifications() {
+		const notificationsList = document.querySelector('.notifications-dueDate ul');
+		if (!notificationsList) {
+			return;
+		}
+
+		// Limpiar mensajes previos antes de añadir nuevos
+		notificationsList.innerHTML = '';
+
+		// Función para añadir mensajes
+		function addNotification(task, days) {
+			const li = document.createElement('li');
+			li.textContent = `🔔 ${task.title} (vence en ${days} días)`;
+			notificationsList.appendChild(li);
+		}
+
+		let hasNotifications = false;
+		// Agregar notificaciones según la fecha
+		tasksReminder5days.forEach(({ task, reminderDate }) => {
+			if (reminderDate.toISOString().split('T')[0] === todayStr) {
+				addNotification(task, 5);
+				hasNotifications = true;
+			}
+		});
+
+		tasksReminder2days.forEach(({ task, reminderDate }) => {
+			if (reminderDate.toISOString().split('T')[0] === todayStr) {
+				addNotification(task, 2);
+				hasNotifications = true;
+			}
+		});
+
+		tasksReminder1day.forEach(({ task, reminderDate }) => {
+			if (reminderDate.toISOString().split('T')[0] === todayStr) {
+				addNotification(task, 1);
+				hasNotifications = true;
+			}
+		});
+
+		//Si no hay notificaciones, mostrar mensaje
+		if(!hasNotifications) {
+			const noNotificationsMessage = document.createElement('li');
+			noNotificationsMessage.textContent = 'Sin notificaciones';
+			notificationsList.appendChild(noNotificationsMessage);
+		}
+
+
+	}
+
+	checkNotifications();
+}
+
+dueDateNotifications();
+
+
+//Eliminar notificaciones 
+document.getElementById("clearNotifications").addEventListener("click", () => {
+    const notificationsList = document.querySelector(".notifications-dueDate ul");
+
+    notificationsList.innerHTML = "";
+
+    // Marcar todas las tareas como notificadas
+    const tasks = loadTasksFromStorage().map(task => {
+        if (task.notifications && !task.isChecked) {
+            task.notified = true;  // Nueva propiedad
+        }
+        return task;
+    });
+
+    // Guardar en localStorage
+  	 saveTasksToStorage(tasks);
+
+	 //Temporizador después de crear animación
+	 setTimeout(function() {
+		Swal.fire({
+			title: '¡Éxito!',
+			text: 'Panel vacio',
+			icon: 'success',
+			showConfirmButton: false,  
+			timer: 1000,  
+			width: '200px', 
+			position: 'center',  
+			customClass: {
+				popup: 'custom-alert'  
+			}
+		});
+	
+		// Recargar la página después de que la alerta desaparezca
+		setTimeout(() => {
+			location.reload();
+		}, 1000);
+	}, 500);
+});
+
+
+function slider() {
+	const tasks = loadTasksFromStorage();
+
+	//Tareas con prioridad alta
+	const priorityHigh = tasks.filter((task) => task.priority === 'Alta');
+	const ulPriority = document.querySelector('.priorityHigh');
+
+	priorityHigh.forEach((task) => {
+		const liPriority = document.createElement('li');
+		const spanPriority = document.createElement('span');
+		const noti = task.notifications ? `/project-dashboard/assets/check-mark.png` : `/project-dashboard/assets/error.png`;
+
+		//Imagen muestra notificacion activa
+		const img = document.createElement('img');
+		img.src = noti;
+		img.alt = 'Notificación';
+		img.style.width = '20px';
+		img.style.height = '20px';
+		img.style.marginLeft = '20px';
+
+		spanPriority.textContent = `${task.title}, ${task.due_date}, ${task.ttag}, ${task.assigned_to}`;
+		liPriority.appendChild(spanPriority);
+		liPriority.appendChild(img);
+		ulPriority.appendChild(liPriority);
+	});
+
+
+	//Tareas no completadas
+
+	const noChecked = tasks.filter((task) => !task.isChecked);
+	const ulNoChecked = document.querySelector('.noChecked');
+
+	noChecked.forEach((task) => {
+		const liNoChecked = document.createElement('li');
+		const spanNoChecked = document.createElement('span');
+		const noti = task.notifications ? `/project-dashboard/assets/check-mark.png` : `/project-dashboard/assets/error.png`;
+
+		//Imagen muestra notificacion activa
+		const img = document.createElement('img');
+		img.src = noti;
+		img.alt = 'Notificación';
+		img.style.width = '20px';
+		img.style.height = '20px';
+		img.style.marginLeft = '20px';
+
+		spanNoChecked.textContent = `${task.title}, ${task.due_date}, ${task.ttag}, ${task.assigned_to}`;
+		liNoChecked.appendChild(spanNoChecked);
+		liNoChecked.appendChild(img);
+		ulNoChecked.appendChild(liNoChecked);
+
+	});
+
+
+	//Tareas con fecha de vencimiento en esta semana
+
+	const today = new Date();
+	const inOneWeek = new Date();
+	inOneWeek.setDate(today.getDate() + 7);
+	
+	
+	const tasksInWeekly = tasks.filter((task) => {
+		const taskDate = new Date(task.due_date);
+		return taskDate >= today && taskDate <= inOneWeek;
+	});
+
+	const ulDueDateWeekly = document.querySelector('.dueDateWeekly');
+
+	tasksInWeekly.forEach((task) => {
+		const liDueDateWeekly = document.createElement('li');
+		const spanDueDateWeekly = document.createElement('span');
+		const noti = task.notifications ? `/project-dashboard/assets/check-mark.png` : `/project-dashboard/assets/error.png`;
+
+		//Imagen muestra notificacion activa
+		const img = document.createElement('img');
+		img.src = noti;
+		img.alt = 'Notificación';
+		img.style.width = '20px';
+		img.style.height = '20px';
+		img.style.marginLeft = '20px';
+
+		spanDueDateWeekly.textContent = `${task.title}, ${task.due_date}, ${task.ttag}, ${task.assigned_to}`;
+		liDueDateWeekly.appendChild(spanDueDateWeekly);
+		liDueDateWeekly.appendChild(img);
+		ulDueDateWeekly.appendChild(liDueDateWeekly);
+
+	})
+
+}
+
