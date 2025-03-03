@@ -336,6 +336,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+//Animación secciones 
 
 document.addEventListener("DOMContentLoaded", function () {
     const sections = document.querySelectorAll("section");
@@ -360,49 +361,55 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+//Animación de sliders sections
 
-let currentSlide = 0;
-let slideInterval;
+document.addEventListener("DOMContentLoaded", function () {
 
-function moveSlide(direction = 1) {
-  const slides = document.querySelectorAll('.slide');
-  const totalSlides = slides.length;
+	//COnfiguracion de sliders con respectivas clases
+	const slidersConfig = [
+		{container: '.slider-container', slider: '.slider', slide: '.slide'},
+		{container: '.slider-container-phrases', slider: '.slider-phrases', slide: '.slide-phrase'}
+	]
 
-  // Calcular el índice del siguiente slide
-  currentSlide += direction;
+	slidersConfig.forEach((config, index) => {
+		const sliderContainer = document.querySelector(config.container);
+		if(!sliderContainer) return; // SI  o existe el slider , ignoramos
 
-  // Si llega al final, vuelve al primer slide
-  if (currentSlide >= totalSlides) {
-    currentSlide = 0;
-  } else if (currentSlide < 0) {
-    currentSlide = totalSlides - 1;
-  }
+		const slider = sliderContainer.querySelector(config.slider);
+		const slides = sliderContainer.querySelectorAll(config.slide);
+		const totalSlides = slides.length;
+		let currentSlide = 0;
+		let slideInterval;
 
-  // Mover el slider
-  const slider = document.querySelector('.slider');
-  slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-}
+		//cambiar de slide
+		function moveSlide(direction = 1){
+			currentSlide += direction;
 
-// Función para iniciar el slider automático
-function startSlider() {
-	slideInterval = setInterval(() => {
-	  moveSlide();
-	}, 3000);
-  }
+			if (currentSlide >= totalSlides) currentSlide = 0;
+			else if (currentSlide < 0) currentSlide = totalSlides - 1;
+			slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+		}
 
-//Detener slider
+		//Iniciar slider automatico
+		function startSlider() {
+			slideInterval = setInterval(() => moveSlide(), 3000);
+		}
 
-function stopSlider() {
-	clearInterval(slideInterval);
-}
+		//Parar slider al posar encima el ratón
+		function stopSlider() {
+			clearInterval(slideInterval);
+		}
 
-startSlider();
+		sliderContainer.addEventListener('mouseover', stopSlider);
+		sliderContainer.addEventListener('mouseout', startSlider);
 
-// Obtener el contenedor del slider
-const sliderContainer = document.querySelector('.slider-container');
+		const prevButton = sliderContainer.querySelector('.prev');
+		const nextButton = sliderContainer.querySelector('.next');
 
-// Pausar cuando el mouse esté sobre el slider
-sliderContainer.addEventListener('mouseover', stopSlider);
+		if(prevButton) prevButton.addEventListener('click', () => moveSlide(-1));
+		if(nextButton) nextButton.addEventListener('click', () => moveSlide(1));
 
-// Reanudar cuando el mouse salga
-sliderContainer.addEventListener('mouseout', startSlider);
+		startSlider();
+	});
+});
+

@@ -9,10 +9,30 @@
     margin-top: 100px;
   }
   
+.slider-container-phrases {
+  position: relative;
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.slider-container-phrases:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
   /* Contenedor de las slides */
   .slider {
     display: flex;
     transition: transform 0.5s ease; /* Deslizar suavemente */
+  }
+
+  .slider-phrases {
+    display: flex;
+    transition: transform 0.5s ease;
+  
   }
   
   /* Cada slide */
@@ -30,13 +50,24 @@
     overflow-x: hidden;
     flex: 0 0 100%;
   }
-  
+
+  .slide-phrase {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+    height: 200px;
+  }
+
+
+
+/*   
   h2:not(.slideH2):hover {
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 10px;
     transform: scale(1.1);
-  }
+  } */
 
   .slide p {
     font-size: 16px;
@@ -45,6 +76,13 @@
     margin-bottom: 50px;
   }
   
+  .slide-phrase p {
+    font-size: 16px;
+    font-weight: bold;
+    color: gray;
+    margin-bottom: 50px;
+  }
+
   /* Estilo de los botones de navegación */
   .prev, .next {
     position: absolute;
@@ -63,7 +101,10 @@
   }
 
   .slider-container:hover .prev,
-  .slider-container:hover .next {
+  .slider-container:hover .next,
+  .slider-container-phrases:hover .prev,
+  .slider-container-phrases:hover .next
+   {
     opacity: 1;
   }
   
