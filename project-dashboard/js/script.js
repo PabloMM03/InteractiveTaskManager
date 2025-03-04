@@ -105,7 +105,7 @@ function addTask() {
 
             hiddenField.style.display = 'block';  
             setTimeout(() => {
-                hiddenField.style.transform = 'translateX(600px) translateY(100px)';
+                hiddenField.style.transform = 'translateX(650px) translateY(100px)';
             }, 50); 
 
 

@@ -51,6 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function filterTags(inputId, suggestionsId) {
 	const input = document.getElementById(inputId);
+
+	if(!input) return;
 	const filter = input.value.toLowerCase();
 	const suggestions = document.getElementById(suggestionsId);
 
@@ -336,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-//Animación secciones 
+//Animación secciones scroll
 
 document.addEventListener("DOMContentLoaded", function () {
     const sections = document.querySelectorAll("section");

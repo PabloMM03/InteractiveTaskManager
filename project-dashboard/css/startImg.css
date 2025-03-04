@@ -7,7 +7,7 @@
     opacity: 0;
     transform: translateY(-60px);
     animation: fadeIn 2s ease-out forwards;
-    margin-bottom: 200px;
+    margin-bottom: 50px;
 }
 /*Texto*/ 
 .headerText {
