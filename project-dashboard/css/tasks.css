@@ -67,8 +67,8 @@ section#form-section {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background: #007bff;
-	color: white;
+	background: ghostwhite;
+	color: black;
 	padding: 10px;
 	margin-bottom: 5px;
 	border-radius: 5px;
@@ -122,7 +122,7 @@ section#form-section {
   }
   
   /* Media Queries */
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
 	form#task-form {
 	  width: 90%;
 	  margin: 0 auto;
@@ -140,6 +140,38 @@ section#form-section {
   
 	section#task-section ul li span {
 	  max-width: 200px;
+	}
+  }
+  
+  @media (max-width: 768px) {
+	form#task-form {
+	  width: 100%;
+	  padding: 1rem;
+	}
+  
+	section#task-section {
+	  width: 100%;
+	  margin-top: 30px;
+	}
+  
+	section#task-section ul li {
+	  margin-right: 10px;
+	  margin-left: 10px;
+	  font-size: 14px; /* Reducir el tamaño de la fuente */
+	}
+  
+	section#task-section ul li button {
+	  width: 80px;
+	  height: 40px;
+	}
+  
+	section#task-section ul li span {
+	  max-width: 150px;
+	}
+  
+	#task-list p {
+	  font-size: 14px;
+	  margin-top: 50px;
 	}
   }
   

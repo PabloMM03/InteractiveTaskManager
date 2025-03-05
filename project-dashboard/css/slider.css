@@ -1,7 +1,8 @@
 /* Contenedor del slider */
 .slider-container {
   position: relative;
-  width: 40%;
+  width: 100%;
+  max-width: 1200px;
   margin: auto;
   overflow: hidden;
   border-radius: 20px;
@@ -11,7 +12,8 @@
 
 .slider-container-phrases {
   position: relative;
-  width: 80%;
+  width: 100%;
+  max-width: 1200px;
   margin: auto;
   overflow: hidden;
   margin-top: 100px;
@@ -59,7 +61,6 @@
   flex: 0 0 100%;
   height: 200px;
 }
-
 
 /* Estilos de los botones de navegación */
 .prev, .next {
@@ -119,93 +120,91 @@
 /* Responsive */
 @media (max-width: 1200px) {
   .slider-container {
-      width: 80%;
+    width: 90%;
   }
 
   .slider-container-phrases {
-      width: 90%;
+    width: 90%;
   }
 
   .slide {
-      height: 400px; 
+    height: 400px; 
   }
 
   .slide-phrase {
-      height: 150px; 
+    height: 150px; 
   }
 
   .prev, .next {
-      font-size: 20px; 
-      width: 12%;
+    font-size: 20px; 
+    width: 12%;
   }
 
   .slide p {
-      font-size: 14px; 
+    font-size: 14px; 
   }
 
   .slide-phrase p {
-      font-size: 14px; 
+    font-size: 14px; 
   }
 }
 
 @media (max-width: 768px) {
   .slider-container {
-    left: 40px;
-      width: 100%;
-      margin-top: 50px;
+    width: 95%;
+    margin-top: 50px;
   }
 
   .slider-container-phrases {
-      left: 40px;
-      width: 100%;
-      margin-top: 50px;
+    width: 95%;
+    margin-top: 50px;
   }
 
   .slide {
-      height: 400px; 
+    height: 350px; 
   }
 
   .slide-phrase {
-      height: 150px; 
+    height: 120px; 
   }
 
   .prev, .next {
-      font-size: 18px; 
-      width: 15%;
+    font-size: 18px; 
+    width: 15%;
   }
 
   .slide p {
-      font-size: 12px; 
+    font-size: 12px; 
   }
 
   .slide-phrase p {
-      font-size: 12px; 
+    font-size: 12px; 
   }
 }
 
 @media (max-width: 480px) {
   .slider-container {
-      margin-top: 30px;
+    margin-top: 30px;
   }
 
   .prev, .next {
-      font-size: 16px; 
-      width: 20%;
+    font-size: 16px; 
+    width: 20%;
   }
 
   .slide {
-      height: 300px; 
+    height: 300px; 
   }
 
   .slide-phrase {
-      height: 120px;
+    height: 120px;
   }
 
   .slide p {
-      font-size: 10px; 
+    font-size: 10px; 
   }
 
   .slide-phrase p {
-      font-size: 10px; 
+    font-size: 10px; 
   }
 }

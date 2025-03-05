@@ -1,4 +1,4 @@
-/*Cabecera principal*/
+/* Cabecera principal */
 .headerStart {
     margin-top: 150px;
     display: flex;
@@ -10,7 +10,7 @@
     margin-bottom: 50px;
 }
 
-/*Texto*/ 
+/* Texto */
 .headerText {
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
     width: 300px;
 }
 
-/*Video*/
+/* Video */
 .headerVideo {
     display: flex;
     position: relative;
@@ -38,7 +38,7 @@
     margin-left: 90px;
 }
 
-/*animación mostrar principal*/
+/* Animación mostrar principal */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -51,7 +51,7 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .headerStart {
         flex-direction: column; 
         margin-top: 80px;
@@ -65,7 +65,7 @@
 
     .headerText h1 {
         width: auto;
-        font-size: 1.8rem; 
+        font-size: 2rem; 
     }
 
     .headerVideo {
@@ -85,9 +85,34 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .headerStart {
         margin-top: 60px;
+        margin-bottom: 20px;
+    }
+
+    .headerText h1 {
+        font-size: 1.8rem;
+        padding: 0 10px;
+    }
+
+    .headerVideo {
+        margin-top: 10px;
+    }
+
+    .homeVideo {
+        width: 100%;
+    }
+
+    .headerVideo img {
+        max-width: 0%; 
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .headerStart {
+        margin-top: 50px;
         margin-bottom: 20px;
     }
 
