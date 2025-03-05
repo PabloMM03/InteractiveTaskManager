@@ -384,16 +384,7 @@ input[type='date']:valid + .labellineDate1 {
     bottom: -20px; 
     left: 0;
     width: 100%;
-	/* opacity: 0;
-	transform: translateX(10px);
-	transition: opacity 0.3s ease, transform 0.3s ease; */
 }
-
-/* .campoError.show {
-	opacity: 1;
-	transform: translateX(0);
-} */
-
 
 /* Oculta el mensaje de error cuando está vacío */
 .campoError:empty {
@@ -449,4 +440,50 @@ input[type='date']:valid + .labellineDate1 {
 	max-width: 300px;
 	top: 10px;
 	left: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+	.labellineDate {
+		font-size: 0.7rem;
+	}
+
+    button {
+        width: auto;
+        max-width: 300px;
+    }
+
+    .progress-container {
+        width: 100%;
+        padding: 5px;
+        position: relative;
+    }
+
+    .menu {
+        max-height: 150px;
+        font-size: 0.9rem;
+    }
+
+    .step, .step-goal {
+        padding: 10px;
+    }
+
+    .select {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu {
+        width: 90%;
+    }
+
+    .progress-container {
+        text-align: center;
+    }
+
+    .select {
+        font-size: 0.85rem;
+    }
 }

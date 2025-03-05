@@ -1,95 +1,184 @@
 /* Navbar */
 nav {
-	background-color: white;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 1rem 2rem;
-	height: 50px;
-	position: fixed;
-	top: 0;
-	left: 0;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	width: calc(100% - 4rem);
-	z-index: 1113;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 4rem);
+    z-index: 1113;
 }
 
 /* Contenedor del logo */
 nav .logo {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
 }
 
 /* Logo */
 nav .logo img {
-	height: 50px;
-	border-radius: 10px;
-	transition: transform 0.3s ease;
-	flex-shrink: 0;
+    height: 50px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
 nav .logo img:hover {
-	transform: scale(1.5);
-	z-index: 10;
+    transform: scale(1.5);
+    z-index: 10;
 }
 
 /* Texto al lado del logo */
 nav .logo li {
-	color: black;
-	font-size: 1.2rem;
-	list-style: none;
-	margin-left: 5px;
-	white-space: nowrap;
+    color: black;
+    font-size: 1.2rem;
+    list-style: none;
+    margin-left: 5px;
+    white-space: nowrap;
 }
 
 /* Menú */
 nav ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
 nav ul li {
-	margin-left: 1.5rem;
+    margin-left: 1.5rem;
 }
 
 /* Botones del nav */
 nav ul li .button {
-	width: 120px;
-	height: 45px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	border-radius: 30px;
-	border: 1px solid #7eb7f5;
-	background-color: transparent;
-	color: #0056b3;
-	cursor: pointer;
-	transition: background-color 0.3s, color 0.3s;
-	text-decoration: none;
+    width: 120px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 30px;
+    border: 1px solid #7eb7f5;
+    background-color: transparent;
+    color: #0056b3;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
 }
 
 nav .btn {
-	width: 145px;
-	height: 45px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	border-radius: 30px;
-	border: 1px solid #7eb7f5;
-	background-color: #007bff;
-	color: white;
-	cursor: pointer;
-	transition: background-color 0.3s, color 0.3s;
+    width: 145px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 30px;
+    border: 1px solid #7eb7f5;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 nav ul li .button:hover,
 nav .btn:hover {
-	background-color: #0056b3;
-	color: white;
+    background-color: #0056b3;
+    color: white;
+}
+
+.menu-toggle {
+	display:none;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    nav {
+        width: 100%;
+        padding: 1rem 1rem;
+    }
+
+    nav .logo {
+        gap: 5px;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+		width: 20%;
+		background-color: white;
+		border-radius: 10px;
+		margin-top:10px;
+		opacity: 0;
+        transform: translateY(0px); 
+        transition: transform 0.9s ease-in-out, opacity 0.3s ease-in-out;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        font-size: 1.2rem;
+    }
+
+    nav ul.showNav {
+        display: flex;
+		transform: translateY(120px);
+		opacity: 1;
+    }
+
+	nav ul li .button {
+		background-color: #007bff;
+		color: white;
+		width: 100px;
+	}
+
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+		transition: transform 0.5s ease-in-out;
+    }
+
+    nav .logo img {
+        height: 40px;
+    }
+
+    nav .btn {
+        width: 200px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        padding: 1rem;
+    }
+
+    nav ul li {
+        margin: 8px 0;
+    }
+
+    nav ul li a {
+        font-size: 1rem;
+    }
+
+    nav .btn {
+        width: 120px;
+        height: 35px;
+    }
+
+    nav .logo img {
+        height: 35px;
+    }
 }

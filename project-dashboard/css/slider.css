@@ -1,14 +1,14 @@
 /* Contenedor del slider */
 .slider-container {
-    position: relative;
-    width: 40%;
-    margin: auto;
-    overflow: hidden; /* Oculta los elementos fuera del área visible */
-    border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 100px;
-  }
-  
+  position: relative;
+  width: 40%;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 100px;
+}
+
 .slider-container-phrases {
   position: relative;
   width: 80%;
@@ -23,119 +23,189 @@
   border-radius: 10px;
 }
 
-  /* Contenedor de las slides */
-  .slider {
-    display: flex;
-    transition: transform 0.5s ease; /* Deslizar suavemente */
+/* Contenedor de las slides */
+.slider, .slider-phrases {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* Cada slide */
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  background-color: ghostwhite;
+  border: 1px solid #ddd;
+  height: 500px;
+  max-height: 500px;
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 0 0 100%;
+}
+
+.slide-phrase {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  background-color: transparent;
+  height: 500px;
+  max-height: 500px;
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 0 0 100%;
+  height: 200px;
+}
+
+
+/* Estilos de los botones de navegación */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  color: black;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 25px;
+  z-index: 10;
+  width: 10%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.slider-container:hover .prev,
+.slider-container:hover .next,
+.slider-container-phrases:hover .prev,
+.slider-container-phrases:hover .next {
+  opacity: 1;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.prev:hover, .next:hover {
+  color: #007bff;
+}
+
+.slide ul li {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+/*Span con información*/
+.slide ul li span {
+  display: inline-block;
+  width: 100%;
+  max-width: 80%;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .slider-container {
+      width: 80%;
   }
 
-  .slider-phrases {
-    display: flex;
-    transition: transform 0.5s ease;
-  
+  .slider-container-phrases {
+      width: 90%;
   }
-  
-  /* Cada slide */
+
   .slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    padding: 20px;
-    text-align: center;
-	  background-color: ghostwhite;
-    border: 1px solid #ddd;
-    height: 500px;
-    max-height: 500px;
-    max-width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    flex: 0 0 100%;
+      height: 400px; 
   }
 
   .slide-phrase {
-    min-width: 100%;
-    box-sizing: border-box;
-    padding: 20px;
-    text-align: center;
-    height: 200px;
+      height: 150px; 
   }
 
-
-
-/*   
-  h2:not(.slideH2):hover {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-    transform: scale(1.1);
-  } */
+  .prev, .next {
+      font-size: 20px; 
+      width: 12%;
+  }
 
   .slide p {
-    font-size: 16px;
-    font-weight: bold;
-    color: #007bff;
-    margin-bottom: 50px;
+      font-size: 14px; 
   }
-  
+
   .slide-phrase p {
-    font-size: 16px;
-    font-weight: bold;
-    color: gray;
-    margin-bottom: 50px;
+      font-size: 14px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-container {
+    left: 40px;
+      width: 100%;
+      margin-top: 50px;
   }
 
-  /* Estilo de los botones de navegación */
+  .slider-container-phrases {
+      left: 40px;
+      width: 100%;
+      margin-top: 50px;
+  }
+
+  .slide {
+      height: 400px; 
+  }
+
+  .slide-phrase {
+      height: 150px; 
+  }
+
   .prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    color: black;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 25px;
-    z-index: 10;
-    width: 10%;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+      font-size: 18px; 
+      width: 15%;
   }
 
-  .slider-container:hover .prev,
-  .slider-container:hover .next,
-  .slider-container-phrases:hover .prev,
-  .slider-container-phrases:hover .next
-   {
-    opacity: 1;
-  }
-  
-  .prev {
-    left: 10px;
-  }
-  
-  .next {
-    right: 10px;
-  }
-  
-  /* Opcional: añadir efecto hover a los botones */
-  .prev:hover, .next:hover {
-    color: #007bff;
-  }
-  
-  .slide ul li {
-    list-style: none;
-    margin-bottom: 20px;
+  .slide p {
+      font-size: 12px; 
   }
 
-  /*Span con información*/
-  .slide ul li span {
-    display: inline-block;
-    width: 100%;
-    max-width: 80%;
-    text-align: center; 
-    padding: 10px; 
-    font-size: 14px; 
-    background-color: #fff;
-    border: 1px solid #ddd; 
-    border-radius: 5px; 
-    box-sizing: border-box; 
+  .slide-phrase p {
+      font-size: 12px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .slider-container {
+      margin-top: 30px;
+  }
+
+  .prev, .next {
+      font-size: 16px; 
+      width: 20%;
+  }
+
+  .slide {
+      height: 300px; 
+  }
+
+  .slide-phrase {
+      height: 120px;
+  }
+
+  .slide p {
+      font-size: 10px; 
+  }
+
+  .slide-phrase p {
+      font-size: 10px; 
+  }
 }

@@ -1,4 +1,4 @@
-/*Task chart modificado*/
+/* Task chart modificado */
 #taskChart {
     width: 1450px !important;
     height: 400px !important;  
@@ -6,133 +6,244 @@
     border-radius: 10px;
     padding: 0 20px 10px 20px;
 }
-  
+
 #tagChart {
-margin-top: 30px;
-margin-left: 100px;
+    margin-top: 30px;
+    margin-left: 100px;
 }
 
-/*Sección de Gráficos*/
+/* Sección de Gráficos */
 .charts {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 1500px;
-	height: 400px; 
-	margin: auto;
-	padding: 60px;
-	position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1500px;
+    height: 400px; 
+    margin: auto;
+    padding: 60px;
+    position: relative;
 }
 
 .secondChart {
-	display: flex;
-	justify-content: space-around; 
-	align-items: center;
-	width: 80vw;
-	height: 400px; 
-	margin: auto;
-	padding: 0 60px 60px 60px;
-	position: relative;
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    width: 80vw;
+    height: 400px; 
+    margin: auto;
+    padding: 0 60px 60px 60px;
+    position: relative;
 }
 
 .hidden {
-	display: none;
+    display: none;
 }
 
 /* Fondo oscuro semi-transparente */
 .modal-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 1000;
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.9s ease, visibility 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.9s ease, visibility 0.3s ease;
 }
 
 /* Contenedor del modal */
 .modal-content {
-	background: white;
-	padding: 40px;
-	padding-top: 0;
-	border-radius: 10px;
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-	text-align: center;
-	align-content: center;
-	width: 750px;
-	height: 375px;
-	position: relative;
+    background: white;
+    padding: 40px;
+    padding-top: 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    align-content: center;
+    width: 750px;
+    height: 375px;
+    position: relative;
 }
 
 /* Botón de cierre de modal */
 .modal-close {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	width: 50px;
-	background: transparent;
-	border: none;
-	font-size: 18px;
-	cursor: pointer;
-	color: #333;
-	transition: transform 0.3s ease;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #333;
+    transition: transform 0.3s ease;
 }
 
 .modal-close:hover {
-	transform: scale(1.05) rotate(-90deg);
+    transform: scale(1.05) rotate(-90deg);
 }
 .modal-close:active {
-	transform: scale(0.1);
+    transform: scale(0.1);
 }
 
 #stats {
-	display: flex;
-	position: absolute;
-	top: 0;
-	left: 30%;
-	border-bottom: 2px solid transparent;
-	transition: border-color 0.3s ease-in-out;
-	border-radius: 10px;
-	overflow: hidden;
-	
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 30%;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease-in-out;
+    border-radius: 10px;
+    overflow: hidden;
 }
+
 #stats:hover {
-	border-color: #007bff;
+    border-color: #007bff;
 }
 
 #stats p {
-	margin: 10px;
-	font-size: 25px;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 10px;
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
 .tagChartH2 {
-	all: unset;
-	font-size: 1.5em;
-	font-weight: bold;
-	width: 70%;
-	text-align: left;
-	padding-top: 40px;
-	transition: transform 0.3s;
+    all: unset;
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 70%;
+    text-align: left;
+    padding-top: 40px;
+    transition: transform 0.3s;
 }
 
 .tagChartH2:hover {
-	transform: translateX(50px);
+    transform: translateX(50px);
 }
-/*Mensaje sin tagChart*/
+
+/* Mensaje sin tagChart */
 .no-data-message {
-	transform: translate(-115%, -115%);
-	font-family: 'Segoe UI', sans-serif;
-	font-size: 17px;
-	color: gray;
-	opacity: 0;  
-	transition: opacity 1.5s ease-in-out;
-  }
-  
+    transform: translate(-115%, -115%);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 17px;
+    color: gray;
+    opacity: 0;  
+    transition: opacity 1.5s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    /* Ajusta la sección de gráficos */
+    .charts {
+        width: 100%;
+        padding: 30px; 
+    }
+
+    .secondChart {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    #taskChart, #tagChart {
+        width: 100% !important; 
+        height: 300px !important; 
+    }
+
+    .modal-content {
+        width: 90%; 
+        height: auto; 
+    }
+
+    #stats p {
+        font-size: 20px;
+    }
+
+    .tagChartH2 {
+        font-size: 1.3em; 
+    }
+}
+
+@media (max-width: 768px) {
+    /* Ajusta aún más los tamaños para dispositivos más pequeños */
+    .charts {
+        padding: 20px;
+    }
+
+    .secondChart {
+        flex-direction: column; 
+        padding: 20px 0;
+    }
+
+    #taskChart {
+        width: 100% !important;
+        height: 250px !important;
+    }
+
+	#tagChart{
+		width: 400px !important;
+		height: 400px !important;     
+	}
+
+    .modal-content {
+        width: 90%;
+        height: auto;
+    }
+
+    .tagChartH2 {
+        font-size: 1.2em;
+        padding-top: 20px;
+    }
+
+    #stats p {
+        font-size: 18px;
+    }
+
+	#stats{
+		display: flex;
+		width: 100%;
+		height: 20%;
+		left: 15%;
+	}
+
+
+}
+
+@media (max-width: 480px) {
+    /* Ajusta el contenido para pantallas muy pequeñas */
+    .charts {
+        padding: 10px;
+    }
+
+    .secondChart {
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    #taskChart {
+        width: 100% !important;
+        height: 200px !important; 
+    }
+
+	#tagChart{
+		width: 300px !important;
+		height: 300px !important;     
+	}
+    .modal-content {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .tagChartH2 {
+        font-size: 1.1em;
+        padding-top: 10px;
+    }
+
+    #stats p {
+        font-size: 16px;
+    }
+}

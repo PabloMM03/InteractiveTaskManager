@@ -415,3 +415,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 });
 
+//Menu responsive
+document.querySelector('.menu-toggle').addEventListener('click', function() {
+	const navMenu = document.querySelector('nav ul');
+	navMenu.classList.toggle('showNav');
+});	

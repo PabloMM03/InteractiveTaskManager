@@ -139,3 +139,53 @@ footer .waves#wave4
         background-position-x: 1000px;
     }
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+    footer {
+        padding: 20px;
+    }
+
+    footer .social_icon li a {
+        font-size: 1.8em;
+        margin: 5px 8px;
+    }
+
+    footer .menuf li a {
+        font-size: 1.1em;
+        margin: 5px 8px;
+    }
+
+    footer p {
+        font-size: 1em;
+    }
+
+    footer .waves {
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 15px;
+    }
+
+    footer .social_icon li a {
+        font-size: 1.5em;
+        margin: 5px 7px;
+    }
+
+    footer .menuf li a {
+        font-size: 1em;
+        margin: 5px 7px;
+    }
+
+    footer p {
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+
+    footer .waves {
+        height: 70px;
+    }
+}
