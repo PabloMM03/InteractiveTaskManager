@@ -1,19 +1,4 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     const lightModeImage = document.querySelector('.lightmode');
-//     const nav = document.querySelector('nav');
-//     const titlePage = document.querySelector('.logo li');
-
-//     lightModeImage.addEventListener('click', () => {
-//         nav.classList.toggle('dark-mode');
-
-//         if (nav.classList.contains('dark-mode')) {
-//             titlePage.style.color = 'white';
-//         } else {
-//             titlePage.style.color = 'black';
-//         }
-//     });
-// });
-
+//Cambiar entre modo light o dark al hacer click en la imagen
 document.addEventListener('DOMContentLoaded', () => {
     const lightModeImage = document.querySelector('.lightmode');
     const body = document.body; // Seleccionamos el body
