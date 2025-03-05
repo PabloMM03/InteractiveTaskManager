@@ -1,0 +1,45 @@
+body.dark-mode {
+    background-color: black;
+}
+
+body.dark-mode #taskChart {
+    background-color: ghostwhite;
+}
+
+body.dark-mode #stats p {
+    color: white;
+}
+
+
+body.dark-mode nav {
+    background-color: black;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 255);
+}
+
+body.dark-mode nav .button{
+    background-color: white;
+}
+
+body.dark-mode nav li {
+    color: white;
+}
+
+body.dark-mode .headerText, 
+body.dark-mode .headerText h1 {
+    color: white;
+} 
+
+body.dark-mode .slider-container-phrases:hover {
+    background-color: ghostwhite;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+
+body.dark-mode .slider-container-phrases:hover .slide-phrase {
+    color: black;
+}
+
+body.dark-mode .slide-phrase {
+    color: white;
+  }
