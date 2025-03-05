@@ -1,4 +1,5 @@
 /* Navbar */
+
 nav {
     background-color: white;
     display: flex;
@@ -86,6 +87,7 @@ nav .btn {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    margin-right: 40px;
 }
 
 nav ul li .button:hover,
@@ -98,6 +100,14 @@ nav .btn:hover {
 .menu-toggle {
     display: none;
 }
+
+/*Light mode*/
+.lightmode {
+    width: 60px;
+}
+
+
+
 
 /* Responsive */
 @media (max-width: 1024px) {

@@ -86,6 +86,7 @@ section#form-section {
 	height: 50px;
 	align-self: flex-end;
 	cursor: pointer;
+	margin-left: 10px;
   }
   
   section#task-section ul li span {
