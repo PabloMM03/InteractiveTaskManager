@@ -1,22 +1,22 @@
-footer { 
+footer {
     font-size: 14px;
+    min-height: 150px;
+    max-height: 150px;
     width: 100%;
     background: ghostwhite;
-    min-height: 50px;
-    padding: 20px 50px;
+}
+
+.footer-content {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
-    position: fixed;
-    bottom: 0;
+    margin-top: 30%;
+    min-width: 100%;
+    padding-top: 10px;
 }
 
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
 footer .social_icon,
 footer .menuf {

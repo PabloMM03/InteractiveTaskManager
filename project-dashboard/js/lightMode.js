@@ -1,6 +1,6 @@
 //Cambiar entre modo light o dark al hacer click en la imagen
 document.addEventListener('DOMContentLoaded', () => {
-    const lightModeImage = document.querySelector('.lightmode');
+    const lightModeImage = document.getElementById('darkmode-toggle');
     const body = document.body; // Seleccionamos el body
 
     lightModeImage.addEventListener('click', () => {

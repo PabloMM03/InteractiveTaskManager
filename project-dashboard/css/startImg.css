@@ -38,6 +38,43 @@
     margin-left: 90px;
 }
 
+
+.headerText .social_icon{
+    position: relative;
+    display: flex;      
+    justify-content: center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+
+.headerText .social_icon li,
+.headerText .menuf li {
+    list-style: none;
+}
+
+.headerText .social_icon li a {
+    font-size: 2em;
+    color: black;
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+.headerText .social_icon li a:hover {
+    transform: translateY(-10px);
+}
+
+.headerText .menuf li a {
+    font-size: 1.2em;
+    color: black;
+    margin: 0 10px;
+    display: inline-block;
+    text-decoration: none;
+    opacity: 0.75;
+}
+
+
+
 /* Animación mostrar principal */
 @keyframes fadeIn {
     from {
