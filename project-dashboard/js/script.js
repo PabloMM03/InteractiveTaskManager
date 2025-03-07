@@ -65,6 +65,15 @@ function addTask() {
             data.createTaskDate = new Date().toISOString().split('T')[0];
             data.isActive = true;
 
+			let firtsLetter = data.title.charAt(0).toUpperCase();
+			let restOfTitle = data.title.substring(1);
+			data.title = firtsLetter + restOfTitle;
+
+			let firtsLetterAssignedTo = data.assigned_to.charAt(0).toUpperCase();
+			let restOfAssignedTo= data.assigned_to.substring(1);
+			data.assigned_to = firtsLetterAssignedTo + restOfAssignedTo;
+
+
             // Obtener el ID del objetivo seleccionado
             const selectedGoalElement = document.querySelector('#goal-select');
             const selectedGoalId = selectedGoalElement.getAttribute('data-selected-id');
@@ -142,6 +151,8 @@ export function loadTask(goalId) {
 	const tasks = loadTasksFromStorage();
 	const taskList = document.getElementById('task-list');
 	taskList.innerHTML = ''; //Limpiar la lista antes de cargar las tareas
+
+	tasks.sort((a, b) => new Date(b.createTaskDate) - new Date(a.createTaskDate));
 
 	tasks.forEach((task, index) => {
 		if (!task.isActive) return;
@@ -266,9 +277,11 @@ function addGoals() {
 			data.startDate = new Date().toISOString().split('T')[0];
 			data.progress = 0;
 			data.totalTasks = 0;
-			data.completedTasks = 0;
-
 			
+			let firtsLetter = data.gtitle.charAt(0).toUpperCase();
+			let restOfTitle = data.gtitle.substring(1);
+			data.gtitle = firtsLetter + restOfTitle;
+
 
 			const goals = loadGoalsFromStorage();
 			goals.push(data);
@@ -346,6 +359,8 @@ function loadGoals() {
 	// Agregar opciones iniciales
 	menu.append(createOption('Sin objetivo', 'none'));
 
+	goals.sort((a, b) => new Date(b.gdate) - new Date(a.gdate));
+
 	// Generar lista de objetivos
 	goals.forEach((goal, index) => {
 		// Crear elemento de la lista de objetivos
@@ -375,6 +390,7 @@ function loadGoals() {
 
 		li.append(deleteButton);
 		goalsList.append(li);
+
 
 		// Agregar opción al menú desplegable
 		menu.append(createOption(goal.gtitle, index));
