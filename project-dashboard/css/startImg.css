@@ -20,6 +20,20 @@
 
 .headerText h1 {
     width: 300px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.headerText h1::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #007bff;
+    transition: width 0.5s ease-in-out; 
 }
 
 /* Video */
@@ -73,17 +87,20 @@
     opacity: 0.75;
 }
 
+.headerText h1:hover::after {
+   width: 100%;
+}
 
 
 /* Animación mostrar principal */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-100px);
+        transform: translateY(0px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(-100px);
     }
 }
 
