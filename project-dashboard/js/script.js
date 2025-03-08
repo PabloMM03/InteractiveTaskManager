@@ -626,7 +626,7 @@ function slider() {
 			const img = document.createElement('img');
 
 			span.textContent = `${task.title}, ${task.due_date}, ${task.ttag}, ${task.assigned_to}`;
-			img.src = task.notifications ? `/project-dashboard/assets/img/check-mark.png` : `/project-dashboard/img/assets/error.png`;
+			img.src = task.notifications ? `/project-dashboard/assets/img/check-mark.png` : `/project-dashboard/assets/img/error.png`;
 			img.alt = 'Notificación';
 			Object.assign(img.style, {width: '20px', height: '20px', marginLeft: '20px'});
 
