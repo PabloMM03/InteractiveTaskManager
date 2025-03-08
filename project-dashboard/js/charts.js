@@ -4,6 +4,7 @@ import {
 	saveTaskCountsHistory,
 } from './storage.js';
 
+//Renderizar al cargar
 document.addEventListener('DOMContentLoaded', () => {
 	renderChart();
 	renderChartByDay();
@@ -13,16 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let myChart, myChart2, myChart3;
 
-//Total tareas por mes
-
 export function renderChart(chartData) {
 	const ctx = document.getElementById('taskChart').getContext('2d');
 
 	if (myChart) {
-		myChart.destroy(); // Eliminar gráfico anterior si existe
+		myChart.destroy(); 
 	}
 
-	// Crear el nuevo gráfico de barras
 	myChart = new Chart(ctx, {
 		type: 'bar',
 		data: chartData,
@@ -90,7 +88,7 @@ export function renderChart(chartData) {
 						color: 'transparent',
 					},
 				},
-			}, //Cambiar cursor al haber información
+			}, 
 			onHover: (event, elements) => {
 				if (elements.length > 0) {
 					event.native.target.style.cursor = 'pointer';
@@ -100,7 +98,6 @@ export function renderChart(chartData) {
 			},
 
 			onClick: (event, elements) => {
-				// Mostrar detalles por mes
 				if (elements.length > 0) {
 					const dataIndex = elements[0].index;
 					renderTasksChartByDay(dataIndex, chartData);
@@ -111,10 +108,9 @@ export function renderChart(chartData) {
 	});
 }
 
-//Mostrar y cerrar modal con detalles
+/** Mostrar modal */
 function showModal() {
 	const modal = document.getElementById('modal');
-	// Generar el segundo gráfico
 	modal.style.opacity = '1';
 	modal.style.visibility = 'visible';
 }
@@ -125,17 +121,16 @@ window.closeModal = function () {
 	modal.style.visibility = 'hidden';
 };
 
-//renderizar las tareas
+/**Renderizar grafico Tareas */
 export function renderTasksChart() {
-	const { months, taskCounts, completedCounts } = getTasksByMonth(); // Obtener los datos procesados
+	const { months, taskCounts, completedCounts } = getTasksByMonth(); 
 
-	// Crear los datos para el gráfico
 	const chartData = {
 		labels: months,
 		datasets: [
 			{
 				label: 'Tareas añadidas',
-				data: taskCounts, // Número de tareas por mes
+				data: taskCounts, 
 				backgroundColor: 'rgba(255, 99, 132, 0.6)',
 				borderColor: 'rgba(255, 99, 132, 1)',
 				borderWidth: 1,
@@ -150,10 +145,9 @@ export function renderTasksChart() {
 		],
 	};
 
-	// Llamar a renderChart para mostrar el gráfico
 	renderChart(chartData);
 }
-
+/** Renderizar gráfico etiquetas */
 export function renderTagChart() {
 	const stats = getStats();
 	const ctx = document.getElementById('tagChart').getContext('2d');
@@ -204,11 +198,9 @@ export function renderTagChart() {
 		  
 				const noDataMessage = document.getElementById('noDataMessage');
 				if (!dataExists) {
-				  // Muestra el mensaje
-				  noDataMessage.style.opacity = 1;  // La opacidad sube a 1 (visible)
+				  noDataMessage.style.opacity = 1; 
 				} else {
-				  // Oculta el mensaje
-				  noDataMessage.style.opacity = 0;  // La opacidad baja a 0 (invisible)
+				  noDataMessage.style.opacity = 0;  
 				}
 			  },
 			},
@@ -217,7 +209,7 @@ export function renderTagChart() {
 	});	
 }
 
-//Actualizar estado del global de tareas y %
+/** Actualizar el estado de progreso */
 export function updateStatsUI() {
 	const stats = getStats();
 	document.getElementById('totalTasks').textContent = stats.totalTasks;
@@ -226,9 +218,7 @@ export function updateStatsUI() {
 		stats.completedPercentage.toFixed(2);
 }
 
-//renderTagChart();
-
-// Lógica para obtener tareas por mes
+/** Obtener tareas por mes */
 export function getTasksByMonth() {
 	const allMonths = [
 		'Enero',
@@ -259,6 +249,7 @@ export function getTasksByMonth() {
 	return { months, taskCounts, completedCounts };
 }
 
+/** Actulizar el historial de tareas */
 export function updateTaskHistory(data) {
 	const allMonths = [
 		'Enero',
@@ -275,12 +266,10 @@ export function updateTaskHistory(data) {
 		'Diciembre',
 	];
 
-	let taskCountsHistory = loadTaskCountsHistory() || {}; // Cargar historial
-
+	let taskCountsHistory = loadTaskCountsHistory() || {}; 
 	const taskDate = new Date(data.createTaskDate);
 	const monthYear = `${taskDate.getFullYear()}-${taskDate.getMonth() + 1}`;
 
-	// Si el mes no existe en el historial, lo inicializamos
 	if (!taskCountsHistory[monthYear]) {
 		taskCountsHistory[monthYear] = {
 			total: 0,
@@ -289,33 +278,29 @@ export function updateTaskHistory(data) {
 		};
 	}
 
-	// Actualizar solo el mes de la tarea que se acaba de crear
 	taskCountsHistory[monthYear].total += 1;
 	if (data.isChecked) {
 		taskCountsHistory[monthYear].completed += 1;
 	}
 
-	// Guardar historial actualizado en localStorage
 	saveTaskCountsHistory(taskCountsHistory);
 }
 
-//Funcion obtener dias del mes
+/** Funcion obtener dias del mes */
 function daysPerMonth(dataIndex) {
 	const { taskCounts, completedCounts } = getTasksByMonth();
 
 	const year = new Date().getFullYear();
-	const month = Number(dataIndex); // Asegurar que sea número válido
+	const month = Number(dataIndex); 
 	if (isNaN(month) || month < 0 || month > 11) {
 		return [];
 	}
 
-	// Obtener calendario con los dias del mes indicado
 	const lastDay = new Date(year, month + 1, 0).getDate();
 	const day = new Date().getDate();
 
 	const calendar = Array.from({ length: lastDay }, (_, i) => i + 1);
 
-	// Funcion interna para asignar aleatoriamente las tareas a los dias del mes
 	const totalTasks = taskCounts[dataIndex] || 0;
 	const completedTasks = completedCounts[dataIndex] || 0;
 
@@ -333,15 +318,13 @@ function daysPerMonth(dataIndex) {
 	return { calendar, taskDays, completed };
 }
 
-//Renderizar gráfico mostrar tareas por dias del mes
-
+/**Renderizar gráficos obtener tareas oir dia */
 function renderChartByDay(chartData, month) {
 	const ctx = document.getElementById('taskChart2').getContext('2d');
 	if (myChart3) {
-		myChart3.destroy(); // Eliminar gráfico anterior si existe
+		myChart3.destroy(); 
 	}
 
-	// Crear el nuevo gráfico de barras
 	myChart3 = new Chart(ctx, {
 		type: 'bar',
 		data: chartData,
@@ -409,7 +392,7 @@ function renderChartByDay(chartData, month) {
 						color: 'transparent',
 					},
 				},
-			}, //Cambiar cursor al haber información
+			}, 
 			onHover: (event, elements) => {
 				if (elements.length > 0) {
 					event.native.target.style.cursor = 'pointer';
@@ -425,13 +408,12 @@ function renderTasksChartByDay(dataIndex, charMonth) {
 	const { calendar, taskDays, completed } = daysPerMonth(dataIndex);
 	const month = charMonth.labels[dataIndex];
 
-	// Crear los datos para el gráfico
 	const chartData = {
 		labels: calendar,
 		datasets: [
 			{
 				label: 'Tareas añadidas',
-				data: calendar.map((day) => taskDays[day] || 0), // Número de tareas por mes
+				data: calendar.map((day) => taskDays[day] || 0), 
 				backgroundColor: 'rgba(255, 99, 132, 0.6)',
 				borderColor: 'rgba(255, 99, 132, 1)',
 				borderWidth: 1,
@@ -445,7 +427,5 @@ function renderTasksChartByDay(dataIndex, charMonth) {
 			},
 		],
 	};
-
-	// Llamar a renderChart para mostrar el gráfico
 	renderChartByDay(chartData, month);
 }

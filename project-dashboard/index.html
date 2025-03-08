@@ -9,458 +9,435 @@
 	</head>
 	<body>
 		<div class="all">
-		<header>
-
-			<nav id="navbar">
-				<div class="logo">
-					<img src="/project-dashboard/assets/logo.jpg" alt="PM" />
-					<li><b>daily</b> work management</li>
-				</div>
-
-				<!-- Menú-->
-				<div class="menu-toggle">☰</div>
-
-				<ul>
-					<li>
-						<button class="button" data-target="#tasksNav">Tareas</button>
-					</li>
-					<li>
-						<button class="button" data-target="#goalsNav">Objetivos</button>
-					</li>
-					<li>
-						<button class="button" data-target="#statsNav">Estadísticas</button>
-					</li>
-					
-				</ul>
-
-				<!-- <img class="lightmode" src="./assets/Light Mode.gif" alt="lightmode"> -->
-				<div>
-					<!--Dark mode-->
-					<input type="checkbox" id="darkmode-toggle">
-					<label for="darkmode-toggle">
-						<svg fill="#000000" version="1.1" id="Layer_1" class="sun" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 						width="800px" height="800px" viewBox="0 0 72 72" enable-background="new 0 0 72 72" xml:space="preserve">
-						<g>
-							<path d="M36.564,14.645c-11.671,0-21.167,9.495-21.167,21.166c0,11.671,9.495,21.166,21.167,21.166
-								c11.672,0,21.168-9.494,21.168-21.166C57.732,24.14,48.236,14.645,36.564,14.645z M36.564,52.979
-								c-9.465,0-17.167-7.701-17.167-17.167c0-9.466,7.701-17.166,17.167-17.166c9.467,0,17.168,7.7,17.168,17.166
-								C53.732,45.279,46.031,52.979,36.564,52.979z"/>
-							<path d="M34.666,22.306c-4.054,0-7.859,2.167-9.929,5.655c-0.281,0.475-0.125,1.089,0.35,1.371c0.16,0.095,0.336,0.14,0.51,0.14
-								c0.341,0,0.674-0.175,0.861-0.489c1.711-2.885,4.856-4.677,8.208-4.677c0.553,0,1-0.447,1-1
-								C35.666,22.753,35.219,22.306,34.666,22.306z"/>
-							<path d="M24.631,30.464c-0.529-0.123-1.076,0.207-1.202,0.745c-0.195,0.826-0.304,1.337-0.304,2.27c0,0.553,0.447,1,1,1
-								s1-0.447,1-1c0-0.716,0.077-1.073,0.251-1.813C25.502,31.129,25.169,30.591,24.631,30.464z"/>
-							<path d="M37.37,59.5c-1.104,0-2,0.895-2,2v6c0,1.104,0.896,2,2,2c1.104,0,2-0.896,2-2v-6C39.37,60.395,38.475,59.5,37.37,59.5z"/>
-							<path d="M37.37,12.5c1.104,0,2-0.896,2-2v-6c0-1.104-0.896-2-2-2c-1.104,0-2,0.896-2,2v6C35.37,11.604,36.266,12.5,37.37,12.5z"/>
-							<path d="M17.055,52.428l-4.242,4.242c-0.781,0.781-0.781,2.047,0,2.828c0.391,0.391,0.902,0.586,1.414,0.586
-								c0.511,0,1.023-0.195,1.414-0.586l4.242-4.242c0.781-0.781,0.781-2.047,0-2.828C19.102,51.646,17.836,51.646,17.055,52.428z"/>
-							<path d="M54.531,19.78c0.512,0,1.023-0.195,1.414-0.586l4.242-4.242c0.78-0.781,0.78-2.047,0-2.828
-								c-0.781-0.781-2.047-0.781-2.828,0l-4.242,4.242c-0.781,0.781-0.781,2.047,0,2.828C53.508,19.585,54.02,19.78,54.531,19.78z"/>
-							<path d="M17.055,19.194c0.391,0.391,0.902,0.586,1.414,0.586c0.511,0,1.023-0.195,1.414-0.586c0.781-0.781,0.781-2.047,0-2.828
-								l-4.242-4.242c-0.781-0.781-2.047-0.781-2.828,0c-0.781,0.781-0.781,2.047,0,2.828L17.055,19.194z"/>
-							<path d="M55.945,52.428c-0.781-0.781-2.047-0.781-2.828,0s-0.781,2.047,0,2.828l4.242,4.244c0.391,0.391,0.902,0.586,1.414,0.586
-								s1.023-0.195,1.414-0.586c0.78-0.781,0.78-2.047,0-2.828L55.945,52.428z"/>
-							<path d="M10.5,34.5h-6c-1.104,0-2,0.896-2,2c0,1.104,0.896,2,2,2h6c1.104,0,2-0.896,2-2C12.5,35.396,11.604,34.5,10.5,34.5z"/>
-							<path d="M67.5,34.5h-6c-1.104,0-2,0.896-2,2c0,1.104,0.896,2,2,2h6c1.104,0,2-0.896,2-2C69.5,35.396,68.604,34.5,67.5,34.5z"/>
-						</g>
-						</svg>
-							<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" class="moon" xmlns="http://www.w3.org/2000/svg">
-							<path d="M2.02911 12.42C2.38911 17.57 6.75911 21.76 11.9891 21.99C15.6791 22.15 18.9791 20.43 20.9591 17.72C21.7791 16.61 21.3391 15.87 19.9691 16.12C19.2991 16.24 18.6091 16.29 17.8891 16.26C12.9991 16.06 8.99911 11.97 8.97911 7.13996C8.96911 5.83996 9.23911 4.60996 9.72911 3.48996C10.2691 2.24996 9.61911 1.65996 8.36911 2.18996C4.40911 3.85996 1.69911 7.84996 2.02911 12.42Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>	 
-					</label>
-				</div>
-
-				<!-- <button class="btn">Get Started →</button> -->
-			</nav>
-		</header>
-
-		<main>	
 			<header>
-				<div class="headerStart">
-
-					<div class="headerText">
-						<h1>Diseño de Tareas ilimitado</h1>
-						<p>La aplicación permite la creación y gestión ilimitada de tareas organizadas en objetivos, ofreciendo un sistema flexible y dinámico. Además, el progreso de los objetivos se visualiza en tiempo real, proporcionando un control eficiente y una mejor planificación del trabajo.
-							<ul class="social_icon">
-								<li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
-								<li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
-								<li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
-								<li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-								<li><a href="https://github.com/PabloMM03"><ion-icon name="logo-github"></ion-icon></a></li>
-								</ul>
-						</p>
+				<nav id="navbar">
+					<div class="logo">
+						<img src="/project-dashboard/assets/img/logo.jpg" alt="PM" />
+						<li><b>daily</b> work management</li>
 					</div>
-					<div class="headerVideo">
-						<video width="350" height="200" class="homeVideo" controls autoplay loop>
-							<source src="./assets/videos/20250304_192618.mp4">
-						</video>
-						<img src="./assets/headerWithoutbackground.png" alt="">
-					</div>	
-				</div>
+					<div class="menu-toggle">☰</div>
+					<ul>
+						<li>
+							<button class="button" data-target="#tasksNav">Tareas</button>
+						</li>
+						<li>
+							<button class="button" data-target="#goalsNav">Objetivos</button>
+						</li>
+						<li>
+							<button class="button" data-target="#statsNav">Estadísticas</button>
+						</li>
+						
+					</ul>
+					<div>
+						<!--Dark mode-->
+						<input type="checkbox" id="darkmode-toggle">
+						<label for="darkmode-toggle">
+							<svg fill="#000000" version="1.1" id="Layer_1" class="sun" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+								width="800px" height="800px" viewBox="0 0 72 72" enable-background="new 0 0 72 72" xml:space="preserve">
+							<g>
+								<path d="M36.564,14.645c-11.671,0-21.167,9.495-21.167,21.166c0,11.671,9.495,21.166,21.167,21.166
+									c11.672,0,21.168-9.494,21.168-21.166C57.732,24.14,48.236,14.645,36.564,14.645z M36.564,52.979
+									c-9.465,0-17.167-7.701-17.167-17.167c0-9.466,7.701-17.166,17.167-17.166c9.467,0,17.168,7.7,17.168,17.166
+									C53.732,45.279,46.031,52.979,36.564,52.979z"/>
+								<path d="M34.666,22.306c-4.054,0-7.859,2.167-9.929,5.655c-0.281,0.475-0.125,1.089,0.35,1.371c0.16,0.095,0.336,0.14,0.51,0.14
+									c0.341,0,0.674-0.175,0.861-0.489c1.711-2.885,4.856-4.677,8.208-4.677c0.553,0,1-0.447,1-1
+									C35.666,22.753,35.219,22.306,34.666,22.306z"/>
+								<path d="M24.631,30.464c-0.529-0.123-1.076,0.207-1.202,0.745c-0.195,0.826-0.304,1.337-0.304,2.27c0,0.553,0.447,1,1,1
+									s1-0.447,1-1c0-0.716,0.077-1.073,0.251-1.813C25.502,31.129,25.169,30.591,24.631,30.464z"/>
+								<path d="M37.37,59.5c-1.104,0-2,0.895-2,2v6c0,1.104,0.896,2,2,2c1.104,0,2-0.896,2-2v-6C39.37,60.395,38.475,59.5,37.37,59.5z"/>
+								<path d="M37.37,12.5c1.104,0,2-0.896,2-2v-6c0-1.104-0.896-2-2-2c-1.104,0-2,0.896-2,2v6C35.37,11.604,36.266,12.5,37.37,12.5z"/>
+								<path d="M17.055,52.428l-4.242,4.242c-0.781,0.781-0.781,2.047,0,2.828c0.391,0.391,0.902,0.586,1.414,0.586
+									c0.511,0,1.023-0.195,1.414-0.586l4.242-4.242c0.781-0.781,0.781-2.047,0-2.828C19.102,51.646,17.836,51.646,17.055,52.428z"/>
+								<path d="M54.531,19.78c0.512,0,1.023-0.195,1.414-0.586l4.242-4.242c0.78-0.781,0.78-2.047,0-2.828
+									c-0.781-0.781-2.047-0.781-2.828,0l-4.242,4.242c-0.781,0.781-0.781,2.047,0,2.828C53.508,19.585,54.02,19.78,54.531,19.78z"/>
+								<path d="M17.055,19.194c0.391,0.391,0.902,0.586,1.414,0.586c0.511,0,1.023-0.195,1.414-0.586c0.781-0.781,0.781-2.047,0-2.828
+									l-4.242-4.242c-0.781-0.781-2.047-0.781-2.828,0c-0.781,0.781-0.781,2.047,0,2.828L17.055,19.194z"/>
+								<path d="M55.945,52.428c-0.781-0.781-2.047-0.781-2.828,0s-0.781,2.047,0,2.828l4.242,4.244c0.391,0.391,0.902,0.586,1.414,0.586
+									s1.023-0.195,1.414-0.586c0.78-0.781,0.78-2.047,0-2.828L55.945,52.428z"/>
+								<path d="M10.5,34.5h-6c-1.104,0-2,0.896-2,2c0,1.104,0.896,2,2,2h6c1.104,0,2-0.896,2-2C12.5,35.396,11.604,34.5,10.5,34.5z"/>
+								<path d="M67.5,34.5h-6c-1.104,0-2,0.896-2,2c0,1.104,0.896,2,2,2h6c1.104,0,2-0.896,2-2C69.5,35.396,68.604,34.5,67.5,34.5z"/>
+							</g>
+							</svg>
+								<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" class="moon" xmlns="http://www.w3.org/2000/svg">
+								<path d="M2.02911 12.42C2.38911 17.57 6.75911 21.76 11.9891 21.99C15.6791 22.15 18.9791 20.43 20.9591 17.72C21.7791 16.61 21.3391 15.87 19.9691 16.12C19.2991 16.24 18.6091 16.29 17.8891 16.26C12.9991 16.06 8.99911 11.97 8.97911 7.13996C8.96911 5.83996 9.23911 4.60996 9.72911 3.48996C10.2691 2.24996 9.61911 1.65996 8.36911 2.18996C4.40911 3.85996 1.69911 7.84996 2.02911 12.42Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>	 
+						</label>
+					</div>
+				</nav>
 			</header>
 
-			<div class="container" id="tasksNav">
-				<!-- Sección del formulario -->
-				<section id="form-section">
-					<form id="task-form">
-						<h2>Crear Nueva Tarea</h2>
+			<main>	
+				<header>
+					<div class="headerStart">
 
-						<div class="step active" id="step-1">
-							<div class="containerInputs">
-								<div class="entryarea">
-									<input type="text" name="title" id="titulo"/>
-									<div class="labelline">Nombre de la tarea</div>
-								</div>
-							</div>
-							<div class="containerInputs">
-								<div class="entryarea">
-									<div class="dropdown">
-										<div class="select" id="goal-select" tabindex="0">
-											<span class="selected"></span>
-											<div class="caret"></div>
-											<div class="labellineSelect">Seleccione un objetivo</div>
-										</div>
-										<ul class="menu"></ul>
+						<div class="headerText">
+							<h1>Diseño de Tareas ilimitado</h1>
+							<p>La aplicación permite la creación y gestión ilimitada de tareas organizadas en objetivos, ofreciendo un sistema flexible y dinámico. Además, el progreso de los objetivos se visualiza en tiempo real, proporcionando un control eficiente y una mejor planificación del trabajo.
+								<ul class="social_icon">
+									<li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+									<li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+									<li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+									<li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+									<li><a href="https://github.com/PabloMM03"><ion-icon name="logo-github"></ion-icon></a></li>
+									</ul>
+							</p>
+						</div>
+						<div class="headerVideo">
+							<video width="350" height="200" class="homeVideo" controls autoplay loop>
+								<source src="./assets/videos/20250304_192618.mp4">
+							</video>
+							<img src="./assets/img/headerWithoutbackground.png" alt="">
+						</div>	
+					</div>
+				</header>
+
+				<div class="container" id="tasksNav">
+					<section id="form-section">
+						<form id="task-form">
+							<h2>Crear Nueva Tarea</h2>
+
+							<div class="step active" id="step-1">
+								<div class="containerInputs">
+									<div class="entryarea">
+										<input type="text" name="title" id="titulo"/>
+										<div class="labelline">Nombre de la tarea</div>
 									</div>
 								</div>
-							</div>
-							
-
-							<button
-								class="form-buttons"
-								style="margin-top: 35px"
-								type="button"
-								onclick="nextStep(2, 'task')"
-							>
-								Siguiente
-							</button>
-						</div>
-
-						<div class="step" id="step-2">
-							<div class="containerInputs">
-								<div class="entryarea">
-									<input type="date" name="due_date" id="dateField" required/>
-									<div class="labellineDate">Fecha de vencimiento</div>
-								</div>
-							</div>
-
-							<div class="containerInputs">
-								<div class="entryarea">
-									<div class="dropdown">
-										<div class="select" tabindex="0">
-											<span class="selected"></span>
-											<div class="caret"></div>
-											<div class="labellineSelect">Seleccione la prioridad</div>
+								<div class="containerInputs">
+									<div class="entryarea">
+										<div class="dropdown">
+											<div class="select" id="goal-select" tabindex="0">
+												<span class="selected"></span>
+												<div class="caret"></div>
+												<div class="labellineSelect">Seleccione un objetivo</div>
+											</div>
+											<ul class="menu"></ul>
 										</div>
-										<ul class="menu" id="priority" name="priority">
-											<li id="baja" data-priority="Baja">Baja</li>
-											<li id="media" data-priority="Media">Media</li>
-											<li id="alta" data-priority="Alta">Alta</li>
-										</ul>
 									</div>
 								</div>
-							</div>
-							
-							<button
-								class="form-buttons"
-								style="margin-top: 35px"
-								type="button"
-								onclick="nextStep(3, 'task')"
-							>
-								Siguiente
-							</button>
-						</div>
+								
 
-						<div class="step" id="step-3">
-							<div class="containerInputs">
-								<div class="entryarea">
+								<button
+									class="form-buttons"
+									style="margin-top: 35px"
+									type="button"
+									onclick="nextStep(2, 'task')"
+								>
+									Siguiente
+								</button>
+							</div>
+
+							<div class="step" id="step-2">
+								<div class="containerInputs">
+									<div class="entryarea">
+										<input type="date" name="due_date" id="dateField" required/>
+										<div class="labellineDate">Fecha de vencimiento</div>
+									</div>
+								</div>
+
+								<div class="containerInputs">
+									<div class="entryarea">
+										<div class="dropdown">
+											<div class="select" tabindex="0">
+												<span class="selected"></span>
+												<div class="caret"></div>
+												<div class="labellineSelect">Seleccione la prioridad</div>
+											</div>
+											<ul class="menu" id="priority" name="priority">
+												<li id="baja" data-priority="Baja">Baja</li>
+												<li id="media" data-priority="Media">Media</li>
+												<li id="alta" data-priority="Alta">Alta</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								
+								<button
+									class="form-buttons"
+									style="margin-top: 35px"
+									type="button"
+									onclick="nextStep(3, 'task')"
+								>
+									Siguiente
+								</button>
+							</div>
+
+							<div class="step" id="step-3">
+								<div class="containerInputs">
+									<div class="entryarea">
+										<input
+											type="text"
+											id="ttag"
+											name="ttag"
+											oninput="filterTags()"
+											
+										/>
+										<div class="labelline">Busca o escribe una etiqueta...</div>
+									</div>
+								</div>
+
+								<ul id="ttags-suggestions" class="hidden"></ul>
+								<button
+									class="form-buttons"
+									style="margin-top: 50px"
+									type="button"
+									onclick="nextStep(4, 'task')"
+								>
+									Siguiente
+								</button>
+							</div>
+
+							<div class="step" id="step-4">
+								<div class="containerInputs">
+									<div class="entryarea">
+										<input
+											type="text"
+											id="assigned-to"
+											name="assigned_to"
+										/>
+										<div class="labelline">Persona asignada</div>
+									</div>
+								</div>
+
+								<div class="checkbox-container">
 									<input
-										type="text"
-										id="ttag"
-										name="ttag"
-										oninput="filterTags()"
+										type="checkbox"
+										id="notifications"
+										name="notifications"
 										
 									/>
-									<div class="labelline">Busca o escribe una etiqueta...</div>
+									<label for="notifications" class="lbl-switch"></label>
+									<label for="notifications" class="lbl-switch2"
+										>Recordarme antes de la fecha de vencimiento</label
+									>
 								</div>
-							</div>
-
-							<ul id="ttags-suggestions" class="hidden"></ul>
-							<!-- Las opciones de etiquetas se mostrarán aquí -->
-
-							<button
-								class="form-buttons"
-								style="margin-top: 50px"
-								type="button"
-								onclick="nextStep(4, 'task')"
-							>
-								Siguiente
-							</button>
-						</div>
-
-						<div class="step" id="step-4">
-							<div class="containerInputs">
-								<div class="entryarea">
-									<input
-										type="text"
-										id="assigned-to"
-										name="assigned_to"
-									/>
-									<div class="labelline">Persona asignada</div>
-								</div>
-							</div>
-
-							<div class="checkbox-container">
-								<input
-									type="checkbox"
-									id="notifications"
-									name="notifications"
-									
-								/>
-								<label for="notifications" class="lbl-switch"></label>
-								<label for="notifications" class="lbl-switch2"
-									>Recordarme antes de la fecha de vencimiento</label
+								<button
+									class="form-buttons"
+									style="margin-top: 40px"
+									type="submit"
 								>
-							</div>
-							<button
-								class="form-buttons"
-								style="margin-top: 40px"
-								type="submit"
-							>
-								Crear tarea
-							</button>
+									Crear tarea
+								</button>
 
-							<div id="hidden-field" style="display: none; overflow: hidden; transition: transform 2s;">
-								<input type="text" id="task-info" readonly/>
-							</div>
+								<div id="hidden-field" style="display: none; overflow: hidden; transition: transform 2s;">
+									<input type="text" id="task-info" readonly/>
+								</div>
 
+							</div>
+							<div class="progress-container">
+								<button
+									class="back-button-task"
+									type="button"
+									onclick="previousStep('task')"
+								>
+									🠠 Volver
+								</button>
+								<div class="progress-bar">
+									<div class="progress-task"></div>
+								</div>
+							</div>
+						</form>
+					</section>
+
+					<section id="task-section">
+						<h2>Tareas Creadas</h2>
+						<div class="taskScroll">
+							<ul id="task-list"></ul>
 						</div>
+					</section>
 
-						<!--Barra de progreso formulario-->
-
-						<div class="progress-container">
-							<button
-								class="back-button-task"
-								type="button"
-								onclick="previousStep('task')"
-							>
-								🠠 Volver
-							</button>
-							<div class="progress-bar">
-								<div class="progress-task"></div>
-							</div>
-						</div>
-					</form>
-				</section>
-
-				
-				<!-- Sección de tareas -->
-				<section id="task-section">
-					<h2>Tareas Creadas</h2>
-					<div class="taskScroll">
-						<ul id="task-list"></ul>
-					</div>
-				</section>
-
-				
-			</div>
-
-				<!-- Slider de tareas-->
-
-			<section class="animatedLtoR" style="position: relative;">	
-				<div class="slider-container">
-					<div class="slider">
-					<div class="slide">
-						<h2 class="slideH2">Vencimiento semanal</h2>
-						<p>Tareas con fecha de vencimiento esta semana.</p>
-						<ul class="dueDateWeekly"></ul>
-					</div>
-					<div class="slide">
-						<h2 class="slideH2">Prioridad Alta</h2>
-						<p>Tareas con nivel de prioridad alta.</p>
-						<ul class="priorityHigh"></ul>
-					</div>
-					<div class="slide">
-						<h2 class="slideH2">Tareas sin completar</h2>
-						<p>Tareas activas sin completar por el momento.</p>
-						<ul class="noChecked"></ul>
-					</div>
-					</div>
-				
-					<button class="prev" data-slider="1">&#10094;</button>
-					<button class="next" data-slider="1">&#10095;</button>
+					
 				</div>
-				</section> 
 
+					<!-- Slider de tareas-->
 
-			<div class="containerGoals" id="goalsNav">
-				<!-- Sección del formulario de objetivos -->
-				<section id="goals-form-section" class="animatedRtoL">
-					<h2>Crear Nuevo Objetivo</h2>
-					<form id="goal-form">
-						<div class="step-goal active" id="step-goal-1">
-							<div class="containerInputs">
-								<div class="entryarea">
-									<input type="text" id="gtitle" name="gtitle" required />
-									<div class="labelline">Titulo del objetivo</div>
-								</div>
-							</div>
-
-							<button
-								class="form-buttons"
-								type="button"
-								onclick="nextStep(2, 'goal')"
-							>
-								Siguiente
-							</button>
+				<section class="animatedLtoR" style="position: relative;">	
+					<div class="slider-container">
+						<div class="slider">
+						<div class="slide">
+							<h2 class="slideH2">Vencimiento semanal</h2>
+							<p>Tareas con fecha de vencimiento esta semana.</p>
+							<ul class="dueDateWeekly"></ul>
 						</div>
-						<div class="step-goal" id="step-goal-2">
-							<div class="containerInputs">
-								<div class="entryarea">
-									<input type="date" id="gdate" name="gdate" required />
-									<div class="labellineDate1">Fecha de vencimiento</div>
-								</div>
-							</div>
-							<button
-								class="form-buttons"
-								type="button"
-								onclick="nextStep(3, 'goal')"
-							>
-								Siguiente
-							</button>
+						<div class="slide">
+							<h2 class="slideH2">Prioridad Alta</h2>
+							<p>Tareas con nivel de prioridad alta.</p>
+							<ul class="priorityHigh"></ul>
 						</div>
-
-						<div class="step-goal" id="step-goal-3">
-							<div class="containerInputs">
-								<div class="entryarea">
-									<input
-										type="text"
-										id="gtag"
-										name="gtag"
-										oninput="filterTags()"
-										required
-									/>
-									<div class="labelline">Busca o escribe una etiqueta...</div>
-								</div>
-							</div>
-
-							<ul id="gtags-suggestions" class="hidden">
-								<!-- Las opciones de etiquetas se mostrarán aquí -->
-							</ul>
-
-							<button class="form-buttons" type="submit">
-								Agregar Objetivo
-							</button>
-
-							<div id="hidden-field-goal" style="display: none; overflow: hidden; transition: transform 2s;">
-								<input type="text" id="goal-info" readonly/>
-							</div>
+						<div class="slide">
+							<h2 class="slideH2">Tareas sin completar</h2>
+							<p>Tareas activas sin completar por el momento.</p>
+							<ul class="noChecked"></ul>
 						</div>
-
-						<div class="progress-container">
-							<button
-								class="back-button-goal"
-								type="button"
-								onclick="previousStep('goal')"
-							>
-								🠠 Volver
-							</button>
-							<div class="progress-bar">
-								<div class="progress-goal"></div>
-							</div>
 						</div>
-					</form>
-				</section>
-
-
-
-				<!-- Sección donde se mostrarán los objetivos -->
-				<section id="goals-section" class="animatedRtoL">
-					<h2>Lista de Objetivos</h2>
-					<div class="goalScroll">
-						<ul id="goals-list">
-							<!-- Aquí se insertarán los objetivos dinámicamente -->
-						</ul>
+					
+						<button class="prev" data-slider="1">&#10094;</button>
+						<button class="next" data-slider="1">&#10095;</button>
 					</div>
-				</section>
-			</div>
+					</section> 
 
-			<section>
-				<div class="slider-container-phrases">
-					<div class="slider-phrases">
-						<div class="slide-phrase">
-							<h3 class="slideH3">🌟 Pequeños pasos, grandes logros</h3>
-							<p>Cada pequeño paso que das hoy te acerca un poco más a tus grandes objetivos. No importa lo lento que avances, lo importante es no detenerte.</p>
+
+				<div class="containerGoals" id="goalsNav">
+					<section id="goals-form-section" class="animatedRtoL">
+						<h2>Crear Nuevo Objetivo</h2>
+						<form id="goal-form">
+							<div class="step-goal active" id="step-goal-1">
+								<div class="containerInputs">
+									<div class="entryarea">
+										<input type="text" id="gtitle" name="gtitle" required />
+										<div class="labelline">Titulo del objetivo</div>
+									</div>
+								</div>
+
+								<button
+									class="form-buttons"
+									type="button"
+									onclick="nextStep(2, 'goal')"
+								>
+									Siguiente
+								</button>
+							</div>
+							<div class="step-goal" id="step-goal-2">
+								<div class="containerInputs">
+									<div class="entryarea">
+										<input type="date" id="gdate" name="gdate" required />
+										<div class="labellineDate1">Fecha de vencimiento</div>
+									</div>
+								</div>
+								<button
+									class="form-buttons"
+									type="button"
+									onclick="nextStep(3, 'goal')"
+								>
+									Siguiente
+								</button>
+							</div>
+
+							<div class="step-goal" id="step-goal-3">
+								<div class="containerInputs">
+									<div class="entryarea">
+										<input
+											type="text"
+											id="gtag"
+											name="gtag"
+											oninput="filterTags()"
+											required
+										/>
+										<div class="labelline">Busca o escribe una etiqueta...</div>
+									</div>
+								</div>
+
+								<ul id="gtags-suggestions" class="hidden"></ul>
+
+								<button class="form-buttons" type="submit">
+									Agregar Objetivo
+								</button>
+
+								<div id="hidden-field-goal" style="display: none; overflow: hidden; transition: transform 2s;">
+									<input type="text" id="goal-info" readonly/>
+								</div>
+							</div>
+
+							<div class="progress-container">
+								<button
+									class="back-button-goal"
+									type="button"
+									onclick="previousStep('goal')"
+								>
+									🠠 Volver
+								</button>
+								<div class="progress-bar">
+									<div class="progress-goal"></div>
+								</div>
+							</div>
+						</form>
+					</section>
+
+
+
+					<section id="goals-section" class="animatedRtoL">
+						<h2>Lista de Objetivos</h2>
+						<div class="goalScroll">
+							<ul id="goals-list"></ul>
 						</div>
-						<div class="slide-phrase">
-							<h3 class="slideH3">🔥 La clave del éxito</h3>
-							<p>El éxito no llega de la noche a la mañana, sino a través del esfuerzo, la disciplina y la pasión por lo que haces. Mantén el enfoque y sigue adelante</p>
-						</div>
-						<div class="slide-phrase">
-							<h3 class="slideH3">🚀 Convierte tus ideas en acción</h3>
-							<p>Las grandes metas no se logran con ideas, sino con acción. Da el primer paso hoy y convierte tus sueños en realidad con determinación y constancia.</p>
-						</div>
-						<div class="slide-phrase">
-							<h3 class="slideH3">⏳ El mejor momento es ahora</h3>
-							<p>No esperes el momento perfecto para empezar, porque nunca llegará. Empieza ahora con lo que tienes y donde estás, y mejora en el camino.</p>
+					</section>
+				</div>
+
+				<section>
+					<div class="slider-container-phrases">
+						<div class="slider-phrases">
+							<div class="slide-phrase">
+								<h3 class="slideH3">🌟 Pequeños pasos, grandes logros</h3>
+								<p>Cada pequeño paso que das hoy te acerca un poco más a tus grandes objetivos. No importa lo lento que avances, lo importante es no detenerte.</p>
+							</div>
+							<div class="slide-phrase">
+								<h3 class="slideH3">🔥 La clave del éxito</h3>
+								<p>El éxito no llega de la noche a la mañana, sino a través del esfuerzo, la disciplina y la pasión por lo que haces. Mantén el enfoque y sigue adelante</p>
+							</div>
+							<div class="slide-phrase">
+								<h3 class="slideH3">🚀 Convierte tus ideas en acción</h3>
+								<p>Las grandes metas no se logran con ideas, sino con acción. Da el primer paso hoy y convierte tus sueños en realidad con determinación y constancia.</p>
+							</div>
+							<div class="slide-phrase">
+								<h3 class="slideH3">⏳ El mejor momento es ahora</h3>
+								<p>No esperes el momento perfecto para empezar, porque nunca llegará. Empieza ahora con lo que tienes y donde estás, y mejora en el camino.</p>
+							</div>	
 						</div>	
-					</div>	
-					<button class="prev" data-slider="2">&#10094;</button>
-					<button class="next" data-slider="2">&#10095;</button>
-				</div>
-			</section>
-
-				<div class="charts" id="statsNav">
-					<div id="stats">
-						<p>Tareas totales: <span id="totalTasks">0</span></p>
-						<p>Tareas completadas: <span id="completedTasks">0</span></p>
-						<p>Progreso total: <span id="completedPercentage">0</span>%</p>
+						<button class="prev" data-slider="2">&#10094;</button>
+						<button class="next" data-slider="2">&#10095;</button>
 					</div>
-					<section>					
-						<canvas id="taskChart"></canvas>
-					</section>
-					<!-- Modal -->
-					<div id="modal" class="modal-overlay">
-						<div class="modal-content">
-							<button class="modal-close" onclick="closeModal()">✖</button>
-							<p id="modal-content2"></p>
-							<canvas id="taskChart2"></canvas>
+				</section>
+
+					<div class="charts" id="statsNav">
+						<div id="stats">
+							<p>Tareas totales: <span id="totalTasks">0</span></p>
+							<p>Tareas completadas: <span id="completedTasks">0</span></p>
+							<p>Progreso total: <span id="completedPercentage">0</span>%</p>
 						</div>
+						<section>					
+							<canvas id="taskChart"></canvas>
+						</section>
+						<!-- Modal -->
+						<div id="modal" class="modal-overlay">
+							<div class="modal-content">
+								<button class="modal-close" onclick="closeModal()">✖</button>
+								<p id="modal-content2"></p>
+								<canvas id="taskChart2"></canvas>
+							</div>
+						</div>
+						<h2 class="tagChartH2">Etiquetas Activas</h2>
+
+						<section class="animatedLtoR">
+
+							<div class="secondChart">
+								<canvas id="tagChart"></canvas>
+								<p id="noDataMessage" class="no-data-message">
+									No hay datos registrados por el momento
+								</p>
+
+								<video width="640" height="360" controls autoplay loop>
+									<source src="./assets/videos/20250304_193720.mp4">
+								</video>
+							</div>
+						</section>
 					</div>
-					<h2 class="tagChartH2">Etiquetas Activas</h2>
 
-					<section class="animatedLtoR">
-
-						<div class="secondChart">
-							<canvas id="tagChart"></canvas>
-							<p id="noDataMessage" class="no-data-message">
-								No hay datos registrados por el momento
-							</p>
-
-							<video width="640" height="360" controls autoplay loop>
-								<source src="./assets/videos/20250304_193720.mp4">
-							</video>
-						</div>
-					</section>
-				</div>
-
-				<div class="notifications-dueDate">
-					<div class="header">
-						<div>Vencimiento</div>
-						<button id="clearNotifications">
-							<img src="/project-dashboard/assets/delete.gif" id="clear" alt="Limpiar Notificaciones">
-						</button>
-					</div>	
-					<ul></ul>
-				</div>
-		</main>	
-		
-	</div>
+					<div class="notifications-dueDate">
+						<div class="header">
+							<div>Vencimiento</div>
+							<button id="clearNotifications">
+								<img src="/project-dashboard/assets/img/delete.gif" id="clear" alt="Limpiar Notificaciones">
+							</button>
+						</div>	
+						<ul></ul>
+					</div>
+			</main>	
+		</div>
 
 		<script type="module" src="./js/script.js"></script>
 		<script type="module" src="./js/storage.js"></script>
 		<script type="module" src="./js/charts.js"></script>
-		<script src="./js/autocompleteSearchTag.js"></script>
+		<script src="./js/animations.js"></script>
 		<script type="module" src="./js/validateForms.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<!-- Ionicons -->

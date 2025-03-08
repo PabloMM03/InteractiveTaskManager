@@ -1,86 +1,80 @@
-// Cargar tareas desde localStorage
+/** Cargar tareas desde localStorage */
 export function loadTasksFromStorage() {
 	return JSON.parse(localStorage.getItem('tasks')) || [];
 }
 
-// Guardar tareas en localStorage
+/** Guardar tareas en localStorage */
 export function saveTasksToStorage(tasks) {
 	localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-// Cargar objetivos desde localStorage
+/** Cargar objetivos desde localStorage */
 export function loadGoalsFromStorage() {
 	return JSON.parse(localStorage.getItem('goals')) || [];
 }
 
-// Guardar objetivos en localStorage
+/** Guardar objetivos en localStorage */
 export function saveGoalsToStorage(goals) {
 	localStorage.setItem('goals', JSON.stringify(goals));
 }
 
-// Función para obtener el contador histórico de tareas
+/** Obtener el contador histórico de tareas */
 export function loadTaskCountsHistory() {
 	return JSON.parse(localStorage.getItem('taskCountsHistory')) || {};
 }
 
-// Función para guardar el contador histórico de tareas
+/** Guardar el contador histórico de tareas */
 export function saveTaskCountsHistory(counts) {
 	localStorage.setItem('taskCountsHistory', JSON.stringify(counts));
 }
 
-// Eliminar tarea del almacenamiento
+/** Eliminar tarea del almacenamiento */
 export function deleteTaskFromStorage(index) {
 	const tasks = loadTasksFromStorage();
 	const goals = loadGoalsFromStorage();
 	const countsHistory = loadTaskCountsHistory() || {};
 
 	const wasChecked = tasks[index].isChecked;
-	const taskGoalId = tasks[index].goalId; // Id del objetivo relacionado con la tarea
+	const taskGoalId = tasks[index].goalId; 
 
-	//Fecha de creación de tarea para incrementar o decrementar estado de completada por mes
 	const taskDate = new Date(tasks[index].createTaskDate);
 	const monthYear = `${taskDate.getFullYear()}-${taskDate.getMonth() + 1}`;
 
-	// Si la tarea tiene un objetivo asociado
 	if (taskGoalId !== 'no-goal' && goals[taskGoalId]) {
 		if (wasChecked) {
 			tasks[index].isActive = false;
 		} else {
 			tasks.splice(index, 1);
-			goals[taskGoalId].totalTasks -= 1; // Restar 1 al total de tareas del objetivo
+			goals[taskGoalId].totalTasks -= 1; 
 			countsHistory[monthYear].total -= 1;
 		}
 	} else {
 		if (wasChecked) {
 			tasks[index].isActive = false;
 		} else {
-			// Si la tarea no tiene objetivo, eliminarla normalmente
 			tasks.splice(index, 1);
 			countsHistory[monthYear].total -= 1;
 		}
 	}
 
-	// Guardar tareas y objetivos actualizados
 	saveTasksToStorage(tasks);
 	saveGoalsToStorage(goals);
 	saveTaskCountsHistory(countsHistory);
 
-	// Actualizar el progreso del objetivo (si tiene objetivo)
 	if (taskGoalId !== 'no-goal' && goals[taskGoalId]) {
 		updateGoalProgressInStorage(taskGoalId);
 	}
-
 	return wasChecked;
 }
 
-// Actualizar el progreso del objetivo en el almacenamiento
+/** Actualizar el progreso del objetivo en el almacenamiento */
 export function updateGoalProgressInStorage(
 	goalId,
 	completedTasks,
 	totalTasks
 ) {
 	const goals = loadGoalsFromStorage();
-	if (goalId === 'no-goal' || !goals[goalId]) return; // Si no tiene objetivo no actualizar nada
+	if (goalId === 'no-goal' || !goals[goalId]) return; 
 
 	const progress =
 		totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
@@ -88,6 +82,7 @@ export function updateGoalProgressInStorage(
 	saveGoalsToStorage(goals);
 }
 
+/** Obtener estadísticas de tareas */
 export function getStats() {
 	const tasks = loadTasksFromStorage();
 
@@ -99,7 +94,6 @@ export function getStats() {
 
 	tasks.forEach((task) => {
 		if (task.ttag) {
-			// Asegurar que la tarea tiene una etiqueta válida
 			if (!stats.tagCount[task.ttag]) {
 				stats.tagCount[task.ttag] = 0;
 			}

@@ -3,16 +3,12 @@ const ERROR_CAMPO = 'error';
 const ERROR_MENSAJES = 'campoError';
 const MIN_CHAR = 5;
 
-
-document.addEventListener('DOMContentLoaded', createListeners)
+document.addEventListener('DOMContentLoaded', createListeners);
 
 function createListeners() {
-    // Obtenemos todos los formularios
     const forms = document.querySelectorAll('form');
 
-    // Recorremos cada formulario y añadimos los listeners correspondientes
     forms.forEach(form => {
-        // No validar al formulario
         form.setAttribute('novalidate', true);
 
         const fields = form.querySelectorAll('input');
@@ -23,25 +19,22 @@ function createListeners() {
             field.addEventListener('input', reviewFieldErrors, false); 
         });
 
-        // Añadir el listener de submit para cada formulario
         form.addEventListener('submit', (e) => validateFormEvent(e, form), false);
     });
 }
 
-
-
+/**Valida el campo */
 function validateField(e) {
     const field = e.target;
     updateFieldErrors(field);
     validateField1(field);
 }
 
-
+/** Actuilizar errores */
 function updateFieldErrors(field) {
     const content = field.value;
     let messages = [];
 
-    // si los campos tienen estos dos ids no mostrar errores
     if(field.id === 'task-info' || field.id === 'notifications' ||field.id === 'goal-info') { return; }
 
     if(field.id === 'dateField' || field.id === 'gdate') {
@@ -52,7 +45,6 @@ function updateFieldErrors(field) {
 
     field.setCustomValidity(messages.length > 0 ? messages.join('. ') : '')
   
-    // Mostrar mensaje de error personalizado en el DOM
     if (messages.length > 0) {
         showErrorMessage(messages, field);
     } else {
@@ -60,6 +52,7 @@ function updateFieldErrors(field) {
     }
 }
 
+/** Mensajes input date */
 function validateDateField(content, messages) {
    
     if (content === '') {
@@ -76,6 +69,7 @@ function validateDateField(content, messages) {
     
 }
 
+/** Mensajes input text */
 function validateTextField(field, content, messages) {
     const minLength = field.id === 'ttag' || field.id === 'assigned-to' || field.id === 'gtag' ? 3: MIN_CHAR;
 
@@ -87,7 +81,7 @@ function validateTextField(field, content, messages) {
         messages.push(`El campo no puede tener más de 25 caracteres`);
     }
 }
-
+/** Revisar errores */
 function reviewFieldErrors(e) {
     const field =  e.target;
     updateFieldErrors(field);
@@ -101,6 +95,7 @@ function validateField1(field) {
     return field.checkValidity();   
 }
 
+/** Notificar el error*/
 function notifyFieldError(e) {
     const field = e.target;
     let messages = [];
@@ -112,8 +107,8 @@ function notifyFieldError(e) {
     showErrorMessage(messages, field);
 }
 
-
-export function deleteErrors(field){
+/** eliminar error */
+function deleteErrors(field){
 
     field.classList.remove(ERROR_CAMPO);
 
@@ -124,7 +119,8 @@ export function deleteErrors(field){
     }
 }
 
-export function showErrorMessage(messages, field) {
+/** Mostrar mensaje de error e insertar justo después */
+function showErrorMessage(messages, field) {
     deleteErrors(field);
 
     if(messages.length === 0){
@@ -155,7 +151,7 @@ function insertAfter(referencefield, fieldAdd) {
         referencefield.parentNode.appendChild(fieldAdd);
     }
 }
-
+/** Validar el formulario */
 export function validateFormEvent(e, form) {
     let validForm = true;
 
@@ -163,11 +159,10 @@ export function validateFormEvent(e, form) {
     form.querySelectorAll('input').forEach(field => {
         if (updateFieldErrors(field)) {
             validForm = false;
-            field.focus(); // Focalizar en el primer campo inválido
+            field.focus(); 
         }
     });
 
-    // Validar campos específicos según el formulario
     if (form.id === 'task-form') {
         validForm = validateField1(document.getElementById('titulo')) && validForm;
         validForm = validateField1(document.getElementById('ttag')) && validForm;
@@ -176,7 +171,6 @@ export function validateFormEvent(e, form) {
     }
 
     if (form.id === 'goal-form') {
-        // Validar campos específicos de otro formulario (Ejemplo)
         validForm = validateField1(document.getElementById('gtitle')) && validForm;
         validForm = validateField1(document.getElementById('gdate')) && validForm;
         validForm = validateField1(document.getElementById('gtag')) && validForm;
@@ -184,7 +178,7 @@ export function validateFormEvent(e, form) {
     }
 
     if (!validForm) {
-        e.preventDefault(); // Prevenir el envío si hay errores
+        e.preventDefault(); 
     }
 
     return validForm;

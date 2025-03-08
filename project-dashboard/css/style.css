@@ -4,15 +4,11 @@
 @import url('goals.css');
 @import url('charts.css');
 @import url('startImg.css');
-@import url('footer.css');
 @import url('slider.css');
 @import url('darkMode.css');
 
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* margin: 0;
-    padding: 0;
-    box-sizing: border-box; */
 }
 
 html, body {

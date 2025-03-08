@@ -19,6 +19,7 @@ import {
 	validateFormEvent
 } from './validateForms.js';
 
+//Renderizar al cargar
 document.addEventListener('DOMContentLoaded', () => {
 	loadTask(); 
 	addTask(); 
@@ -26,8 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	addGoals(); 
 	renderTasksChart();
 	slider();
-	
-	//addSampleTask(); // Añadir tarea simulada
 });
 
 /**
@@ -38,49 +37,44 @@ document.addEventListener('DOMContentLoaded', () => {
 function addTask() {
     const form = document.querySelector('#task-form');
 
-    // Verificar si ya tiene el evento de submit para evitar duplicados
     if (!form.dataset.listenerAdded) {
-        form.dataset.listenerAdded = 'true'; // Marcar que ya tiene un listener
+        form.dataset.listenerAdded = 'true'; 
         
         form.addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevenir envío inmediato
+            e.preventDefault(); 
 
             if (!validateFormEvent(e, form)) { 
-                return; // Detener la función si hay errores
+                return; 
             }
 
             // Capturar formulario de tareas y obtener sus datos
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData.entries());
 
-            // Capturar la prioridad seleccionada
             const selects = document.querySelectorAll('.select');
             const priority = selects[1];
             const selected = priority.querySelector('.selected').textContent;
             data.priority = selected;
 
-            // Datos adicionales
-            data.notifications = formData.get('notifications') === 'on';
-            data.isChecked = false;
-            data.createTaskDate = new Date().toISOString().split('T')[0];
-            data.isActive = true;
+				// Datos adicionales
+				data.notifications = formData.get('notifications') === 'on';
+				data.isChecked = false;
+				data.createTaskDate = new Date().toISOString().split('T')[0];
+				data.isActive = true;
 
-			let firtsLetter = data.title.charAt(0).toUpperCase();
-			let restOfTitle = data.title.substring(1);
-			data.title = firtsLetter + restOfTitle;
+				let firtsLetter = data.title.charAt(0).toUpperCase();
+				let restOfTitle = data.title.substring(1);
+				data.title = firtsLetter + restOfTitle;
 
-			let firtsLetterAssignedTo = data.assigned_to.charAt(0).toUpperCase();
-			let restOfAssignedTo= data.assigned_to.substring(1);
-			data.assigned_to = firtsLetterAssignedTo + restOfAssignedTo;
+				let firtsLetterAssignedTo = data.assigned_to.charAt(0).toUpperCase();
+				let restOfAssignedTo= data.assigned_to.substring(1);
+				data.assigned_to = firtsLetterAssignedTo + restOfAssignedTo;
 
-
-            // Obtener el ID del objetivo seleccionado
             const selectedGoalElement = document.querySelector('#goal-select');
             const selectedGoalId = selectedGoalElement.getAttribute('data-selected-id');
 
             data.goalId = selectedGoalId && selectedGoalId !== 'none' ? parseInt(selectedGoalId) : 'no-goal';
 
-            // Guardar en localStorage
             const tasks = loadTasksFromStorage();
             tasks.push(data);
             saveTasksToStorage(tasks);
@@ -98,12 +92,9 @@ function addTask() {
 			},2150)
 
             updateGoalProgress(data.goalId);
-
-            //Actualizar gráficos después de añadir tarea
-            renderTasksChart();
+	        renderTasksChart();
             renderTagChart();
 		
-
             e.target.reset();
 
 			//Añadir datos y animación al crear tarea 
@@ -133,27 +124,22 @@ function addTask() {
 					}
 				});
 			
-				// Recargar la página después de que la alerta desaparezca
 				setTimeout(() => {
 					location.reload();
 				}, 3100);
 			}, 2500);
 			
-			
-
 		});
    	 }
 }
-
 
 // Cargar y mostrar tareas
 export function loadTask(goalId) {
 	const tasks = loadTasksFromStorage();
 	const taskList = document.getElementById('task-list');
-	taskList.innerHTML = ''; //Limpiar la lista antes de cargar las tareas
+	taskList.innerHTML = ''; 
 
 	tasks.sort((a, b) => new Date(b.createTaskDate) - new Date(a.createTaskDate));
-
 	tasks.forEach((task, index) => {
 		if (!task.isActive) return;
 
@@ -179,7 +165,6 @@ export function loadTask(goalId) {
 		taskList.appendChild(li);
 	});
 
-	//Si no hay tareas mostrar el mensaje
 	if(taskList.children.length === 0) {
 		const message = document.createElement('p');
 		message.textContent = 'No tienes tareas pendientes';
@@ -197,11 +182,10 @@ function stateTask(index, task, span) {
 	const tasks = loadTasksFromStorage();
 	const countsHistory = loadTaskCountsHistory() || {};
 
-	task.isChecked = !task.isChecked; //Cambiar estado
+	task.isChecked = !task.isChecked; 
 	tasks[index] = task;
 	saveTasksToStorage(tasks);
 
-	//Fecha de creación de tarea para incrementar o decrementar estado de completada por mes
 	const taskDate = new Date(task.createTaskDate);
 	const monthYear = `${taskDate.getFullYear()}-${taskDate.getMonth() + 1}`;
 
@@ -215,10 +199,9 @@ function stateTask(index, task, span) {
 	}
 
 	saveTaskCountsHistory(countsHistory);
-
 	span.style.textDecoration = task.isChecked ? 'line-through' : 'none';
-	updateGoalProgress(task.goalId);
 
+	updateGoalProgress(task.goalId);
 	renderTasksChart();
 	updateStatsUI();
 }
@@ -233,7 +216,6 @@ function deleteTask(index, goalId) {
 	renderTasksChart();
 	renderTagChart();
 
-	//Notificación eliminar tareas
 	setTimeout(function() {
 		Swal.fire({
 			title: '¡Éxito!',
@@ -260,17 +242,15 @@ function deleteTask(index, goalId) {
 function addGoals() {
 		const form = document.querySelector('#goal-form');
 
-		// Verificar si ya tiene el evento de submit para evitar duplicados
 		if (!form.dataset.listenerAdded) {
-			form.dataset.listenerAdded = 'true'; // Marcar que ya tiene un listener
+			form.dataset.listenerAdded = 'true'; 
 			
 			form.addEventListener('submit', function (e) {
-				e.preventDefault(); // Prevenir envío inmediato
+				e.preventDefault(); 
 
 				if (!validateFormEvent(e, form)) { 
-					return; // Detener la función si hay errores
+					return; 
 				}
-
 
 			const formData = new FormData(e.target);
 			const data = Object.fromEntries(formData.entries());
@@ -299,13 +279,11 @@ function addGoals() {
 			taskInfoField.value = `${data.gtitle} - ${data.gtag} - ${data.gdate}`;			
 
 			const hiddenField = document.querySelector('#hidden-field-goal');
-
 			hiddenField.style.display = 'block';  
 			setTimeout(() => {
 				hiddenField.style.transform = 'translateX(500px) translateY(150px)';
 			}, 10); 
 
-			//Notificación de añadir 
 			setTimeout(function() {
 				Swal.fire({
 					title: '¡Éxito!',
@@ -320,7 +298,6 @@ function addGoals() {
 					}
 				});
 			
-				// Recargar la página después de que la alerta desaparezca
 				setTimeout(() => {
 					location.reload();
 				}, 3100);
@@ -336,11 +313,9 @@ function loadGoals() {
 	const goalsList = document.getElementById('goals-list');
 	const menu = document.querySelector('.menu');
 
-	// Limpiar listas
 	goalsList.innerHTML = '';
 	menu.innerHTML = '';
 
-	//Añadir opción al selector de objetivos en Tareas
 	const createOption = (text, value = '') => {
 		const li = document.createElement('li');
 		li.textContent = text;
@@ -356,14 +331,11 @@ function loadGoals() {
 		return li;
 	};
 
-	// Agregar opciones iniciales
 	menu.append(createOption('Sin objetivo', 'none'));
 
 	goals.sort((a, b) => new Date(b.gdate) - new Date(a.gdate));
 
-	// Generar lista de objetivos
 	goals.forEach((goal, index) => {
-		// Crear elemento de la lista de objetivos
 		const li = document.createElement('li');
 		li.innerHTML = `<span>${goal.gtitle} - ${goal.gtag} - ${goal.gdate}</span>`;		
 
@@ -380,7 +352,7 @@ function loadGoals() {
 
 		// Botón de eliminar
 		const deleteButton = document.createElement('img');
-		deleteButton.src = '/project-dashboard/assets/delete.gif';
+		deleteButton.src = '/project-dashboard/assets/img/delete.gif';
 		deleteButton.alt = 'Eliminar';
 		deleteButton.dataset.index = index;
 		deleteButton.addEventListener('click', (e) => {
@@ -392,7 +364,6 @@ function loadGoals() {
 		goalsList.append(li);
 
 
-		// Agregar opción al menú desplegable
 		menu.append(createOption(goal.gtitle, index));
 	});
 
@@ -416,13 +387,11 @@ function deleteGoal(index) {
 	const goals = loadGoalsFromStorage();
 	const tasks = loadTasksFromStorage();
 
-	const goalId = index; //Id del objetivo a eliminar
+	const goalId = index; 
 
-	//Filtrar objetivos y tareas relacionadas para al mismo
 	const updatedGoals = goals.filter((_, i) => i !== index);
 	const updatedTasks = tasks.filter((task) => task.goalId !== goalId);
 
-	//Guardar almacenamiento y actualizar
 	saveGoalsToStorage(updatedGoals);
 	saveTasksToStorage(updatedTasks);
 	renderTagChart();
@@ -430,7 +399,6 @@ function deleteGoal(index) {
 	loadGoals();
 	loadTask(goalId);
 
-	//Notificación eliminar objetivos
 	setTimeout(function() {
 		Swal.fire({
 			title: '¡Éxito!',
@@ -452,12 +420,11 @@ function updateGoalProgress(goalId) {
 	const tasks = loadTasksFromStorage();
 	const goals = loadGoalsFromStorage();
 
-	if (goalId === 'no-goal' || !goals[goalId]) return; //Si la tarea no tiene objetivo, no hace nada
+	if (goalId === 'no-goal' || !goals[goalId]) return; 
 
 	const relatedTasks = tasks.filter((task) => task.goalId == goalId);
 	const completedTasks = relatedTasks.filter((task) => task.isChecked);
 
-	// Asegurar que el goalId asignado a la tarea pertenece a un objetivo
 	if (goals[goalId]) {
 		updateGoalProgressInStorage(
 			goalId,
@@ -472,12 +439,12 @@ function updateGoalProgress(goalId) {
 function deleteByDueDate() {
 	//Tasks
 	const tasks = loadTasksFromStorage();
-	const today = new Date(); //Fecha de hoy
+	const today = new Date(); 
 	const formattedToday = today.toISOString().split('T')[0];
 
 	const activeTasks = tasks.filter((task) => task.due_date >= formattedToday);
-	//Goals
 
+	//Goals
 	const goals = loadGoalsFromStorage();
 	const activeGoals = goals.filter((goal) => goal.gdate >= formattedToday);
 
@@ -485,27 +452,8 @@ function deleteByDueDate() {
 	saveGoalsToStorage(activeGoals);
 	loadGoals()
 }
-
-setInterval(deleteByDueDate, 60000); //Comprobar cada 1 minuto
-
-//Silmular una tarea
-function addSampleTask() {
-	const sampleTask = {
-		title: 'Tarea simulada Marzo',
-		priority: 'Alta',
-		due_date: '2025-01-15',
-		notifications: true,
-		isChecked: false,
-		createTaskDate: '2025-12-15',
-		isActive: true,
-		goalId: 'no-goal',
-	};
-
-	const tasks = loadTasksFromStorage();
-	tasks.push(sampleTask); // Añadir la tarea simulada al array de tareas
-
-	saveTasksToStorage(tasks); // Guardar las tareas en el localStorage
-}
+//Intervalo que compruba cada minuto
+setInterval(deleteByDueDate, 60000); 
 
 /*Mostrar notificaciones de vencimiento x dias antes de su finalización */
 function dueDateNotifications() {
@@ -596,25 +544,21 @@ function dueDateNotifications() {
 
 dueDateNotifications();
 
-
 //Eliminar notificaciones 
 document.getElementById("clearNotifications").addEventListener("click", () => {
     const notificationsList = document.querySelector(".notifications-dueDate ul");
 
     notificationsList.innerHTML = "";
 
-    // Marcar todas las tareas como notificadas
     const tasks = loadTasksFromStorage().map(task => {
         if (task.notifications && !task.isChecked) {
-            task.notified = true;  // Nueva propiedad
+            task.notified = true;  
         }
         return task;
     });
 
-    // Guardar en localStorage
   	 saveTasksToStorage(tasks);
 
-	 //Temporizador después de crear animación
 	 setTimeout(function() {
 		Swal.fire({
 			title: '¡Éxito!',
@@ -629,100 +573,74 @@ document.getElementById("clearNotifications").addEventListener("click", () => {
 			}
 		});
 	
-		// Recargar la página después de que la alerta desaparezca
 		setTimeout(() => {
 			location.reload();
 		}, 1000);
 	}, 500);
 });
 
-
+/** Cargar tipos de datos en sliders */
 function slider() {
 	const tasks = loadTasksFromStorage();
 
-	//Tareas con prioridad alta
-	const priorityHigh = tasks.filter((task) => task.priority === 'Alta');
-	const ulPriority = document.querySelector('.priorityHigh');
+	let ulElements = {
+		priorityHigh: document.querySelector('.priorityHigh'),
+		noChecked: document.querySelector('.noChecked'),
+		dueDateWeekly: document.querySelector('.dueDateWeekly'),
+	};
 
-	priorityHigh.forEach((task) => {
-		const liPriority = document.createElement('li');
-		const spanPriority = document.createElement('span');
-		const noti = task.notifications ? `/project-dashboard/assets/check-mark.png` : `/project-dashboard/assets/error.png`;
-
-		//Imagen muestra notificacion activa
-		const img = document.createElement('img');
-		img.src = noti;
-		img.alt = 'Notificación';
-		img.style.width = '20px';
-		img.style.height = '20px';
-		img.style.marginLeft = '20px';
-
-		spanPriority.textContent = `${task.title}, ${task.due_date}, ${task.ttag}, ${task.assigned_to}`;
-		liPriority.appendChild(spanPriority);
-		liPriority.appendChild(img);
-		ulPriority.appendChild(liPriority);
-	});
-
-
-	//Tareas no completadas
-
-	const noChecked = tasks.filter((task) => !task.isChecked);
-	const ulNoChecked = document.querySelector('.noChecked');
-
-	noChecked.forEach((task) => {
-		const liNoChecked = document.createElement('li');
-		const spanNoChecked = document.createElement('span');
-		const noti = task.notifications ? `/project-dashboard/assets/check-mark.png` : `/project-dashboard/assets/error.png`;
-
-		//Imagen muestra notificacion activa
-		const img = document.createElement('img');
-		img.src = noti;
-		img.alt = 'Notificación';
-		img.style.width = '20px';
-		img.style.height = '20px';
-		img.style.marginLeft = '20px';
-
-		spanNoChecked.textContent = `${task.title}, ${task.due_date}, ${task.ttag}, ${task.assigned_to}`;
-		liNoChecked.appendChild(spanNoChecked);
-		liNoChecked.appendChild(img);
-		ulNoChecked.appendChild(liNoChecked);
-
-	});
-
-
-	//Tareas con fecha de vencimiento en esta semana
-
-	const today = new Date();
-	const inOneWeek = new Date();
-	inOneWeek.setDate(today.getDate() + 7);
+	 const today = new Date();
+	 const inOneWeek = new Date();
+	 inOneWeek.setDate(today.getDate() + 7);
 	
-	
-	const tasksInWeekly = tasks.filter((task) => {
+	 const categorizedTasks = {
+		priorityHigh: [],
+		noChecked: [],
+		dueDateWeekly: [],
+	 };
+
+	 //Comprobar el tipo de tarea
+	 tasks.forEach((task) => {
+		if(task.priority === 'Alta') {
+			categorizedTasks.priorityHigh.push(task);
+		}
+		if(!task.isChecked) {
+			categorizedTasks.noChecked.push(task);
+		}
 		const taskDate = new Date(task.due_date);
-		return taskDate >= today && taskDate <= inOneWeek;
-	});
+		if(taskDate >= today && taskDate <= inOneWeek) {
+			categorizedTasks.dueDateWeekly.push(task);
+		}
+	 })
 
-	const ulDueDateWeekly = document.querySelector('.dueDateWeekly');
+	 //Función interna para mostrar datos
+	function optimizedSliderData(iterator, ul) {
+		if(!ul) return;
+		ul.innerHTML = '';
 
-	tasksInWeekly.forEach((task) => {
-		const liDueDateWeekly = document.createElement('li');
-		const spanDueDateWeekly = document.createElement('span');
-		const noti = task.notifications ? `/project-dashboard/assets/check-mark.png` : `/project-dashboard/assets/error.png`;
+		let fragment = document.createDocumentFragment();
 
-		//Imagen muestra notificacion activa
-		const img = document.createElement('img');
-		img.src = noti;
-		img.alt = 'Notificación';
-		img.style.width = '20px';
-		img.style.height = '20px';
-		img.style.marginLeft = '20px';
+		iterator.forEach((task) => {
+			const li = document.createElement('li');
+			const span = document.createElement('span');
+			const img = document.createElement('img');
 
-		spanDueDateWeekly.textContent = `${task.title}, ${task.due_date}, ${task.ttag}, ${task.assigned_to}`;
-		liDueDateWeekly.appendChild(spanDueDateWeekly);
-		liDueDateWeekly.appendChild(img);
-		ulDueDateWeekly.appendChild(liDueDateWeekly);
+			span.textContent = `${task.title}, ${task.due_date}, ${task.ttag}, ${task.assigned_to}`;
+			img.src = task.notifications ? `/project-dashboard/assets/img/check-mark.png` : `/project-dashboard/img/assets/error.png`;
+			img.alt = 'Notificación';
+			Object.assign(img.style, {width: '20px', height: '20px', marginLeft: '20px'});
 
+
+			li.appendChild(span);
+			li.appendChild(img);
+			fragment.appendChild(li);
+		});
+
+		ul.appendChild(fragment);
+	}
+
+	Object.entries(categorizedTasks).forEach(([key, iterator]) => {
+		optimizedSliderData(iterator, ulElements[key]);
 	})
-
 }
 

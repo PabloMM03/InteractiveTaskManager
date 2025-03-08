@@ -139,7 +139,6 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-    /* Ajusta la sección de gráficos */
     .charts {
         width: 100%;
         padding: 30px; 
@@ -170,7 +169,6 @@
 }
 
 @media (max-width: 768px) {
-    /* Ajusta aún más los tamaños para dispositivos más pequeños */
     .charts {
         padding: 20px;
     }
@@ -215,7 +213,6 @@
 }
 
 @media (max-width: 480px) {
-    /* Ajusta el contenido para pantallas muy pequeñas */
     .charts {
         padding: 10px;
     }

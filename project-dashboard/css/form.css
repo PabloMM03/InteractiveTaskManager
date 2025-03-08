@@ -61,7 +61,6 @@ textarea {
 }
 
 button {
-	/* background-color: #007bff; */
 	background-color: gray;
 	color: white;
 	border: none;
@@ -74,7 +73,6 @@ button {
 }
 
 .form-buttons:hover {
-	/* background-color: #0056b3; */
 	background-color: black;
 	color: white;
 }
