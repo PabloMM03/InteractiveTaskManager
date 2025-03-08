@@ -352,7 +352,7 @@ function loadGoals() {
 
 		// Botón de eliminar
 		const deleteButton = document.createElement('img');
-		deleteButton.src = '/assets/img/delete.gif';
+		deleteButton.src = 'assets/img/delete.gif';
 		deleteButton.alt = 'Eliminar';
 		deleteButton.dataset.index = index;
 		deleteButton.addEventListener('click', (e) => {
