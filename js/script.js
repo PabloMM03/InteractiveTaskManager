@@ -352,7 +352,7 @@ function loadGoals() {
 
 		// Botón de eliminar
 		const deleteButton = document.createElement('img');
-		deleteButton.src = '/project-dashboard/assets/img/delete.gif';
+		deleteButton.src = '/assets/img/delete.gif';
 		deleteButton.alt = 'Eliminar';
 		deleteButton.dataset.index = index;
 		deleteButton.addEventListener('click', (e) => {
@@ -626,7 +626,7 @@ function slider() {
 			const img = document.createElement('img');
 
 			span.textContent = `${task.title}, ${task.due_date}, ${task.ttag}, ${task.assigned_to}`;
-			img.src = task.notifications ? `/project-dashboard/assets/img/check-mark.png` : `/project-dashboard/assets/img/error.png`;
+			img.src = task.notifications ? `/assets/img/check-mark.png` : `/assets/img/error.png`;
 			img.alt = 'Notificación';
 			Object.assign(img.style, {width: '20px', height: '20px', marginLeft: '20px'});
 
