@@ -17,7 +17,7 @@ InteractiveTaskManager is a simple and efficient tool for managing tasks and goa
 ## Installation:
 1. Clone this repository to your local machine:
 ```bash
-git clone https://github.com/hola/InteractiveTaskManager.git
+git clone https://github.com/PabloMM03/InteractiveTaskManager.git
 ```
 2. Navigate to the project folder:
 ```bash
