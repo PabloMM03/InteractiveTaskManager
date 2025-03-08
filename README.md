@@ -52,4 +52,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Author:
 - PabloMM03
 - [GitHub](https://github.com/PabloMM03)
+
+## DEMO
+
+You can see a demo of the project in my [DEMO](https://pablomm03.github.io/InteractiveTaskManager/).
   
